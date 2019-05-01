@@ -1,3 +1,4 @@
+#!/bin//python3
 """
 :author: Alexander Bjørnsrud <alexanderbjornsrud@gmail.com>
 :author: Rene Østensen <contact@zorko.co>
@@ -46,9 +47,11 @@ parser_online_pwn = argparse.ArgumentParser(prog="{} --online --pwn".format(sys.
 parser_online_pwn.add_argument("-l","--list",action="store_true",help="List online machines")
 parser_online_pwn.add_argument("-a","--active",action="store_true",help="List only active machines")
 parser_online_pwn.add_argument("-r","--retired",action="store_true",help="List only REtired machines")
-parser_online_pwn.add_argument("-m","--machine",action="store_int",help="The machine id to pwn")
-parser_online_pwn.add_argument("-h","--hash",action="store_str",help="The machine to pwn")
-parser_online_pwn.add_argument("-s","--score",action="store_int",help="The machine to pwn")
+parser_online_pwn.add_argument("-m","--machine",type=int,help="The machine id to pwn")
+parser_online_pwn.add_argument("--user",action="store_true",help="Own user")
+parser_online_pwn.add_argument("--root",action="store_true",help="Own root")
+parser_online_pwn.add_argument("-h","--hash",type=str,help="The machine to pwn")
+parser_online_pwn.add_argument("-s","--score",type=int,help="The machine to pwn")
 
 
 """
@@ -58,11 +61,7 @@ parser_local = argparse.ArgumentParser(prog="{} --local".format(sys.argv[0]),des
 parser_local.add_argument("-l","--list",help="Lists all local machines")
 parser_local.add_argument("-a","--active",action="store_true",help="List only active machines")
 parser_local.add_argument("-r","--retired",action="store_true",help="List only REtired machines")
-parser_local.add_argument("--user",action="store_true",help="Own user")
-parser_local.add_argument("--root",action="store_true",help="Own root")
-parser_local.add_argument("-k","--key",action="store_str",help="Change API Key")
-
-parser_local.add_argument("-s")
+parser_local.add_argument("-k","--key",type=str,help="Change API Key")
 
 if(sys.argv[1:2]==[]):
         argparser.print_usage()
