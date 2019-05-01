@@ -93,12 +93,12 @@ class get:
     def get_machines(self):
         return requests.get(BASE_URL + tokenize('/machines/get/all/',self.key)).json()
 
-    def list_active(self)
+    def list_active(self):
         self.make_all_machines()
         active = [i for i in self.machines if i.is_Active]
         return active
     
-    def list_retired(self)
+    def list_retired(self):
         self.make_all_machines()
         retired = [i for i in self.machines if not i.is_Active]
         return retired
