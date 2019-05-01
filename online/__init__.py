@@ -35,6 +35,7 @@ class machine:
         self.retired = datetime.strptime(retired,"%Y-%m-%d %H:%M:%S") if retired != None else None
         self.is_Active = True if self.retired == None else False
         self.data=data
+        self.hostname=self.name+".htb"
 
     def own_user(self,h,d,key):
         return requests.post(BASE_URL + tokenize('/machines/own/user/{}/'.format(self.id), key), data={"hash": h, "diff": d})
@@ -89,6 +90,14 @@ class get:
             id,name,os,ip,points,release,retired,maker,maker2 = i.values()
             self.machines[name] = machine(id,name,os,ip,points,release,retired,i)
         return self.machines
+
+    def add_to_hosts(self):
+        with open("/etc/hosts","r") as f:
+            hosts = f.read()
+        for i in self.machines.values():
+            hosts+="\n{}\t{}".format(i.ip,i.hostname)
+        with open("/etc/hosts","w") as f:
+            f.write(hosts)
 
     def get_machines(self):
         return requests.get(BASE_URL + tokenize('/machines/get/all/',self.key)).json()
