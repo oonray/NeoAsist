@@ -93,7 +93,7 @@ class get:
 
     def add_to_hosts(self=None,name="",ip=""):
         with open("/etc/hosts","r") as f:
-            hosts = f.read_lines()
+            hosts = f.readlines()
         machines = {"localhost"}
         for i in hosts:
             if(i[0]!="#" or i[0]!=":"):
