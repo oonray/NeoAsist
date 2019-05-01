@@ -160,7 +160,7 @@ if(base_arg.online):
                 getter.machines[args2.machines].own_root(args2.hash,args2.score,key)
         
 if(base_arg.local):
-    from online import MACHINE_PATH
+    from online import get,MACHINE_PATH
 
     parser = parser_local
     if(sys.argv[2:3]==[]):
