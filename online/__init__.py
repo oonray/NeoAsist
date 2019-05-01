@@ -111,7 +111,7 @@ class get:
         else:
             for i in self.machines.values():
                 if(i.name not in machines):
-                    hosts.append("{:>20}{:>50}{:>50}\n".format(i.ip,i.name,i.hostname))
+                    hosts.append("{:20}{:20}{:20}\n".format(i.ip,i.name,i.hostname))
         print(hosts)
         with open("/etc/hosts","w") as f:
             f.writelines(hosts)
