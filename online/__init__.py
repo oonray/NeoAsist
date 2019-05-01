@@ -96,7 +96,8 @@ class get:
             hosts = f.read()
         machines = {"localhost"}
         for i in hosts:
-            machines.add(i.split("\t")[1])
+            if(i[0]!="#"):
+                machines.add(i.split("\t")[1])
 
         if(name != "" and ip != ""):
             for i in hosts:
