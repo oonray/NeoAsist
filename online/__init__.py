@@ -56,8 +56,8 @@ class machine:
         if(not os.path.isfile(os.path.join(self.location,"ip"))):
             with open(os.path.join(self.location,"ip"),"w") as f:
                 f.write(self.ip)
-        if(not os.path.exists(os.path.join(self.location,"Scan"))):
-            os.mkdir(os.path.join(self.location,"Scan"))
+        if(not os.path.exists(os.path.join(self.location,"Scans"))):
+            os.mkdir(os.path.join(self.location,"Scans"))
     
     def nmap_scan(self):
         self.create_folder(os.path.join(MACHINE_PATH,self.mame))
