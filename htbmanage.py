@@ -192,7 +192,7 @@ if(base_arg.local):
                 status="Retired"
         try:
             os.chdir(os.path.join(os.path.join(MACHINE_PATH,status),args.start_session))
-            os.fork("openvpn {}".format(os.path.join(CONFIG_PATH,"vpn.ovpn")))
+            os.popen("openvpn {}".format(os.path.join(CONFIG_PATH,"vpn.ovpn")))
             os.system("tmux")
         except Exception as e:
             print(e)
