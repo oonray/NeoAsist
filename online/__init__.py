@@ -100,8 +100,9 @@ class get:
 
         if(name != "" and ip != ""):
             for i in hosts:
-                if(i.split("\t")[0] == ip):
-                    i+="\t"+name
+                if(i[0]!="#"):
+                    if(i.split("\t")[0] == ip):
+                        i+="\t"+name
         else:
             if(i.name not in machines):
                 for i in self.machines:
