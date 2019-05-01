@@ -104,7 +104,7 @@ class get:
                     i+="\t"+name
         else:
             if(i.name not in machines):
-                for(i in machines):
+                for i in machines:
                     hosts+="\n{}\t{}\t{}".format(i.ip,i.name,i.hostname)
         with open("/etc/hosts","w") as f:
             f.write(hosts)
