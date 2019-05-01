@@ -62,6 +62,9 @@ parser_local.add_argument("-l","--list",help="Lists all local machines")
 parser_local.add_argument("-a","--active",action="store_true",help="List only active machines")
 parser_local.add_argument("-r","--retired",action="store_true",help="List only REtired machines")
 parser_local.add_argument("-k","--key",type=str,help="Change API Key")
+parser_local.add_argument("--install",help="Install dependencies")
+parser_local.add_argument("--start-session",type=str,help="Starts Tmux session with the local machine name provided")
+parser_local.add_argument("--scan",type=str,help="starts the auto scan")
 
 if(sys.argv[1:2]==[]):
         argparser.print_usage()
@@ -175,6 +178,24 @@ if(base_arg.local):
         with open(CONFIG_PATH+CONFIG_FILE,"w") as f:
            f.write(json.dumps(data))
 
+    if(args.install):
+        os.system("sudo apt-get install tmux -y")
+
+    if(args.start_session):
+        status=""
+        Active = os.listdir(os.path.join(MACHINE_PATH,"Active"))
+        Retired = os.listdir(os.path.join(MACHINE_PATH,"Retired"))
+        for i,x in zip(Active,Retired):
+            if i == agrs.start_session:
+                status="Active"
+            else:
+                status="Retired"
+        try:
+            os.chdir(os.path.join(os.path.join(MACHINE_PATH,status),args.start_session))
+            os.system("tmux")
+        except:
+            raise ValueError("The machine does not exist!")
+            
     
 
 
