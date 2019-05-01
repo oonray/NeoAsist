@@ -91,7 +91,7 @@ class get:
             self.machines[name] = machine(id,name,os,ip,points,release,retired,i)
         return self.machines
 
-    def add_to_hosts(self,name="",ip=""):
+    def add_to_hosts(self=None,name="",ip=""):
         with open("/etc/hosts","r") as f:
             hosts = f.read()
         machines = {"localhost"}
@@ -104,7 +104,7 @@ class get:
                     i+="\t"+name
         else:
             if(i.name not in machines):
-                for i in machines:
+                for i in self.machines:
                     hosts+="\n{}\t{}\t{}".format(i.ip,i.name,i.hostname)
         with open("/etc/hosts","w") as f:
             f.write(hosts)

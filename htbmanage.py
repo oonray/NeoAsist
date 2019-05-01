@@ -68,13 +68,6 @@ parser_local.add_argument("--scan",type=str,help="starts the auto scan")
 parser_local.add_argument("-ah","--add-host",type=str,help="adds host to the ip")
 parser_local.add_argument("-ip","--ip",type=str,help="ip of the machine to change")
 
-try:
-    with open(os.path.join(CONFIG_PATH,CONFIG_FILE),"r") as f:
-            conf = json.loads(f.read())
-            getter = get(conf["key"])
-except:
-        out = "You Must Add an api key to {}{}".format(CONFIG_PATH,CONFIG_FILE)
-        raise ValueError(out)
 
 if(sys.argv[1:2]==[]):
         argparser.print_usage()
@@ -84,6 +77,14 @@ base_arg = argparser.parse_args(sys.argv[1:2])
 
 if(base_arg.online):
     from online import get, MACHINE_PATH
+
+    try:
+        with open(os.path.join(CONFIG_PATH,CONFIG_FILE),"r") as f:
+                conf = json.loads(f.read())
+                getter = get(conf["key"])
+    except:
+            out = "You Must Add an api key to {}{}".format(CONFIG_PATH,CONFIG_FILE)
+            raise ValueError(out)
     
     parser = parser_online
     if(sys.argv[2:3]==[]):
@@ -207,7 +208,7 @@ if(base_arg.local):
         if(not args.ip):
             parser.print_help()
             exit()
-        getter.add_to_hosts(args.add_to_hosts,args.ip)
+        get.add_to_hosts(args.add_to_hosts,args.ip)
             
     
 
