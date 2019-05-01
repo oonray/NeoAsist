@@ -188,7 +188,7 @@ if(base_arg.local):
         for i,x in zip(Active,Retired):
             if(i == args.start_session):
                 status="Active"
-            else:
+            if(x == args.start_session):
                 status="Retired"
         try:
             os.chdir(os.path.join(os.path.join(MACHINE_PATH,status),args.start_session))
