@@ -4,6 +4,16 @@ from datetime import datetime
 BASE_URL = 'https://www.hackthebox.eu/api'
 MACHINE_PATH = "/root/HTB/"
 
+if(not os.path.exists(MACHINE_PATH)):
+    os.mkdir(MACHINE_PATH)
+
+if(not os.path.exists(os.path.join(MACHINE_PATH,"Active"))):
+        os.mkdir(os.path.join(MACHINE_PATH,"Active"))
+
+if(not os.path.exists(os.path.join(MACHINE_PATH,"Retired"))):
+        os.mkdir(os.path.join(MACHINE_PATH,"Retired"))
+
+
 def tokenize(path,key):
         return "{}?api_token={}".format(path, key)
 
@@ -64,19 +74,24 @@ class machine:
 class get:
     def __init__(self,key):
         self.key = key
+        self.machines = {}
 
     def make_all_machines(self):
-        machines = {}
         ret = self.get_machines()
         for i in ret:
             id,name,os,ip,points,release,retired,maker,maker2 = i.values()
-            machines[name] = machine(id,name,os,ip,points,release,retired,i)
-        return machines
+            self.machines[name] = machine(id,name,os,ip,points,release,retired,i)
+        return self.machines
 
     def get_machines(self):
         return requests.get(BASE_URL + tokenize('/machines/get/all/',self.key)).json()
 
-     
-
-if __name__ == "__main__":
-    print(make_all_machines())
+    def list_active(self)
+        self.make_all_machines()
+        active = [i for i in self.machines if i.is_Active]
+        return active
+    
+    def list_retired(self)
+        self.make_all_machines()
+        retired = [i for i in self.machines if not i.is_Active]
+        return retired

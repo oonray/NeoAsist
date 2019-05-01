@@ -6,7 +6,6 @@
 
 This progam is made to manage the different aspects of Hack The Box Automatically.
 It is designed to make a structured setup for your machines.
-
 """
 
 import os, re, sys, argparse, pip, json
@@ -27,7 +26,6 @@ if(not os.path.exists(CONFIG_PATH)):
             f2.write(f1.read())
 
 argparser = argparse.ArgumentParser(description='Manages htb hashes and Machines.')
-argparser.add_argument("--all",action="store_true",help="Runs all opperations. Good for a fresh start.")
 argparser.add_argument("--online",action="store_true",help="Connect to the htb website, pwn, reset or get boxes")
 argparser.add_argument("--local",action="store_true",help="Does local tasks like changes config or runs tools")
 
@@ -41,14 +39,30 @@ parser_online.add_argument("--pwn",action="store_true",help="Submits eighter use
 parser_online_get = argparse.ArgumentParser(prog="{} --online --get".format(sys.argv[0]), description="")
 parser_online_get.add_argument("-p","--print",action="store_true",help="Prints machines to std")
 parser_online_get.add_argument("-c","--create",action="store_true",help="Creates machine folders")
+parser_online_get.add_argument("-a","--active",action="store_true",help="List only active machines")
+parser_online_get.add_argument("-r","--retired",action="store_true",help="List only REtired machines")
 #pwn
 parser_online_pwn = argparse.ArgumentParser(prog="{} --online --pwn".format(sys.argv[0]), description="")
-parser_online_pwn.add_argument("-m","--machine",action="store_true",help="The machine to pwn")
+parser_online_pwn.add_argument("-l","--list",action="store_true",help="List online machines")
+parser_online_pwn.add_argument("-a","--active",action="store_true",help="List only active machines")
+parser_online_pwn.add_argument("-r","--retired",action="store_true",help="List only REtired machines")
+parser_online_pwn.add_argument("-m","--machine",action="store_int",help="The machine id to pwn")
+parser_online_pwn.add_argument("-h","--hash",action="store_str",help="The machine to pwn")
+parser_online_pwn.add_argument("-s","--score",action="store_int",help="The machine to pwn")
+
 
 """
 Local
 """
 parser_local = argparse.ArgumentParser(prog="{} --local".format(sys.argv[0]),description="")
+parser_local.add_argument("-l","--list",help="Lists all local machines")
+parser_local.add_argument("-a","--active",action="store_true",help="List only active machines")
+parser_local.add_argument("-r","--retired",action="store_true",help="List only REtired machines")
+parser_local.add_argument("--user",action="store_true",help="Own user")
+parser_local.add_argument("--root",action="store_true",help="Own root")
+parser_local.add_argument("-k","--key",action="store_str",help="Change API Key")
+
+parser_local.add_argument("-s")
 
 if(sys.argv[1:2]==[]):
         argparser.print_usage()
@@ -97,12 +111,46 @@ if(base_arg.online):
         if(args2.create):
             for i in machines.values():
                 i.create_folder(MACHINE_PATH)
-                
+            
         if(args2.print):
-            [print(i) for i in machines.values()]
-        
-        
+            prt = machines.values()
+            if(not args.active and args.retired):
+                if(args.active):
+                    prt = getter.list_active()
+                if(args.retired):
+                    prt = getter.list_retired()
+            [print(i) for i in prt]
+                
 
+    if(args.pwn):
+        if(args2.list):
+            [print(i) for i in machines.values()]
+
+        if(args2.list):
+            prt = machines.values()
+            if(not args.active and args.retired):
+                if(args.active):
+                    prt = getter.list_active()
+                if(args.retired):
+                    prt = getter.list_retired()
+            [print(i) for i in prt]
+        
+        if(args2.machine):
+            if(not args2.hash and args2.score):
+                parser2.print_help()
+                exit()
+            if(not args2.root or args2.user):
+                parser2.print_help()
+                exit()
+            if(args2.root and args2.user):
+                parser2.print_help()
+                exit()
+
+            if(args2.user):
+                get.machines[args2.machines].own_user(args2.hash,args2.score,key)
+            if(args2.root):
+                get.machines[args2.machines].own_root(args2.hash,args2.score,key)
+        
 if(base_arg.local):
     pass
 
