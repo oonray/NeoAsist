@@ -95,7 +95,7 @@ class get:
         with open("/etc/hosts","r") as f:
             hosts = f.read()
         for i in self.machines.values():
-            hosts+="\n{}\t{}".format(i.ip,i.hostname)
+            hosts+="\n{}\t{}\t{}".format(i.ip,i.name,i.hostname)
         with open("/etc/hosts","w") as f:
             f.write(hosts)
 
