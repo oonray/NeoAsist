@@ -110,8 +110,8 @@ if(base_arg.online):
                 i.create_folder(MACHINE_PATH)
             
         if(args2.print):
-            if(not args.active and args.retired):
-                prt = machines.values()
+            if(not args.active and not args.retired):
+                    prt = machines.values()
             if(args.active):
                     prt = getter.list_active()
             if(args.retired):
@@ -121,14 +121,14 @@ if(base_arg.online):
 
     if(args.pwn):
         if(args2.list_all):
-            print(args2)
-            prt = machines.values()
-            if(not args2.active and args2.retired):
-                if(args2.active):
+            if(not args.active and not args.retired):
+                    prt = machines.values()
+            if(args2.active):
                     prt = getter.list_active()
-                if(args2.retired):
+            if(args2.retired):
                     prt = getter.list_retired()
             [print(i) for i in prt]
+                
 
         if(args2.list_machine):
             for i in machines.values():
