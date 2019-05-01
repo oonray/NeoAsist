@@ -1,7 +1,6 @@
 #!/bin//python3
 """
 :author: Alexander Bjørnsrud <alexanderbjornsrud@gmail.com>
-:author: Rene Østensen <contact@zorko.co>
 :file: htbmanage.py
 :date: 01.05.2019
 

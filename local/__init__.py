@@ -1,4 +1,9 @@
+"""
+:author: Alexander Bjørnsrud <alexanderbjornsrud@gmail.com>
+:file: local/__init__.py
+:date: 01.05.2019
 
+"""
 
 def save_config(config):
     """Updates the config with the current config dictionary

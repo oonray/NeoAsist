@@ -1,3 +1,10 @@
+"""
+:author: Alexander Bjørnsrud <alexanderbjornsrud@gmail.com>
+:file: online/__init__.py
+:date: 01.05.2019
+
+"""
+
 import requests, os, pickle
 from datetime import datetime
 
