@@ -68,8 +68,6 @@ if(sys.argv[1:2]==[]):
 
 base_arg = argparser.parse_args(sys.argv[1:2])        
 
-if(base_arg.all):
-        pass
 if(base_arg.local):
         parser = parser_local
 if(base_arg.online):
