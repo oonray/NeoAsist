@@ -95,10 +95,10 @@ class get:
 
     def list_active(self):
         self.make_all_machines()
-        active = [i for i in self.machines if i.is_Active]
+        active = [i for i in self.machines.values() if i.is_Active]
         return active
     
     def list_retired(self):
         self.make_all_machines()
-        retired = [i for i in self.machines if not i.is_Active]
+        retired = [i for i in self.machines.values() if not i.is_Active]
         return retired
