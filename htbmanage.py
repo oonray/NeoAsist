@@ -68,6 +68,14 @@ parser_local.add_argument("--scan",type=str,help="starts the auto scan")
 parser_local.add_argument("-ah","--add-host",type=str,help="adds host to the ip")
 parser_local.add_argument("-ip","--ip",type=str,help="ip of the machine to change")
 
+try:
+    with open(os.path.join(CONFIG_PATH,CONFIG_FILE),"r") as f:
+            conf = json.loads(f.read())
+            getter = get(conf["key"])
+    except:
+        out = "You Must Add an api key to {}{}".format(CONFIG_PATH,CONFIG_FILE)
+        raise ValueError(out)
+
 if(sys.argv[1:2]==[]):
         argparser.print_usage()
         exit()
@@ -97,13 +105,7 @@ if(base_arg.online):
 
     parsed = (base_arg,args,args2)
 
-    try:
-        with open(os.path.join(CONFIG_PATH,CONFIG_FILE),"r") as f:
-            conf = json.loads(f.read())
-            getter = get(conf["key"])
-    except:
-        out = "You Must Add an api key to {}{}".format(CONFIG_PATH,CONFIG_FILE)
-        raise ValueError(out)
+  
         
     machines = getter.make_all_machines()
     if(args.get):
@@ -152,9 +154,9 @@ if(base_arg.online):
                 exit()
 
             if(args2.user):
-                get.machines[args2.machines].own_user(args2.hash,args2.score,key)
+                getter.machines[args2.machines].own_user(args2.hash,args2.score,key)
             if(args2.root):
-                get.machines[args2.machines].own_root(args2.hash,args2.score,key)
+                getter.machines[args2.machines].own_root(args2.hash,args2.score,key)
         
 if(base_arg.local):
     from online import MACHINE_PATH
@@ -205,7 +207,7 @@ if(base_arg.local):
         if(not args.ip):
             parser.print_help()
             exit()
-        get.add_to_hosts(args.add_to_hosts,args.ip)
+        getter.add_to_hosts(args.add_to_hosts,args.ip)
             
     
 
