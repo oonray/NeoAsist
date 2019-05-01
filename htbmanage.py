@@ -204,12 +204,12 @@ if(base_arg.local):
             print(e)
             raise ValueError("The machine does not exist!")
 
-    if(args.add_to_hosts):
+    if(args.add-host):
         if(not args.ip):
             parser.print_help()
             exit()
         getter = get("")
-        getter.add_to_hosts(args.add_to_hosts,args.ip)
+        getter.add_to_hosts(args.add-host,args.ip)
             
     
 
