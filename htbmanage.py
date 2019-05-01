@@ -111,7 +111,7 @@ if(base_arg.online):
     machines = getter.make_all_machines()
     if(args.get):
         if(args2.create):
-            get.add_to_hosts()
+            getter.add_to_hosts()
             for i in machines.values():
                 i.create_folder(MACHINE_PATH)
             
