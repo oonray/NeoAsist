@@ -124,20 +124,22 @@ if(base_arg.online):
 
         if(args2.list):
             prt = machines.values()
-            if(not args.active and args.retired):
-                if(args.active):
+            if(not args2.active and args2.retired):
+                if(args2.active):
                     prt = getter.list_active()
-                if(args.retired):
+                if(args2.retired):
                     prt = getter.list_retired()
             [print(i) for i in prt]
         
         if(args2.machine):
             if(not args2.hash and args2.score):
-                parser2.print_help()
-                exit()
+                    parser2.print_help()
+                    exit()
+
             if(not args2.root or args2.user):
-                parser2.print_help()
-                exit()
+                    parser2.print_help()
+                    exit()
+                    
             if(args2.root and args2.user):
                 parser2.print_help()
                 exit()
