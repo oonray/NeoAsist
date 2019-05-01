@@ -72,7 +72,7 @@ try:
     with open(os.path.join(CONFIG_PATH,CONFIG_FILE),"r") as f:
             conf = json.loads(f.read())
             getter = get(conf["key"])
-    except:
+except:
         out = "You Must Add an api key to {}{}".format(CONFIG_PATH,CONFIG_FILE)
         raise ValueError(out)
 
