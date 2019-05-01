@@ -91,7 +91,7 @@ class get:
             self.machines[name] = machine(id,name,os,ip,points,release,retired,i)
         return self.machines
 
-    def add_to_hosts(self=None,name="",ip=""):
+    def add_to_hosts(self,name="",ip=""):
         with open("/etc/hosts","r") as f:
             hosts = f.readlines()
         machines = {"localhost"}

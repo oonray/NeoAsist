@@ -208,7 +208,8 @@ if(base_arg.local):
         if(not args.ip):
             parser.print_help()
             exit()
-        get.add_to_hosts(args.add_to_hosts,args.ip)
+        getter = get("")
+        getter.add_to_hosts(args.add_to_hosts,args.ip)
             
     
 
