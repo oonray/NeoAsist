@@ -17,10 +17,14 @@ try:
 except:
     pipmain(["install", "-r", "requirements.txt"])
 
-
 CONFIG_PATH = "/etc/htb/"
 CONFIG_FILE = "htb.conf"
 
+if(not os.path.exists(CONFIG_PATH)):
+    os.mkdir(CONFIG_PATH)
+    with open("./"+CONFIG_FILE,"r") as f1:
+        with open(CONFIG_PATH+CONFIG_FILE,"w") as f2:
+            f2.write(f1.read())
 
 argparser = argparse.ArgumentParser(description='Manages htb hashes and Machines.')
 argparser.add_argument("--all",action="store_true",help="Runs all opperations. Good for a fresh start.")
@@ -80,10 +84,13 @@ parsed = (base_arg,args,args2)
 
 if(base_arg.online):
     from online import get, MACHINE_PATH
-    with open(os.path.join(CONFIG_PATH,CONFIG_FILE),"r") as f:
-        conf = json.loads(f.read())
-        getter = get(conf["key"])
-    
+    try:
+        with open(os.path.join(CONFIG_PATH,CONFIG_FILE),"r") as f:
+            conf = json.loads(f.read())
+            getter = get(conf["key"])
+    except:
+        raise ValueError("You Must Add an api key to {}".format(CONFIG_PATH))
+        
     machines = getter.make_all_machines()
     if(args.get):
         if(args2.create):
