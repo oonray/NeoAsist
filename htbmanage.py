@@ -43,7 +43,7 @@ parser_online_get.add_argument("-a","--active",action="store_true",help="List on
 parser_online_get.add_argument("-r","--retired",action="store_true",help="List only REtired machines")
 #pwn
 parser_online_pwn = argparse.ArgumentParser(prog="{} --online --pwn".format(sys.argv[0]), description="")
-parser_online_pwn.add_argument("-l","--list",action="store_true",help="List online machines")
+parser_online_pwn.add_argument("-la","--list-all",action="store_true",help="List online machines")
 parser_online_pwn.add_argument("-lm","--list-machine",type=str,help="List a single machine by name")
 parser_online_pwn.add_argument("-a","--active",action="store_true",help="List only active machines")
 parser_online_pwn.add_argument("-r","--retired",action="store_true",help="List only REtired machines")
