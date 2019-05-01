@@ -69,32 +69,29 @@ if(sys.argv[1:2]==[]):
 
 base_arg = argparser.parse_args(sys.argv[1:2])        
 
-if(base_arg.local):
-        parser = parser_local
-if(base_arg.online):
-        parser = parser_online
-
-if(sys.argv[2:3]==[]):
-        parser.print_usage()
-        exit()
-
-args = parser.parse_args(sys.argv[2:3])
-
-if(args.get):
-    parser2 = parser_online_get
-if(args.pwn):
-    parser2 = parser_online_pwn
-
-if(sys.argv[3:4]==[]):
-        parser2.print_usage()
-        exit()
-
-args2 = parser2.parse_args(sys.argv[3:])
-
-parsed = (base_arg,args,args2)
-
 if(base_arg.online):
     from online import get, MACHINE_PATH
+    
+    parser = parser_online
+    if(sys.argv[2:3]==[]):
+            parser.print_usage()
+            exit()
+
+    args = parser.parse_args(sys.argv[2:3])
+
+    if(args.get):
+        parser2 = parser_online_get
+    if(args.pwn):
+        parser2 = parser_online_pwn
+
+    if(sys.argv[3:4]==[]):
+            parser2.print_usage()
+            exit()
+
+    args2 = parser2.parse_args(sys.argv[3:])
+
+    parsed = (base_arg,args,args2)
+
     try:
         with open(os.path.join(CONFIG_PATH,CONFIG_FILE),"r") as f:
             conf = json.loads(f.read())
@@ -154,7 +151,32 @@ if(base_arg.online):
                 get.machines[args2.machines].own_root(args2.hash,args2.score,key)
         
 if(base_arg.local):
-    pass
+    from online import MACHINE_PATH
+
+    parser = parser_local
+    if(sys.argv[2:3]==[]):
+            parser.print_usage()
+            exit()
+    args = parser.parse_args(sys.argv[2:])    
+    if(args.list):
+        Active = os.listdir(os.path.join(MACHINE_PATH,"Active"))
+        Retired = os.listdir(os.path.join(MACHINE_PATH,"Retired"))
+        if(not args.active or not args.retired):
+            args.active,args.retired = True,True
+        if(args.active):
+            [print(i) for i in Active]
+        if(args.retired):
+            [print(i) for i in Retired]
+    
+    if(args.key):
+        with open(CONFIG_PATH+CONFIG_FILE,"r") as f:
+           data = json.laods(f.read())
+           data["key"] = args.key 
+        with open(CONFIG_PATH+CONFIG_FILE,"w") as f:
+           f.write(json.dumps(data))
+
+    
+
 
 
 
