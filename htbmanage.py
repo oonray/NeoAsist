@@ -204,7 +204,7 @@ if(base_arg.local):
             print(e)
             raise ValueError("The machine does not exist!")
 
-    if(args.add-host):
+    if(args.add_host):
         if(not args.ip):
             parser.print_help()
             exit()
