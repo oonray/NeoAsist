@@ -91,13 +91,24 @@ class get:
             self.machines[name] = machine(id,name,os,ip,points,release,retired,i)
         return self.machines
 
-    def add_to_hosts(self):
+    def add_to_hosts(self,name="",ip=""):
         with open("/etc/hosts","r") as f:
             hosts = f.read()
-        for i in self.machines.values():
-            hosts+="\n{}\t{}\t{}".format(i.ip,i.name,i.hostname)
+        machines = {"localhost"}
+        for i in hosts:
+            machines.add(i.split("\t")[1])
+
+        if(name != "" and ip != ""):
+            for i in hosts:
+                if(i.split("\t")[0] == ip):
+                    i+="\t"+name
+        else:
+            if(i.name not in machines):
+                for(i in machines):
+                    hosts+="\n{}\t{}\t{}".format(i.ip,i.name,i.hostname)
         with open("/etc/hosts","w") as f:
             f.write(hosts)
+
 
     def get_machines(self):
         return requests.get(BASE_URL + tokenize('/machines/get/all/',self.key)).json()

@@ -65,6 +65,8 @@ parser_local.add_argument("-k","--key",type=str,help="Change API Key")
 parser_local.add_argument("--install",help="Install dependencies")
 parser_local.add_argument("-ss","--start-session",type=str,help="Starts Tmux session with the local machine name provided")
 parser_local.add_argument("--scan",type=str,help="starts the auto scan")
+parser_local.add_argument("-ah","--add-host",type=str,help="adds host to the ip")
+parser_local.add_argument("-ip","--ip",type=str,help="ip of the machine to change")
 
 if(sys.argv[1:2]==[]):
         argparser.print_usage()
@@ -198,6 +200,12 @@ if(base_arg.local):
         except Exception as e:
             print(e)
             raise ValueError("The machine does not exist!")
+
+    if(args.add_to_hosts):
+        if(not args.ip):
+            parser.print_help()
+            exit()
+        get.add_to_hosts(args.add_to_hosts,args.ip)
             
     
 
