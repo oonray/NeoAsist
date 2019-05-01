@@ -129,7 +129,7 @@ if(base_arg.online):
                     prt = getter.list_retired()
             [print(i) for i in prt]
         if(args2.list_machine):
-            for i in machines.values()
+            for i in machines.values():
                 if i.name == args2.list_machine:
                     print(i)
         
