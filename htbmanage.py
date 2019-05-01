@@ -120,9 +120,10 @@ if(base_arg.online):
                 
 
     if(args.pwn):
-        print(args2)
-        if(args2.list):
+        if(args2.list_all):
             [print(i) for i in machines.values()]
+        if(args2.list_machine):
+            [print(i) for i in machines.values() if i.name == args2.list_machine]
         
         if(args2):
             pass
