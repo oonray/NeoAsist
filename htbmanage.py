@@ -209,7 +209,7 @@ if(base_arg.local):
             parser.print_help()
             exit()
         getter = get("")
-        getter.add_to_hosts(args.add-host,args.ip)
+        getter.add_to_hosts(args.add_host,args.ip)
             
     
 
