@@ -49,7 +49,7 @@ parser_online_pwn.add_argument("-r","--retired",action="store_true",help="List o
 parser_online_pwn.add_argument("-m","--machine",type=int,help="The machine id to pwn")
 parser_online_pwn.add_argument("--user",action="store_true",help="Own user")
 parser_online_pwn.add_argument("--root",action="store_true",help="Own root")
-parser_online_pwn.add_argument("-h","--hash",type=str,help="The machine to pwn")
+parser_online_pwn.add_argument("-hs","--hash",type=str,help="The machine to pwn")
 parser_online_pwn.add_argument("-s","--score",type=int,help="The machine to pwn")
 
 
