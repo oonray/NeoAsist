@@ -111,9 +111,9 @@ class get:
         else:
             for i in self.machines.values():
                 if(i.name not in machines):
-                    hosts+="\n{}\t{}\t{}".format(i.ip,i.name,i.hostname)
+                    hosts.append("\n{}\t{}\t{}".format(i.ip,i.name,i.hostname)
         with open("/etc/hosts","w") as f:
-            f.write(hosts)
+            f.writelines(hosts)
 
 
     def get_machines(self):
