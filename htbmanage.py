@@ -193,7 +193,8 @@ if(base_arg.local):
         try:
             os.chdir(os.path.join(os.path.join(MACHINE_PATH,status),args.start_session))
             os.system("tmux")
-        except:
+        except Exception as e:
+            print(e)
             raise ValueError("The machine does not exist!")
             
     
