@@ -97,8 +97,9 @@ class get:
         machines = {"localhost"}
         for i in hosts:
             if(i[0]!="#" or i[0]!=":" or i[0]!=" "):
-                print(i)
-                machines.add(i.split("\t")[1])
+                try:
+                    machines.add(i.split("\t")[1])
+                except:pass
 
         if(name != "" and ip != ""):
             for i in hosts:
