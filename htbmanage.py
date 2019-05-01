@@ -121,6 +121,7 @@ if(base_arg.online):
 
     if(args.pwn):
         if(args2.list_all):
+            print(args2)
             prt = machines.values()
             if(not args2.active and args2.retired):
                 if(args2.active):
@@ -128,6 +129,7 @@ if(base_arg.online):
                 if(args2.retired):
                     prt = getter.list_retired()
             [print(i) for i in prt]
+
         if(args2.list_machine):
             for i in machines.values():
                 if i.name == args2.list_machine:
