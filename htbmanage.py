@@ -89,7 +89,8 @@ if(base_arg.online):
             conf = json.loads(f.read())
             getter = get(conf["key"])
     except:
-        raise ValueError("You Must Add an api key to {}".format(CONFIG_PATH))
+        out = "You Must Add an api key to {}".format(CONFIG_PATH)
+        raise ValueError(out)
         
     machines = getter.make_all_machines()
     if(args.get):
