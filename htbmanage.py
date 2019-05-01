@@ -44,6 +44,7 @@ parser_online_get.add_argument("-r","--retired",action="store_true",help="List o
 #pwn
 parser_online_pwn = argparse.ArgumentParser(prog="{} --online --pwn".format(sys.argv[0]), description="")
 parser_online_pwn.add_argument("-l","--list",action="store_true",help="List online machines")
+parser_online_pwn.add_argument("-lm","--list-machine",type=str,help="List a single machine by name")
 parser_online_pwn.add_argument("-a","--active",action="store_true",help="List only active machines")
 parser_online_pwn.add_argument("-r","--retired",action="store_true",help="List only REtired machines")
 parser_online_pwn.add_argument("-m","--machine",type=int,help="The machine id to pwn")
@@ -119,8 +120,12 @@ if(base_arg.online):
                 
 
     if(args.pwn):
+        print(args2)
         if(args2.list):
             [print(i) for i in machines.values()]
+        
+        if(args2):
+            pass
 
         if(args2.list):
             prt = machines.values()
@@ -139,7 +144,7 @@ if(base_arg.online):
             if(not args2.root or args2.user):
                     parser2.print_help()
                     exit()
-                    
+
             if(args2.root and args2.user):
                 parser2.print_help()
                 exit()
