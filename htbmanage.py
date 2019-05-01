@@ -63,7 +63,7 @@ parser_local.add_argument("-a","--active",action="store_true",help="List only ac
 parser_local.add_argument("-r","--retired",action="store_true",help="List only REtired machines")
 parser_local.add_argument("-k","--key",type=str,help="Change API Key")
 parser_local.add_argument("--install",help="Install dependencies")
-parser_local.add_argument("--start-session",type=str,help="Starts Tmux session with the local machine name provided")
+parser_local.add_argument("-ss","--start-session",type=str,help="Starts Tmux session with the local machine name provided")
 parser_local.add_argument("--scan",type=str,help="starts the auto scan")
 
 if(sys.argv[1:2]==[]):
@@ -186,7 +186,7 @@ if(base_arg.local):
         Active = os.listdir(os.path.join(MACHINE_PATH,"Active"))
         Retired = os.listdir(os.path.join(MACHINE_PATH,"Retired"))
         for i,x in zip(Active,Retired):
-            if i == agrs.start_session:
+            if(i == args.start_session):
                 status="Active"
             else:
                 status="Retired"
