@@ -216,8 +216,8 @@ if(base_arg.local):
         try:
             os.chdir(os.path.join(os.path.join(MACHINE_PATH,status),args.start_session))
             try:
-                openvpn()
                 os.system("tmux")
+                openvpn()
             except Exception as e:
                 print(e)
                 exit()
