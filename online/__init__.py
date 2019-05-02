@@ -102,19 +102,17 @@ class get:
                 try:
                     machines.add(i.split(" ")[21].lower())
                 except:pass
+        print(machines)
 
         if(name != "" and ip != ""):
             for i in hosts:
-                print(i.split(" ")[0])
-                if(i.split(" ")[0] == ip):
-                    line = i[:-1] 
-                    line+="{:20}\n".format(name.lower())
-                    hosts.remove(i)
-                    hosts.append(line)
-                    print(i)
-                    print(line)
+                if(name.lower() not in i):
+                    if(i.split(" ")[0] == ip):
+                        line = i[:-1] 
+                        line+="{:20}\n".format(name.lower())
+                        hosts.remove(i)
+                        hosts.append(line)
 
-        
         else:
             for i in self.machines.values():
                 if(i.name.lower() not in machines):
