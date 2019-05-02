@@ -185,7 +185,7 @@ if(base_arg.local):
             [print(i) for i in Retired]
     
     if(args.key):
-        getter.config["key"] = args.key 
+        getter.conf["key"] = args.key 
         with open(CONFIG_PATH+CONFIG_FILE,"w") as f:
            f.write(json.dumps(data))
 
@@ -211,10 +211,10 @@ if(base_arg.local):
             except Exception as e:
                 print(e)
                 exit()
-            getter.config["last"] = os.path.join(os.path.join(MACHINE_PATH,status),args.start_session)
-            getter.config["vpnid"] = vpn_id
+            getter.conf["last"] = os.path.join(os.path.join(MACHINE_PATH,status),args.start_session)
+            getter.conf["vpnid"] = vpn_id
             with open(CONFIG_PATH+CONFIG_FILE,"w") as f:
-                    f.write(json.dumps(getter.config))
+                    f.write(json.dumps(getter.conf))
 
         except Exception as e:
             print(e)
