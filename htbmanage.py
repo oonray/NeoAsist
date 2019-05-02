@@ -92,12 +92,12 @@ if(base_arg.online):
     from online import get, MACHINE_PATH
 
     try:
-        print("{}[+]{} Loading Config".format(Fore.green,Fore.reset))
+        print("{}[+]{} Loading Config".format(Fore.GREEN,Fore.RESET))
         with open(os.path.join(CONFIG_PATH,CONFIG_FILE),"r") as f:
                 conf = json.loads(f.read())
                 getter = get(conf)
     except:
-            out = "{}[!]{} You Must Add an api key to {}{}".format(Fore.red,Fore.reset,CONFIG_PATH,CONFIG_FILE)
+            out = "{}[!]{} You Must Add an api key to {}{}".format(Fore.RED,Fore.RESET,CONFIG_PATH,CONFIG_FILE)
             raise ValueError(out)
     
     parser = parser_online
@@ -122,20 +122,20 @@ if(base_arg.online):
     machines = getter.make_all_machines()
     if(args.get):
         if(args2.create):
-            print("{}[+]{} Creating Machines in {}".format(Fore.green,Fore.reset,MACHINE_PATH))
+            print("{}[+]{} Creating Machines in {}".format(Fore.GREEN,Fore.RESET,MACHINE_PATH))
             getter.add_to_hosts()
             for i in machines.values():
                 i.create_folder(MACHINE_PATH)
             
         if(args2.print):          
             if(not args2.active and not args2.retired):
-                    print("{}[+]{} Printing Machines Avalible".format(Fore.green,Fore.reset))  
+                    print("{}[+]{} Printing Machines Avalible".format(Fore.GREEN,Fore.RESET))  
                     prt = machines.values()
             if(args2.active):
-                    print("{}[+]{} Printing Active Machines Avalible".format(Fore.green,Fore.reset))  
+                    print("{}[+]{} Printing Active Machines Avalible".format(Fore.GREEN,Fore.RESET))  
                     prt = getter.list_active()
             if(args2.retired):
-                    print("{}[+]{} Printing Retired Machines Avalible".format(Fore.green,Fore.reset))  
+                    print("{}[+]{} Printing Retired Machines Avalible".format(Fore.GREEN,Fore.RESET))  
                     prt = getter.list_retired()
             [print(i) for i in prt]
                 
