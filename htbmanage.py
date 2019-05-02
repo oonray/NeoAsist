@@ -208,16 +208,20 @@ if(base_arg.local):
                 status="Active"
             if(x == args.start_session):
                 status="Retired"
+        def openvpn():
+            vpn_id = os.fork()
+            os.popen("openvpn {}".format(os.path.join(CONFIG_PATH,"vpn.ovpn")))
+
+        
         try:
             os.chdir(os.path.join(os.path.join(MACHINE_PATH,status),args.start_session))
             try:
+                openvpn()
                 os.system("tmux")
-                vpn_id = os.fork()
-                os.popen("openvpn {}".format(os.path.join(CONFIG_PATH,"vpn.ovpn")))
             except Exception as e:
                 print(e)
                 exit()
-                
+
             getter.conf["last"] = os.path.join(os.path.join(MACHINE_PATH,status),args.start_session)
             getter.conf["vpnid"] = vpn_id
             with open(CONFIG_PATH+CONFIG_FILE,"w") as f:
