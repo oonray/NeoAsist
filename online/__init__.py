@@ -112,6 +112,8 @@ class get:
                             line+="{:20}\n".fomrat(name.lower())
                             hosts.remove(i)
                             hosts.append(line)
+                            print(i)
+                            print(line)
                     except:pass
         else:
             for i in self.machines.values():
