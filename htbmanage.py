@@ -11,11 +11,6 @@ It is designed to make a structured setup for your machines.
 import os, re, sys, argparse, pip, json
 from pip._internal import main as pipmain
 
-try:
-    import colorama
-except:
-    pipmain(["install", "-r", "requirements.txt"])
-
 CONFIG_PATH = "/etc/htb/"
 CONFIG_FILE = "htb.conf"
 
@@ -28,6 +23,7 @@ if(not os.path.exists(CONFIG_PATH)):
 argparser = argparse.ArgumentParser(description='Manages htb hashes and Machines.')
 argparser.add_argument("--online",action="store_true",help="Connect to the htb website, pwn, reset or get boxes")
 argparser.add_argument("--local",action="store_true",help="Does local tasks like changes config or runs tools")
+argparser.add_argument("--install",help="Install dependencies")
 
 """
 Online
@@ -62,7 +58,7 @@ parser_local.add_argument("-l","--list",help="Lists all local machines")
 parser_local.add_argument("-a","--active",action="store_true",help="List only active machines")
 parser_local.add_argument("-r","--retired",action="store_true",help="List only REtired machines")
 parser_local.add_argument("-k","--key",type=str,help="Change API Key")
-parser_local.add_argument("--install",help="Install dependencies")
+
 parser_local.add_argument("-ss","--start-session",type=str,help="Starts Tmux session with the local machine name provided")
 parser_local.add_argument("--scan",type=str,help="starts the auto scan")
 parser_local.add_argument("-ah","--add-host",type=str,help="adds host to the ip")
@@ -73,7 +69,14 @@ if(sys.argv[1:2]==[]):
         argparser.print_usage()
         exit()
 
-base_arg = argparser.parse_args(sys.argv[1:2])        
+base_arg = argparser.parse_args(sys.argv[1:2])
+
+if(base_arg.install):
+    pipmain(["install", "-r", "requirements.txt"])
+    os.system("sudo apt-get install tmux -y")
+    os.system("sudo apt-get install openvpn -y")
+
+import colorama        
 
 if(base_arg.online):
     from online import get, MACHINE_PATH
@@ -183,9 +186,6 @@ if(base_arg.local):
            data["key"] = args.key 
         with open(CONFIG_PATH+CONFIG_FILE,"w") as f:
            f.write(json.dumps(data))
-
-    if(args.install):
-        os.system("sudo apt-get install tmux -y")
 
     if(args.start_session):
         status=""

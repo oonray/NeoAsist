@@ -98,7 +98,7 @@ class get:
         for i in hosts:
             if(i[0]!="#" or i[0]!=":" or i[0]!=" "):
                 try:
-                    machines.add(i.split("\t")[1])
+                    machines.add(i.split("\t")[1].lower())
                 except:pass
 
         if(name != "" and ip != ""):
@@ -107,12 +107,12 @@ class get:
                     try:
                         if(i.split("\t")[0] == ip):
                             i=i[:-1]
-                            i+="{:20}\n".fomrat(name)
+                            i=i+="{:20}\n".fomrat(name.lower())
                     except:pass
         else:
             for i in self.machines.values():
-                if(i.name not in machines):
-                    hosts.append("{:20}{:20}{:20}{:20}\n".format(i.ip,i.name.lower(),i.name,i.hostname))
+                if(i.name.lower() not in machines):
+                    hosts.append("{:20}{:20}{:20}{:20}\n".format(i.ip,i.name.lower(),i.hostname.lower()))
         print(hosts)
         with open("/etc/hosts","w") as f:
             f.writelines(hosts)
