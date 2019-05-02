@@ -14,12 +14,6 @@ from pip._internal import main as pipmain
 CONFIG_PATH = "/etc/htb/"
 CONFIG_FILE = "htb.conf"
 
-if(not os.path.exists(CONFIG_PATH)):
-    os.mkdir(CONFIG_PATH)
-    with open("./"+CONFIG_FILE,"r") as f1:
-        with open(CONFIG_PATH+CONFIG_FILE,"w") as f2:
-            f2.write(f1.read())
-
 argparser = argparse.ArgumentParser(description='Manages htb hashes and Machines.')
 argparser.add_argument("--online",action="store_true",help="Connect to the htb website, pwn, reset or get boxes")
 argparser.add_argument("--local",action="store_true",help="Does local tasks like changes config or runs tools")
@@ -75,6 +69,13 @@ if(base_arg.install):
     pipmain(["install", "-r", "requirements.txt"])
     os.system("sudo apt-get install tmux -y")
     os.system("sudo apt-get install openvpn -y")
+    
+    if(not os.path.exists(CONFIG_PATH)):
+    os.mkdir(CONFIG_PATH)
+    with open("./"+CONFIG_FILE,"r") as f1:
+        with open(CONFIG_PATH+CONFIG_FILE,"w") as f2:
+            f2.write(f1.read())
+
 
 import colorama        
 

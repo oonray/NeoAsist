@@ -5,6 +5,15 @@
 
 """
 
+def TCPScan():
+    pass
+
+def UDPScan():
+    pass
+
+def stdscan():
+    pass
+    
 def save_config(config):
     """Updates the config with the current config dictionary
     

@@ -108,8 +108,10 @@ class get:
                 if(i[0]!="#" or i[0]!=":" or i[0]!=" "):
                     try:
                         if(i.split("\t")[0] == ip):
-                            i=i[:-1]
-                            i+="{:20}\n".fomrat(name.lower())
+                            line = i[:-1] 
+                            line+="{:20}\n".fomrat(name.lower())
+                            hosts.remove(i)
+                            hosts.append(line)
                     except:pass
         else:
             for i in self.machines.values():
