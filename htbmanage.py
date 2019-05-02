@@ -71,10 +71,10 @@ if(base_arg.install):
     os.system("sudo apt-get install openvpn -y")
     
     if(not os.path.exists(CONFIG_PATH)):
-    os.mkdir(CONFIG_PATH)
-    with open("./"+CONFIG_FILE,"r") as f1:
-        with open(CONFIG_PATH+CONFIG_FILE,"w") as f2:
-            f2.write(f1.read())
+        os.mkdir(CONFIG_PATH)
+        with open("./"+CONFIG_FILE,"r") as f1:
+            with open(CONFIG_PATH+CONFIG_FILE,"w") as f2:
+                f2.write(f1.read())
 
 
 import colorama        
