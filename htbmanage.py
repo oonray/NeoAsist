@@ -202,7 +202,7 @@ if(base_arg.local):
             try:
                 vpn_id = os.fork()
                 os.popen("openvpn {}".format(os.path.join(CONFIG_PATH,"vpn.ovpn")))
-            except Exception e:
+            except Exception as e:
                 print(e)
             try:
                 tmux_id = os.fork()
