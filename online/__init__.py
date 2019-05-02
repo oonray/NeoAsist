@@ -100,13 +100,13 @@ class get:
         for i in hosts:
             if(i[0]!="#" or i[0]!=":" or i[0]!=" "):
                 try:
-                    machines.add(i.split("\t")[1].lower())
+                    machines.add(i.split(" ")[21].lower())
                 except:pass
 
         if(name != "" and ip != ""):
             for i in hosts:
-                print(i.split("\t")[0])
-                if(i.split("\t")[0] == ip):
+                print(i.split(" ")[0])
+                if(i.split(" ")[0] == ip):
                     line = i[:-1] 
                     line+="{:20}\n".fomrat(name.lower())
                     hosts.remove(i)
