@@ -215,7 +215,7 @@ if(base_arg.local):
             os.chdir(os.path.join(os.path.join(MACHINE_PATH,status),args.start_session))
             try:
                 os.system("tmux")
-                if(not getter.conf["vpnid"]>0):
+                if(not sum([int(i) for i in getter.conf["vpnid"].split("\n")])>0):
                     os.popen("openvpn {}".format(os.path.join(CONFIG_PATH,"vpn.ovpn")))
                 ps = os.popen("ps -aux | grep openvpn {}/vpn.ovpn | awk '{print $2}'".format(CONFIG_PATH))
                 getter.conf["vpnid"] = ps.read()
