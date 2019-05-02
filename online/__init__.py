@@ -100,7 +100,7 @@ class get:
         for i in hosts:
             if(i[0]!="#" or i[0]!=":" or i[0]!=" "):
                 try:
-                    computer = i.split(" ")[1]
+                    computer = i.split()[1]
                     print(computer)
                     machines.add(computer)
                 except Exception as e:
