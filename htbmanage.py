@@ -48,7 +48,7 @@ parser_online_pwn.add_argument("-s","--score",type=int,help="The machine to pwn"
 Local
 """
 parser_local = argparse.ArgumentParser(prog="{} --local".format(sys.argv[0]),description="")
-parser_local.add_argument("-l","--list",help="Lists all local machines")
+parser_local.add_argument("-l","--list",action="store_true",help="Lists all local machines")
 parser_local.add_argument("-a","--active",action="store_true",help="List only active machines")
 parser_local.add_argument("-r","--retired",action="store_true",help="List only REtired machines")
 parser_local.add_argument("-k","--key",type=str,help="Change API Key")
