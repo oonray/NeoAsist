@@ -209,8 +209,8 @@ if(base_arg.local):
             if(x == args.start_session):
                 status="Retired"
         
-        def openvpn():
-            vpn_id = os.fork()
+        def openvpn(getter):
+            getter.conf["vpnid"] = os.fork()
             os.popen("openvpn {}".format(os.path.join(CONFIG_PATH,"vpn.ovpn")))
 
         try:
