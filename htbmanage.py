@@ -23,7 +23,7 @@ if(not os.path.exists(CONFIG_PATH)):
 argparser = argparse.ArgumentParser(description='Manages htb hashes and Machines.')
 argparser.add_argument("--online",action="store_true",help="Connect to the htb website, pwn, reset or get boxes")
 argparser.add_argument("--local",action="store_true",help="Does local tasks like changes config or runs tools")
-argparser.add_argument("--install",help="Install dependencies")
+argparser.add_argument("--install",action="store_true",help="Install dependencies")
 
 """
 Online
