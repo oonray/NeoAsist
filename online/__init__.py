@@ -105,6 +105,7 @@ class get:
 
         if(name != "" and ip != ""):
             for i in hosts:
+                print(i.split("\t")[0])
                 if(i.split("\t")[0] == ip):
                     line = i[:-1] 
                     line+="{:20}\n".fomrat(name.lower())
