@@ -233,7 +233,7 @@ if(base_arg.local):
             raise ValueError("The machine does not exist!")
 
     if(args.kill_vpn):
-        os.popen("for i in $(ps -aux | grep openvpn {}/vpn.ovpn | awk '{print $2}'); do kill $i; done".format(CONFIG_PATH))
+        os.popen("for i in $(ps -aux | grep openvpn {}/vpn.ovpn | awk \'{print $2}\'); do kill $i; done".format(CONFIG_PATH))
 
     if(args.add_host):
         if(not args.ip):
