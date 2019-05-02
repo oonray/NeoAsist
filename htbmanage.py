@@ -187,7 +187,7 @@ if(base_arg.local):
     if(args.key):
         getter.conf["key"] = args.key 
         with open(CONFIG_PATH+CONFIG_FILE,"w") as f:
-           f.write(json.dumps(data))
+           f.write(json.dumps(getter.conf))
 
     if(args.start_session):
         status=""
