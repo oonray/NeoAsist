@@ -167,7 +167,7 @@ if(base_arg.local):
     from online import get,MACHINE_PATH
 
     with open(CONFIG_PATH+CONFIG_FILE,"r") as f:
-           getter = get(json.laods(f.read()))
+           getter = get(json.loads(f.read()))
 
     parser = parser_local
     if(sys.argv[2:3]==[]):
