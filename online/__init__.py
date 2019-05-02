@@ -100,7 +100,6 @@ class get:
         for i in hosts:
             if(i[0]!="#" or i[0]!=":" or i[0]!=" "):
                 try:
-                    print(i.split())
                     machines.add(i.split(" ")[1].lower())
                 except:pass
         print(machines)
