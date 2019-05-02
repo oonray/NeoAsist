@@ -66,28 +66,37 @@ if(sys.argv[1:2]==[]):
 base_arg = argparser.parse_args(sys.argv[1:2])
 
 if(base_arg.install):
+    print("[+] Installing Requirements")
+    print("[+] Installing Pip requirements")
     pipmain(["install", "-r", "requirements.txt"])
+    print("[+] Installing tmux")
     os.system("sudo apt-get install tmux -y")
+    print("[+] Installing openvpn")
     os.system("sudo apt-get install openvpn -y")
     
+    print("[+] Creating Config Folder: {}".format(CONFIG_PATH))
     if(not os.path.exists(CONFIG_PATH)):
         os.mkdir(CONFIG_PATH)
+    
+    print("[+] Creating Config File {}".format(CONFIG_FILE))
     with open("./"+CONFIG_FILE,"r") as f1:
             with open(CONFIG_PATH+CONFIG_FILE,"w") as f2:
                 f2.write(f1.read())
 
 
-import colorama        
+from colorama import init
+init(autoreset=True)       
 
 if(base_arg.online):
     from online import get, MACHINE_PATH
 
     try:
+        print("{}[+]{} Loading Config".format(Fore.green,Fore.reset))
         with open(os.path.join(CONFIG_PATH,CONFIG_FILE),"r") as f:
                 conf = json.loads(f.read())
                 getter = get(conf)
     except:
-            out = "You Must Add an api key to {}{}".format(CONFIG_PATH,CONFIG_FILE)
+            out = "{}[!]{} You Must Add an api key to {}{}".format(Fore.red,Fore.reset,CONFIG_PATH,CONFIG_FILE)
             raise ValueError(out)
     
     parser = parser_online
@@ -107,24 +116,25 @@ if(base_arg.online):
             exit()
 
     args2 = parser2.parse_args(sys.argv[3:])
-
     parsed = (base_arg,args,args2)
-
-  
-        
+ 
     machines = getter.make_all_machines()
     if(args.get):
         if(args2.create):
+            print("{}[+]{} Creating Machines in {}".format(Fore.green,Fore.reset,MACHINE_PATH))
             getter.add_to_hosts()
             for i in machines.values():
                 i.create_folder(MACHINE_PATH)
             
-        if(args2.print):
+        if(args2.print):          
             if(not args2.active and not args2.retired):
+                    print("{}[+]{} Printing Machines Avalible".format(Fore.green,Fore.reset))  
                     prt = machines.values()
             if(args2.active):
+                    print("{}[+]{} Printing Active Machines Avalible".format(Fore.green,Fore.reset))  
                     prt = getter.list_active()
             if(args2.retired):
+                    print("{}[+]{} Printing Retired Machines Avalible".format(Fore.green,Fore.reset))  
                     prt = getter.list_retired()
             [print(i) for i in prt]
                 
@@ -201,16 +211,13 @@ if(base_arg.local):
         try:
             os.chdir(os.path.join(os.path.join(MACHINE_PATH,status),args.start_session))
             try:
+                os.system("tmux")
                 vpn_id = os.fork()
                 os.popen("openvpn {}".format(os.path.join(CONFIG_PATH,"vpn.ovpn")))
             except Exception as e:
                 print(e)
-            try:
-                tmux_id = os.fork()
-                os.system("tmux")
-            except Exception as e:
-                print(e)
                 exit()
+                
             getter.conf["last"] = os.path.join(os.path.join(MACHINE_PATH,status),args.start_session)
             getter.conf["vpnid"] = vpn_id
             with open(CONFIG_PATH+CONFIG_FILE,"w") as f:
