@@ -101,13 +101,9 @@ class get:
             if(i[0]!="#" or i[0]!=":" or i[0]!=" "):
                 try:
                     computer = i.split()[1]
-                    print(computer)
                     machines.add(computer)
                 except Exception as e:
                     print(e)
-
-
-        print(machines)
 
         if(name != "" and ip != ""):
             for i in hosts:
