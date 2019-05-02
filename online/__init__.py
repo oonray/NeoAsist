@@ -101,7 +101,7 @@ class get:
             if(i[0]!="#" or i[0]!=":" or i[0]!=" "):
                 try:
                     print(i.split())
-                    machines.add(i.split(" ")[21].lower())
+                    machines.add(i.split(" ")[1].lower())
                 except:pass
         print(machines)
 
