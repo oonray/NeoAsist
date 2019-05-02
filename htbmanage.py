@@ -177,7 +177,7 @@ if(base_arg.local):
     if(args.list):
         Active = os.listdir(os.path.join(MACHINE_PATH,"Active"))
         Retired = os.listdir(os.path.join(MACHINE_PATH,"Retired"))
-        if(not args.active or not args.retired):
+        if(not args.active and not args.retired):
             args.active,args.retired = True,True
         if(args.active):
             [print(i) for i in Active]
