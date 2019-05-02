@@ -215,7 +215,7 @@ if(base_arg.local):
             try:
                 os.system("tmux")
                 os.popen("openvpn {}".format(os.path.join(CONFIG_PATH,"vpn.ovpn")))
-                ps = os.popen("ps -aux | grep openvpn | awk '{print $2}'",stdout=PIPE)
+                ps = os.popen("ps -aux | grep openvpn | awk '{print $2}'")
                 print(ps.read())
                 
             except Exception as e:
