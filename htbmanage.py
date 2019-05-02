@@ -85,7 +85,7 @@ if(base_arg.install):
                 f2.write(f1.read())
 
 
-from colorama import init
+from colorama import init, Fore
 init(autoreset=True)       
 
 if(base_arg.online):
