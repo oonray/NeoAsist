@@ -9,7 +9,7 @@ It is designed to make a structured setup for your machines.
 """
 
 import os, re, sys, argparse, pip, json
-from subprocess import PIPE
+from subprocess import Popen, PIPE
 from pip._internal import main as pipmain
 
 CONFIG_PATH = "/etc/htb/"
@@ -209,17 +209,14 @@ if(base_arg.local):
                 status="Active"
             if(x == args.start_session):
                 status="Retired"
-        
-        def openvpn(gt):
-            gt.conf["vpnid"] = os.fork()
-            openvpn = os.popen("openvpn {}".format(os.path.join(CONFIG_PATH,"vpn.ovpn")))
-            print(openvpn)
 
         try:
             os.chdir(os.path.join(os.path.join(MACHINE_PATH,status),args.start_session))
             try:
+                os.system("openvpn {}".format(os.path.join(CONFIG_PATH,"vpn.ovpn")))
                 os.system("tmux")
-                openvpn(getter)
+                ps = Popen("ps -aux | grep openvpn | awk '{print $2}'",stdout=PIPE)
+                print(ps.stdout.read())
             except Exception as e:
                 print(e)
                 exit()
