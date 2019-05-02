@@ -106,15 +106,14 @@ class get:
         if(name != "" and ip != ""):
             for i in hosts:
                 if(i[0]!="#" or i[0]!=":" or i[0]!=" "):
-                    try:
-                        if(i.split("\t")[0] == ip):
-                            line = i[:-1] 
-                            line+="{:20}\n".fomrat(name.lower())
-                            hosts.remove(i)
-                            hosts.append(line)
-                            print(i)
-                            print(line)
-                    except:pass
+                    if(i.split("\t")[0] == ip):
+                        line = i[:-1] 
+                        line+="{:20}\n".fomrat(name.lower())
+                        hosts.remove(i)
+                        hosts.append(line)
+                        print(i)
+                        print(line)
+        
         else:
             for i in self.machines.values():
                 if(i.name.lower() not in machines):
