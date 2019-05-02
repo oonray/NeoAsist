@@ -58,6 +58,7 @@ parser_local.add_argument("-ss","--start-session",type=str,help="Starts Tmux ses
 parser_local.add_argument("--scan",type=str,help="starts the auto scan")
 parser_local.add_argument("-ah","--add-host",type=str,help="adds host to the ip")
 parser_local.add_argument("-ip","--ip",type=str,help="ip of the machine to change")
+parser_local.add_argument("-kv","--kill_vpn",action="store_true",help="ip of the machine to change")
 
 
 if(sys.argv[1:2]==[]):
@@ -214,9 +215,10 @@ if(base_arg.local):
             os.chdir(os.path.join(os.path.join(MACHINE_PATH,status),args.start_session))
             try:
                 os.system("tmux")
-                os.popen("openvpn {}".format(os.path.join(CONFIG_PATH,"vpn.ovpn")))
-                ps = os.popen("ps -aux | grep openvpn | awk '{print $2}'")
-                print(ps.read())
+                if(not getter.conf["vpnid"]>0):
+                    os.popen("openvpn {}".format(os.path.join(CONFIG_PATH,"vpn.ovpn")))
+                ps = os.popen("ps -aux | grep openvpn {}/vpn.ovpn | awk '{print $2}'".format(CONFIG_PATH))
+                getter.conf["vpnid"] = ps.read()
                 
             except Exception as e:
                 print(e)
@@ -229,6 +231,9 @@ if(base_arg.local):
         except Exception as e:
             print(e)
             raise ValueError("The machine does not exist!")
+
+    if(args.kill_vpn):
+        os.popen("for i in $(ps -aux | grep openvpn {}/vpn.ovpn | awk '{print $2}'); do kill $i; done".format(CONFIG_PATH))
 
     if(args.add_host):
         if(not args.ip):
