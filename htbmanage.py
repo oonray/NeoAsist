@@ -84,7 +84,7 @@ if(base_arg.online):
     try:
         with open(os.path.join(CONFIG_PATH,CONFIG_FILE),"r") as f:
                 conf = json.loads(f.read())
-                getter = get(conf["key"])
+                getter = get(conf)
     except:
             out = "You Must Add an api key to {}{}".format(CONFIG_PATH,CONFIG_FILE)
             raise ValueError(out)
@@ -165,6 +165,9 @@ if(base_arg.online):
 if(base_arg.local):
     from online import get,MACHINE_PATH
 
+    with open(CONFIG_PATH+CONFIG_FILE,"r") as f:
+           getter = get(json.laods(f.read()))
+
     parser = parser_local
     if(sys.argv[2:3]==[]):
             parser.print_usage()
@@ -181,9 +184,7 @@ if(base_arg.local):
             [print(i) for i in Retired]
     
     if(args.key):
-        with open(CONFIG_PATH+CONFIG_FILE,"r") as f:
-           data = json.laods(f.read())
-           data["key"] = args.key 
+        getter.config["key"] = args.key 
         with open(CONFIG_PATH+CONFIG_FILE,"w") as f:
            f.write(json.dumps(data))
 
@@ -198,8 +199,22 @@ if(base_arg.local):
                 status="Retired"
         try:
             os.chdir(os.path.join(os.path.join(MACHINE_PATH,status),args.start_session))
-            os.popen("openvpn {}".format(os.path.join(CONFIG_PATH,"vpn.ovpn")))
-            os.system("tmux")
+            try:
+                vpn_id = os.fork()
+                os.popen("openvpn {}".format(os.path.join(CONFIG_PATH,"vpn.ovpn")))
+            except Exception e:
+                print(e)
+            try:
+                tmux_id = os.fork()
+                os.system("tmux")
+            except Exception e:
+                print(e)
+                exit()
+            getter.config["last"] = os.path.join(os.path.join(MACHINE_PATH,status),args.start_session)
+            getter.config["vpnid"] = vpn_id
+            with open(CONFIG_PATH+CONFIG_FILE,"w") as f:
+                    f.write(json.dumps(getter.config))
+
         except Exception as e:
             print(e)
             raise ValueError("The machine does not exist!")

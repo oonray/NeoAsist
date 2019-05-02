@@ -80,8 +80,10 @@ class machine:
         return "ID:{s.id:03d} | Name:{s.name:15}| Points:{s.points} | Active:{s.is_Active}".format(s=self)
 
 class get:
-    def __init__(self,key):
-        self.key = key
+    def __init__(self,conf):
+        self.conf = conf
+        self.key = self.conf["key"]
+        self.last = self.conf["last"]
         self.machines = {}
 
     def make_all_machines(self):
