@@ -9,6 +9,7 @@ It is designed to make a structured setup for your machines.
 """
 
 import os, re, sys, argparse, pip, json
+from subprocess import PIPE
 from pip._internal import main as pipmain
 
 CONFIG_PATH = "/etc/htb/"
@@ -211,12 +212,13 @@ if(base_arg.local):
         
         def openvpn(getter):
             getter.conf["vpnid"] = os.fork()
-            os.popen("openvpn {}".format(os.path.join(CONFIG_PATH,"vpn.ovpn")))
+            openvpn = os.popen("openvpn {} &".format(os.path.join(CONFIG_PATH,"vpn.ovpn")),stdout=PIPE)
+            print(openvpn.stdout.read())
 
         try:
             os.chdir(os.path.join(os.path.join(MACHINE_PATH,status),args.start_session))
             try:
-                os.system("tmux")
+                #os.system("tmux")
                 openvpn()
             except Exception as e:
                 print(e)
