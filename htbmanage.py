@@ -207,7 +207,7 @@ if(base_arg.local):
             try:
                 tmux_id = os.fork()
                 os.system("tmux")
-            except Exception e:
+            except Exception as e:
                 print(e)
                 exit()
             getter.config["last"] = os.path.join(os.path.join(MACHINE_PATH,status),args.start_session)
