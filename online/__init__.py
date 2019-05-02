@@ -108,7 +108,7 @@ class get:
                 print(i.split(" ")[0])
                 if(i.split(" ")[0] == ip):
                     line = i[:-1] 
-                    line+="{:20}\n".fomrat(name.lower())
+                    line+="{:20}\n".format(name.lower())
                     hosts.remove(i)
                     hosts.append(line)
                     print(i)
