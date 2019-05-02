@@ -225,7 +225,6 @@ if(base_arg.local):
                 exit()
 
             getter.conf["last"] = os.path.join(os.path.join(MACHINE_PATH,status),args.start_session)
-            getter.conf["vpnid"] = vpn_id
             with open(CONFIG_PATH+CONFIG_FILE,"w") as f:
                     f.write(json.dumps(getter.conf))
 
