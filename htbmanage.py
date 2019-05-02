@@ -213,10 +213,11 @@ if(base_arg.local):
         try:
             os.chdir(os.path.join(os.path.join(MACHINE_PATH,status),args.start_session))
             try:
+                os.system("tmux")
                 os.system("openvpn {}".format(os.path.join(CONFIG_PATH,"vpn.ovpn")))
                 ps = Popen("ps -aux | grep openvpn | awk '{print $2}'",stdout=PIPE)
                 print(ps.stdout.read())
-                os.system("tmux")
+                
             except Exception as e:
                 print(e)
                 exit()
