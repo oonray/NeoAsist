@@ -109,7 +109,7 @@ class get:
                     try:
                         if(i.split("\t")[0] == ip):
                             i=i[:-1]
-                            i=i+="{:20}\n".fomrat(name.lower())
+                            i+="{:20}\n".fomrat(name.lower())
                     except:pass
         else:
             for i in self.machines.values():
