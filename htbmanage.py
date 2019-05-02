@@ -212,8 +212,8 @@ if(base_arg.local):
         
         def openvpn(gt):
             gt.conf["vpnid"] = os.fork()
-            openvpn = os.popen("openvpn {} &".format(os.path.join(CONFIG_PATH,"vpn.ovpn")),stdout=PIPE)
-            print(openvpn.stdout.read())
+            openvpn = os.popen("openvpn {}".format(os.path.join(CONFIG_PATH,"vpn.ovpn")))
+            print(openvpn)
 
         try:
             os.chdir(os.path.join(os.path.join(MACHINE_PATH,status),args.start_session))
