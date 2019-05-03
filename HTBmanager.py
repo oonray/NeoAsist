@@ -17,8 +17,10 @@ sys.path.append('/opt/HTBManager/online')
 sys.path.append('/opt/HTBManager/local')
 print(sys.path)
 
-from online import *
-from local import *
+try:    
+    from online import *
+    from local import *
+except:pass
 
 CONFIG_PATH = "/etc/htb/"
 CONFIG_FILE = "htb.conf"
