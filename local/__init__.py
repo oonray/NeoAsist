@@ -47,7 +47,7 @@ class localget(onlineget):
 
     
     def make_machine(self,name):
-        return machine("",name,"","","","","","").load()
+        return machine(None,name,None,None,None,None,None,None).load()
 
     def get_machines(self):
         self.get_active()

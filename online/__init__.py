@@ -55,16 +55,18 @@ class machine:
         :param data: The full json String
         :type data: str
         """
-        self.id = id
         self.name = name
-        self.ip = ip
-        self.os = os
-        self.points = points
-        self.release = datetime.strptime(release,"%Y-%m-%d %H:%M:%S")
-        self.retired = datetime.strptime(retired,"%Y-%m-%d %H:%M:%S") if retired != None else None
-        self.is_Active = True if self.retired == None else False
-        self.data=data
-        self.hostname=self.name+".htb"
+        
+        if(data not None):
+            self.id = id
+            self.ip = ip
+            self.os = os
+            self.points = points
+            self.release = datetime.strptime(release,"%Y-%m-%d %H:%M:%S")
+            self.retired = datetime.strptime(retired,"%Y-%m-%d %H:%M:%S") if retired != None else None
+            self.is_Active = True if self.retired == None else False
+            self.data=data
+            self.hostname=self.name+".htb"
 
     def own_user(self,h,d,key):
         """Owns the user on a machine
