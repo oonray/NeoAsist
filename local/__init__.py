@@ -96,6 +96,7 @@ class localget(onlineget):
                 print(i)
     
     def start_session(self,name):
+        global CONFIG_PATH, CONFIG_FILE
         status=""
         Active = os.listdir(os.path.join(MACHINE_PATH,"Active"))
         Retired = os.listdir(os.path.join(MACHINE_PATH,"Retired"))
