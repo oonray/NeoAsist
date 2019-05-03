@@ -81,6 +81,7 @@ class localget(localonline):
     
     def list_retired(self):
         self.get_retired()
+        for i in self.Retired:
             print(make_machine(i))
         
     def prt(self,args2):
