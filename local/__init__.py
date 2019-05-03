@@ -31,7 +31,7 @@ def stdscan():
     TCPScan()
     UDPScan()
 
-from ..online import localonline, machine
+from online import localonline, machine
 
 class localget(localonline):
     def __init__(self,conf):
