@@ -5,6 +5,6 @@ install:
 	ln -s /opt/HTBManager/HTBmanager.py /usr/bin/HTBmanager
 
 clean:
-	rm /usr/bin/HTBManager
+	rm /usr/bin/HTBmanager
 	cd ~
 	rm -rf /opt/HTBManager
