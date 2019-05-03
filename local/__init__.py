@@ -108,7 +108,7 @@ class localget(onlineget):
         os.chdir(os.path.join(os.path.join(MACHINE_PATH,status),name))
         try:
             os.system("tmux")
-            ids = [int(i) for i in self.conf["vpnid"].split("\n") if i != "" else "0"] 
+            ids = [int(i) for i in self.conf["vpnid"].split("\n") if i != ""] 
             if(not sum(ids)>0):
                 os.popen("openvpn {}".format(file))
             ps = os.popen("ps -aux | grep {}".format(file)+' | awk \'{print $2}\'').read()
