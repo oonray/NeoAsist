@@ -17,6 +17,9 @@ sys.path.append('/opt/HTBManager/online')
 sys.path.append('/opt/HTBManager/local')
 print(sys.path)
 
+from online import *
+from local import *
+
 CONFIG_PATH = "/etc/htb/"
 CONFIG_FILE = "htb.conf"
 
@@ -99,8 +102,6 @@ from colorama import init, Fore
 init(autoreset=True)       
 
 if(base_arg.online):
-    from online import onlineget, MACHINE_PATH
-
     try:
         print("{}[+]{} Loading Config".format(Fore.GREEN,Fore.RESET))
         getter = onlineget(CONFIG_PATH+CONFIG_FILE)
@@ -164,9 +165,6 @@ if(base_arg.online):
                 getter.machines[args2.machines].own_root(args2.hash,args2.score,key)
         
 if(base_arg.local):
-    from online import MACHINE_PATH
-    from local import *
-
     getter = localget(CONFIG_PATH+CONFIG_FILE)
     getter.load()
 
