@@ -62,7 +62,6 @@ class machine:
             self.ip = ip
             self.os = oss
             self.points = points
-            print(release)
             self.release = datetime.strptime(release,"%Y-%m-%d %H:%M:%S")
             self.retired = datetime.strptime(retired,"%Y-%m-%d %H:%M:%S") if retired != None else None
             self.is_Active = True if self.retired == None else False
@@ -137,7 +136,6 @@ class machine:
         self.create_folder()
         with open(os.path.join(self.location,"machine.json"),"r") as f:
             self.data = json.loads(f.read())
-        print(self.data)
         id,name,oss,ip,points,release,retired,creator,creator2 = self.data.values()
         self.__init__(id,name,oss,ip,points,release,retired,self.data)
         return self
