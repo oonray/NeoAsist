@@ -8,6 +8,9 @@ The functions and variables used in the Online context.
 
 import requests, os, pickle, json
 from datetime import datetime
+from colorama import init, Fore
+init(autoreset=True)       
+
 
 BASE_URL = 'https://www.hackthebox.eu/api'
 MACHINE_PATH = "/root/HTB/"
