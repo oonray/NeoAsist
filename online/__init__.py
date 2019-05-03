@@ -221,6 +221,6 @@ class onlineget:
         with open(self.path,"w") as f:
             f.write(json.dumps(self.conf))
     
-    def load(self,path):
+    def load(self):
         with open(self.path,"r") as f:
             self.conf = json.loads(f.read())
