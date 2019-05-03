@@ -62,7 +62,7 @@ class localget(onlineget):
     def get_machine(self,name):
         self.get_active()
         self.get_retired()
-        return json.loads(self.machine_path[i]+i+".json")
+        return json.loads(self.machine_path[name]+name+".json")
 
     def get_active(self):
         self.Active = os.listdir(os.path.join(MACHINE_PATH,"Active"))
