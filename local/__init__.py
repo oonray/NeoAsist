@@ -4,16 +4,18 @@
 :date: 01.05.2019
 
 """
+import os
 
 def TCPScan():
-    pass
+    os.popen("nmap -sV -sC -p- -O -A -oA Scans/TCP `cat ip`")
 
 def UDPScan():
-    pass
+    os.popen("nmap -sU Scans/UDP `cat ip`")
 
 def stdscan():
-    pass
-    
+    TCPScan()
+    UDPScan()
+
 def save_config(config):
     """Updates the config with the current config dictionary
     
@@ -34,7 +36,6 @@ def load_config():
             with open(CONFIG_PATH+CONFIG_FILE,"r") as f:
                 return json.loads(f.read())        
     return dict()
-
 
 def create_dir(dir):
     """Creates A Directtory

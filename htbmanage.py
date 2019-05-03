@@ -59,6 +59,7 @@ parser_local.add_argument("--scan",type=str,help="starts the auto scan")
 parser_local.add_argument("-ah","--add-host",type=str,help="adds host to the ip")
 parser_local.add_argument("-ip","--ip",type=str,help="ip of the machine to change")
 parser_local.add_argument("-kv","--kill_vpn",action="store_true",help="ip of the machine to change")
+parser_local.add_argument("-stds","--std_scan",action="store_true",help="ip of the machine to change")
 
 
 if(sys.argv[1:2]==[]):
@@ -177,6 +178,7 @@ if(base_arg.online):
         
 if(base_arg.local):
     from online import get,MACHINE_PATH
+    frin local import *
 
     with open(CONFIG_PATH+CONFIG_FILE,"r") as f:
            getter = get(json.loads(f.read()))
@@ -240,6 +242,9 @@ if(base_arg.local):
             parser.print_help()
             exit()
         getter.add_to_hosts(args.add_host,args.ip)
+    
+    if(args.std_scan):
+        stdscan()
             
     
 
