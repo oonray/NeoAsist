@@ -21,7 +21,7 @@ def UDPScan():
 
     ..warning:: This should only be used with a sesson open.
     """
-    os.system("nmap -sU Scans/UDP `cat ip`")
+    os.system("nmap -sU -oA Scans/UDP `cat ip`")
 
 def stdscan():
     """Runs both TCP and UDP scans
