@@ -17,3 +17,5 @@ git clone https://github.com/oonray/HTBManager.git
 cd HTBManager
 make install
 ```
+
+usage: HTBmanager [-h] [--online] [--local] [--install]
