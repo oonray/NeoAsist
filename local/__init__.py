@@ -31,9 +31,9 @@ def stdscan():
     TCPScan()
     UDPScan()
 
-from online import localonline, machine
+from online import onlineget, machine
 
-class localget(localonline):
+class localget(onlineget):
     def __init__(self,conf):
         localonline.__init__(self,conf)
         self.machine_path = {}
