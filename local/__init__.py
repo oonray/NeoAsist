@@ -95,8 +95,7 @@ class localget(onlineget):
             if i.name == args2.list_machine:
                 print(i)
     
-    def start_session(self,name):
-        global CONFIG_PATH, CONFIG_FILE
+    def start_session(self,name,file):
         status=""
         Active = os.listdir(os.path.join(MACHINE_PATH,"Active"))
         Retired = os.listdir(os.path.join(MACHINE_PATH,"Retired"))
@@ -110,8 +109,8 @@ class localget(onlineget):
         try:
             os.system("tmux")
             if(not sum([int(i) for i in self.conf["vpnid"].split("\n")])>0):
-                os.popen("openvpn {}".format(os.path.join(CONFIG_PATH,"vpn.ovpn")))
-            ps = os.popen("ps -aux | grep openvpn {}/vpn.ovpn | awk '{print $2}'".format(CONFIG_PATH)).read()
+                os.popen("openvpn {}".format(file))
+            ps = os.popen("ps -aux | grep openvpn {}/vpn.ovpn | awk '{print $2}'".format(file)).read()
             print(ps)
             self.conf["vpnid"] = ps
             self.conf["last"] = name
