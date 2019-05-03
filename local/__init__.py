@@ -30,7 +30,6 @@ def stdscan():
     """
     TCPScan()
     UDPScan()
-    exit()
 
 from online import onlineget, machine, MACHINE_PATH
 
