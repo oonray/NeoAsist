@@ -195,7 +195,7 @@ if(base_arg.local):
     
     if(args.kill_vpn):
         os.system('for i in $(ps -aux | grep '+"{}vpn.ovpn | awk ".format(CONFIG_PATH)+'\'{print $2}\'); do kill $i; done')
-        getter.conf["vpnid"]="0"
+        getter.conf["vpnid"]="0\n"
         getter.write()
 
     if(args.add_host):
