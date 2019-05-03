@@ -12,6 +12,8 @@ import os, re, sys, argparse, pip, json
 from subprocess import Popen, PIPE
 from pip._internal import main as pipmain
 
+sys.path.insert(0, os.path.abspath('/opt/HTBManager'))
+
 CONFIG_PATH = "/etc/htb/"
 CONFIG_FILE = "htb.conf"
 
