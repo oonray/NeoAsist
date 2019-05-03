@@ -11,12 +11,9 @@ The configuration can be edited.
 Install:
 --------
 ```
-cd /opt/ & \
+cd /opt/
 git clone https://github.com/oonray/HTBManager.git
 
-```
-
-```
 cd HTBManager
 make install
 ```
