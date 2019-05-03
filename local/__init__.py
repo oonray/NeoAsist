@@ -14,14 +14,14 @@ def TCPScan():
 
     ..warning:: This should only be used with a sesson open.
     """
-    os.popen("nmap -sV -sC -p- -O -A -oA Scans/TCP `cat ip`")
+    os.system("nmap -sV -sC -p- -O -A -oA Scans/TCP `cat ip`")
 
 def UDPScan():
     """LAunches a Nmap UDP Scan
 
     ..warning:: This should only be used with a sesson open.
     """
-    os.popen("nmap -sU Scans/UDP `cat ip`")
+    os.system("nmap -sU Scans/UDP `cat ip`")
 
 def stdscan():
     """Runs both TCP and UDP scans
