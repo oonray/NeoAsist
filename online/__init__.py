@@ -6,7 +6,7 @@
 The functions and variables used in the Online context.
 """
 
-import requests, os, pickle
+import requests, os, pickle, json
 from datetime import datetime
 
 BASE_URL = 'https://www.hackthebox.eu/api'
