@@ -47,22 +47,13 @@ class localget(onlineget):
 
     
     def make_machine(self,name):
-        ret = self.get_machine(name)
-        id,name,os,ip,points,release,retired,maker,maker2 = ret.values()
-        return machine(id,name,os,ip,points,release,retired,i)
+        return machine("",name,"","","","","","").load()
 
     def get_machines(self):
         self.get_active()
         self.get_retired()
-        data = []
-        for i,x in zip(self.machine_path,self.machine_path.values):
-             data.append(json.loads(x+i+".json"))
-        return data
-
-    def get_machine(self,name):
-        self.get_active()
-        self.get_retired()
-        return json.loads(self.machine_path[name]+name+".json")
+        for i in self.machine_path:
+             self.machines.append(make_machine(i))
 
     def get_active(self):
         self.Active = os.listdir(os.path.join(MACHINE_PATH,"Active"))
