@@ -35,7 +35,7 @@ from online import onlineget, machine
 
 class localget(onlineget):
     def __init__(self,conf):
-        localonline.__init__(self,conf)
+        onlineget.__init__(self,conf)
         self.machine_path = {}
 
     def make_all_machines(self):
