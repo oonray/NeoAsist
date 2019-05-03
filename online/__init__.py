@@ -121,7 +121,7 @@ class machine:
     def save(self): 
         """Saves the machine data in a file in the machine folder
         """
-        self.create_folder(os.path.join(MACHINE_PATH,self.mame))
+        self.create_folder(os.path.join(MACHINE_PATH,self.name))
         with open(os.path.join(self.location,"machine.json"),"w") as f:
             f.write(json.dumps(self.data))
     
