@@ -56,7 +56,7 @@ class machine:
         :type data: str
         """
         self.name = name
-        
+
         if(data != None):
             self.id = id
             self.ip = ip
@@ -67,6 +67,8 @@ class machine:
             self.is_Active = True if self.retired == None else False
             self.data=data
             self.hostname=self.name+".htb"
+        else:
+            self.is_Active = True if self.retired == None else False
 
     def own_user(self,h,d,key):
         """Owns the user on a machine

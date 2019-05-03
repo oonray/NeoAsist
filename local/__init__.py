@@ -46,14 +46,18 @@ class localget(onlineget):
         return self.machines
 
     
-    def make_machine(self,name):
-        return machine(None,name,None,None,None,None,None,None).load()
+    def make_machine(self,name,active):
+        return machine(None,name,None,None,None,None,active,None).load()
 
     def get_machines(self):
         self.get_active()
         self.get_retired()
-        for i in self.machine_path:
-             self.machines.append(make_machine(i))
+        
+        for i in self.Active:
+             self.machines.append(make_machine(i),True)
+        for i in self.Retired:
+             self.machines.append(make_machine(i),None)
+             
 
     def get_active(self):
         self.Active = os.listdir(os.path.join(MACHINE_PATH,"Active"))
@@ -91,6 +95,5 @@ class localget(onlineget):
         for i in machines.values():
             if i.name == args2.list_machine:
                 print(i)
-    
 
 
