@@ -139,7 +139,7 @@ class machine:
             self.data = json.loads(f.read())
         print(self.data)
         id,name,oss,ip,points,release,retired,creator,creator2 = self.data.values()
-        self.__init__(self,id,name,oss,ip,points,release,retired,self.data)
+        self.__init__(id,name,oss,ip,points,release,retired,self.data)
         return self
 
     def __str__(self):
