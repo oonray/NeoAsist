@@ -160,7 +160,7 @@ if(base_arg.local):
     from online import MACHINE_PATH
     from local import *
 
-    getter = localget(CONFIG_PATH+CONFIG_FILE))
+    getter = localget(CONFIG_PATH+CONFIG_FILE)
     getter.load()
 
     parser = parser_local
