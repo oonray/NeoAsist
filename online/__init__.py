@@ -140,7 +140,7 @@ class machine:
 class onlineget:
     def __init__(self,path):
         self.path=path
-        self.conf = self.load()
+        self.load()
         self.key = self.conf["key"]
         self.last = self.conf["last"]
         self.machines = {}
