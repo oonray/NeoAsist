@@ -38,6 +38,7 @@ parser_online_pwn.add_argument("-la","--list-all",action="store_true",help="List
 parser_online_pwn.add_argument("-lm","--list-machine",type=str,help="List a single machine by name")
 parser_online_pwn.add_argument("-a","--active",action="store_true",help="List only active machines")
 parser_online_pwn.add_argument("-r","--retired",action="store_true",help="List only REtired machines")
+
 parser_online_pwn.add_argument("-m","--machine",type=int,help="The machine name to pwn")
 parser_online_pwn.add_argument("--user",action="store_true",help="Own user")
 parser_online_pwn.add_argument("--root",action="store_true",help="Own root")
@@ -52,14 +53,15 @@ parser_local = argparse.ArgumentParser(prog="{} --local".format(sys.argv[0]),des
 parser_local.add_argument("-l","--list",action="store_true",help="Lists all local machines")
 parser_local.add_argument("-a","--active",action="store_true",help="List only active machines")
 parser_local.add_argument("-r","--retired",action="store_true",help="List only REtired machines")
+
 parser_local.add_argument("-k","--key",type=str,help="Change API Key")
 
-parser_local.add_argument("-ss","--start-session",type=str,help="Starts Tmux session with the local machine name provided")
-parser_local.add_argument("--scan",type=str,help="starts the auto scan")
 parser_local.add_argument("-ah","--add-host",type=str,help="adds host to the ip")
 parser_local.add_argument("-ip","--ip",type=str,help="ip of the machine to change")
 parser_local.add_argument("-kv","--kill_vpn",action="store_true",help="ip of the machine to change")
+
 parser_local.add_argument("-stds","--std_scan",action="store_true",help="Start tcp and udp scan")
+parser_local.add_argument("-ss","--start-session",type=str,help="Starts Tmux session with the local machine name provided")
 parser_local.add_argument("-sl","--start_last",action="store_true",help="used with -ss starts last used sesson")
 
 
