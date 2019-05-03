@@ -38,7 +38,7 @@ parser_online_pwn.add_argument("-la","--list-all",action="store_true",help="List
 parser_online_pwn.add_argument("-lm","--list-machine",type=str,help="List a single machine by name")
 parser_online_pwn.add_argument("-a","--active",action="store_true",help="List only active machines")
 parser_online_pwn.add_argument("-r","--retired",action="store_true",help="List only REtired machines")
-parser_online_pwn.add_argument("-m","--machine",type=int,help="The machine id to pwn")
+parser_online_pwn.add_argument("-m","--machine",type=int,help="The machine name to pwn")
 parser_online_pwn.add_argument("--user",action="store_true",help="Own user")
 parser_online_pwn.add_argument("--root",action="store_true",help="Own root")
 parser_online_pwn.add_argument("-hs","--hash",type=str,help="The machine to pwn")
@@ -59,7 +59,8 @@ parser_local.add_argument("--scan",type=str,help="starts the auto scan")
 parser_local.add_argument("-ah","--add-host",type=str,help="adds host to the ip")
 parser_local.add_argument("-ip","--ip",type=str,help="ip of the machine to change")
 parser_local.add_argument("-kv","--kill_vpn",action="store_true",help="ip of the machine to change")
-parser_local.add_argument("-stds","--std_scan",action="store_true",help="ip of the machine to change")
+parser_local.add_argument("-stds","--std_scan",action="store_true",help="Start tcp and udp scan")
+parser_local.add_argument("-sl","--start_last",action="store_true",help="used with -ss starts last used sesson")
 
 
 if(sys.argv[1:2]==[]):
@@ -125,40 +126,20 @@ if(base_arg.online):
     if(args.get):
         if(args2.create):
             print("{}[+]{} Creating Machines in {}".format(Fore.GREEN,Fore.RESET,MACHINE_PATH))
-            getter.add_to_hosts()
-            for i in machines.values():
-                i.create_folder(MACHINE_PATH)
+            getter.create()
             
         if(args2.print):          
-            if(not args2.active and not args2.retired):
-                    print("{}[+]{} Printing Machines Avalible".format(Fore.GREEN,Fore.RESET))  
-                    prt = machines.values()
-            if(args2.active):
-                    print("{}[+]{} Printing Active Machines Avalible".format(Fore.GREEN,Fore.RESET))  
-                    prt = getter.list_active()
-            if(args2.retired):
-                    print("{}[+]{} Printing Retired Machines Avalible".format(Fore.GREEN,Fore.RESET))  
-                    prt = getter.list_retired()
-            [print(i) for i in prt]
+            getter.prt()
                 
 
     if(args.pwn):
         if(args2.list_all):
-            if(not args2.active and not args2.retired):
-                    prt = machines.values()
-            if(args2.active):
-                    prt = getter.list_active()
-            if(args2.retired):
-                    prt = getter.list_retired()
-            [print(i) for i in prt]
+            getter.prt(args2)
                 
-
         if(args2.list_machine):
-            for i in machines.values():
-                if i.name == args2.list_machine:
-                    print(i)
+            getter.prt(args2)
         
-        if(args2.machine):
+        if(not args2.machine):
             if(not args2.hash and args2.score):
                     parser2.print_help()
                     exit()
@@ -177,11 +158,11 @@ if(base_arg.online):
                 getter.machines[args2.machines].own_root(args2.hash,args2.score,key)
         
 if(base_arg.local):
-    from online import get,MACHINE_PATH
+    from online import MACHINE_PATH
     frin local import *
 
     with open(CONFIG_PATH+CONFIG_FILE,"r") as f:
-           getter = get(json.loads(f.read()))
+           getter = localget(json.loads(f.read()))
 
     parser = parser_local
     if(sys.argv[2:3]==[]):
@@ -189,14 +170,10 @@ if(base_arg.local):
             exit()
     args = parser.parse_args(sys.argv[2:])    
     if(args.list):
-        Active = os.listdir(os.path.join(MACHINE_PATH,"Active"))
-        Retired = os.listdir(os.path.join(MACHINE_PATH,"Retired"))
         if(not args.active and not args.retired):
             args.active,args.retired = True,True
-        if(args.active):
-            [print(i) for i in Active]
-        if(args.retired):
-            [print(i) for i in Retired]
+            getter.list_active()
+            getter.list_retired()
     
     if(args.key):
         getter.conf["key"] = args.key 
@@ -204,6 +181,11 @@ if(base_arg.local):
            f.write(json.dumps(getter.conf))
 
     if(args.start_session):
+        if(args.start_last):
+            os.chdir(getter.last)
+        else:
+            os.chdir(os.path.join(os.path.join(MACHINE_PATH,status),args.start_session))
+
         status=""
         Active = os.listdir(os.path.join(MACHINE_PATH,"Active"))
         Retired = os.listdir(os.path.join(MACHINE_PATH,"Retired"))
@@ -212,30 +194,26 @@ if(base_arg.local):
                 status="Active"
             if(x == args.start_session):
                 status="Retired"
-
         try:
-            os.chdir(os.path.join(os.path.join(MACHINE_PATH,status),args.start_session))
-            try:
                 os.system("tmux")
                 if(not sum([int(i) for i in getter.conf["vpnid"].split("\n")])>0):
                     os.popen("openvpn {}".format(os.path.join(CONFIG_PATH,"vpn.ovpn")))
                 ps = os.popen("ps -aux | grep openvpn {}/vpn.ovpn | awk '{print $2}'".format(CONFIG_PATH))
                 getter.conf["vpnid"] = ps.read()
+                getter.conf["last"] = os.path.join(os.path.join(MACHINE_PATH,status),args.start_session)
+                getter.write(CONFIG_PATH+CONFIG_FILE)
+
                 
             except Exception as e:
                 print(e)
                 exit()
 
-            getter.conf["last"] = os.path.join(os.path.join(MACHINE_PATH,status),args.start_session)
-            with open(CONFIG_PATH+CONFIG_FILE,"w") as f:
-                    f.write(json.dumps(getter.conf))
-
-        except Exception as e:
-            print(e)
-            raise ValueError("The machine does not exist!")
+  
 
     if(args.kill_vpn):
         os.popen('for i in $(ps -aux | grep openvpn'+"{}/vpn.ovpn | awk ".format(CONFIG_PATH)+'\'{print $2}\'); do kill $i; done')
+        getter.conf["vpnid"]=0
+        getter.write(CONFIG_PATH+CONFIG_FILE)
 
     if(args.add_host):
         if(not args.ip):
