@@ -1,4 +1,4 @@
-#!/bin//python3
+#!/usr/bin/python3
 """
 :author: Alexander Bjørnsrud <alexanderbjornsrud@gmail.com>
 :file: htbmanage.py
