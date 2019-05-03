@@ -56,7 +56,7 @@ class localget(onlineget):
         for i in self.Active:
              self.machines.append({i:make_machine(i,True)})
         for i in self.Retired:
-             self.machines.append(i:make_machine(i,None))}
+             self.machines.append({i:make_machine(i,None)})
              
     def get_active(self):
         self.Active = os.listdir(os.path.join(MACHINE_PATH,"Active"))
