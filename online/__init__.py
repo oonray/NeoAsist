@@ -35,7 +35,7 @@ def tokenize(path,key):
         return "{}?api_token={}".format(path, key)
 
 class machine:
-    def __init__(self,id,name,os,ip,points,release,retired,data):
+    def __init__(self,id,name,oss,ip,points,release,retired,data):
         """A wrapper around the machine response
         
         :param id: The machine id
@@ -60,7 +60,7 @@ class machine:
         if(data != None):
             self.id = id
             self.ip = ip
-            self.os = os
+            self.os = oss
             self.points = points
             self.release = datetime.strptime(release,"%Y-%m-%d %H:%M:%S")
             self.retired = datetime.strptime(retired,"%Y-%m-%d %H:%M:%S") if retired != None else None
