@@ -2,13 +2,11 @@ HTB Manager
 ===========
 A program for managing the HTB machines and starting sessions and VPN connections.
 
-Config files are stored in /etc/htb\\
-VPN file should be stored as /etc/htb/vpn.ovpn\\
-Default machine storage path is /root/HTB/\\
+Config files are stored in /etc/htb
 
-
-
-The configuration can be edited.
+PN file should be stored as /etc/htb/vpn.ovpn<br/>
+Default machine storage path is /root/HTB/<br/>
+The configuration can be edited.<br/>
 
 Install:
 --------
