@@ -12,7 +12,7 @@ Install:
 --------
 ```
 cd /opt/ & \
-git clone https://github.com/oonray/HTBManager.git & \
+git clone https://github.com/oonray/HTBManager.git
 
 ```
 
