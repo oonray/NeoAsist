@@ -110,8 +110,9 @@ class localget(onlineget):
             os.system("tmux")
             if(not sum([int(i) for i in getter.conf["vpnid"].split("\n")])>0):
                 os.popen("openvpn {}".format(os.path.join(CONFIG_PATH,"vpn.ovpn")))
-            ps = os.popen("ps -aux | grep openvpn {}/vpn.ovpn | awk '{print $2}'".format(CONFIG_PATH))
-            getter.conf["vpnid"] = ps.read()
+            ps = os.popen("ps -aux | grep openvpn {}/vpn.ovpn | awk '{print $2}'".format(CONFIG_PATH)).read()
+            print(ps)
+            getter.conf["vpnid"] = ps
             getter.conf["last"] = name
             getter.write(CONFIG_PATH+CONFIG_FILE)  
         except Exception as e:
