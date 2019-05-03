@@ -62,6 +62,7 @@ class machine:
             self.ip = ip
             self.os = oss
             self.points = points
+            print(release)
             self.release = datetime.strptime(release,"%Y-%m-%d %H:%M:%S")
             self.retired = datetime.strptime(retired,"%Y-%m-%d %H:%M:%S") if retired != None else None
             self.is_Active = True if self.retired == None else False
