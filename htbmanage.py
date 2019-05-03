@@ -173,6 +173,10 @@ if(base_arg.local):
             args.active,args.retired = True,True
             getter.list_active()
             getter.list_retired()
+        if(args.active):
+            getter.list_active()
+        if(args.retired):
+            getter.list_retired()
     
     if(args.key):
         getter.conf["key"] = args.key 
