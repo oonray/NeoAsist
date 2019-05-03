@@ -135,7 +135,7 @@ if(base_arg.online):
             getter.create()
             
         if(args2.print):          
-            getter.prt()
+            getter.prt(args2)
                 
 
     if(args.pwn):
