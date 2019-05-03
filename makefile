@@ -7,4 +7,4 @@ install:
 clean:
 	rm /usr/bin/HTBManager
 	cd ~
-	rm /opt/HTBManager
+	rm -rf /opt/HTBManager
