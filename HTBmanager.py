@@ -13,8 +13,6 @@ from subprocess import Popen, PIPE
 from pip._internal import main as pipmain
 
 sys.path.append('/opt/HTBManager')
-sys.path.append('/opt/HTBManager/online')
-sys.path.append('/opt/HTBManager/local')
 print(sys.path)
 
 try:    
