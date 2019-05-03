@@ -110,7 +110,7 @@ class localget(onlineget):
             os.system("tmux")
             if(not sum([int(i) for i in self.conf["vpnid"].split("\n")])>0):
                 os.popen("openvpn {}".format(file))
-            ps = os.popen("ps -aux | grep openvpn {}".format(file)+' | awk \'{print $2}\'').read()
+            ps = os.popen("ps -aux | grep {}".format(file)+' | awk \'{print $2}\'').read()
             print(ps)
             self.conf["vpnid"] = ps
             self.conf["last"] = name
