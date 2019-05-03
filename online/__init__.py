@@ -223,5 +223,4 @@ class onlineget:
     
     def load(self,path):
         with open(self.path,"r") as f:
-            conf = json.loads(f.read())
-                getter = get(conf)
+            self.conf = json.loads(f.read())

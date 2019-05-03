@@ -221,12 +221,5 @@ if(base_arg.local):
     
     if(args.std_scan):
         stdscan()
-            
+
     
-
-
-
-
-
-
-
