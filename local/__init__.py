@@ -77,12 +77,12 @@ class localget(onlineget):
     def list_active(self):
         self.get_active()
         for i in self.Active:
-            print(make_machine(i))
+            print(self.make_machine(i))
     
     def list_retired(self):
         self.get_retired()
         for i in self.Retired:
-            print(make_machine(i))
+            print(self.make_machine(i))
         
     def prt(self,args2):
         if(not args2.active and not args2.retired):
