@@ -130,7 +130,7 @@ class machine:
     def load(self):
         """Loads the machine data from file
         """
-        self.create_folder(os.path.join(MACHINE_PATH,self.mame))
+        self.create_folder(os.path.join(MACHINE_PATH,self.name))
         with open(os.path.join(self.location,"machine.json"),"r") as f:
             self.data = json.loads(f.read())
         id,name,os,ip,points,release,retired = self.data.values()
