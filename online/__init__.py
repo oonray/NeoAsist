@@ -57,7 +57,7 @@ class machine:
         """
         self.name = name
         
-        if(data not None):
+        if(data != None):
             self.id = id
             self.ip = ip
             self.os = os
