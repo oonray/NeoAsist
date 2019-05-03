@@ -92,13 +92,12 @@ from colorama import init, Fore
 init(autoreset=True)       
 
 if(base_arg.online):
-    from online import get, MACHINE_PATH
+    from online import onlineget, MACHINE_PATH
 
     try:
         print("{}[+]{} Loading Config".format(Fore.GREEN,Fore.RESET))
-        with open(os.path.join(CONFIG_PATH,CONFIG_FILE),"r") as f:
-                conf = json.loads(f.read())
-                getter = get(conf)
+        getter = onlineget(CONFIG_PATH+CONFIG_FILE)
+        getter.load()
     except:
             out = "{}[!]{} You Must Add an api key to {}{}".format(Fore.RED,Fore.RESET,CONFIG_PATH,CONFIG_FILE)
             raise ValueError(out)
@@ -159,10 +158,10 @@ if(base_arg.online):
         
 if(base_arg.local):
     from online import MACHINE_PATH
-    frin local import *
+    from local import *
 
-    with open(CONFIG_PATH+CONFIG_FILE,"r") as f:
-           getter = localget(json.loads(f.read()))
+    getter = localget(CONFIG_PATH+CONFIG_FILE))
+    getter.load()
 
     parser = parser_local
     if(sys.argv[2:3]==[]):
