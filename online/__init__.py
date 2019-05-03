@@ -195,6 +195,7 @@ class onlineget:
         return retired
 
     def create(self):
+        self.make_all_machines()
         self.add_to_hosts()
         for i in self.machines.values():
             i.create_folder()
