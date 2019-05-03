@@ -1,7 +1,7 @@
 install:
 	sudo apt-get install python3 -y
 	sudo apt-get install python3-pip -y
-	./HTBmanager --install
+	./HTBmanager.py --install
 	ln /opt/HTBManager/HTBmanager.py /usr/bin/HTBmanager
 
 clean:
