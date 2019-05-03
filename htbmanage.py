@@ -201,11 +201,10 @@ if(base_arg.local):
                 getter.conf["vpnid"] = ps.read()
                 getter.conf["last"] = os.path.join(os.path.join(MACHINE_PATH,status),args.start_session)
                 getter.write(CONFIG_PATH+CONFIG_FILE)
-
-                
-            except Exception as e:
-                print(e)
-                exit()
+        
+        except Exception as e:
+            print(e)
+            exit()
 
   
 
