@@ -136,8 +136,9 @@ class machine:
         self.create_folder()
         with open(os.path.join(self.location,"machine.json"),"r") as f:
             self.data = json.loads(f.read())
-        id,name,os,ip,points,release,retired,creator,creator2 = self.data.values()
-        self.__init__(self,id,name,os,ip,points,release,retired)
+        print(self.data)
+        id,name,oss,ip,points,release,retired,creator,creator2 = self.data.values()
+        self.__init__(self,id,name,oss,ip,points,release,retired)
         return self
 
     def __str__(self):
