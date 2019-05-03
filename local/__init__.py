@@ -8,6 +8,9 @@ The functions used in the setting.
 
 """
 import os, json
+from colorama import init, Fore
+init(autoreset=True)       
+
 
 def TCPScan():
     """Launches an Nmap TCP Scan
