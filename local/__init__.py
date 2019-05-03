@@ -100,9 +100,9 @@ class localget(onlineget):
         Active = os.listdir(os.path.join(MACHINE_PATH,"Active"))
         Retired = os.listdir(os.path.join(MACHINE_PATH,"Retired"))
         for i,x in zip(Active,Retired):
-            if(i == args.name):
+            if(i == name):
                 status="Active"
-            if(x == args.name):
+            if(x == name):
                 status="Retired"
 
         os.chdir(os.path.join(os.path.join(MACHINE_PATH,status),name))
