@@ -52,13 +52,12 @@ class localget(onlineget):
     def get_machines(self):
         self.get_active()
         self.get_retired()
-        
-        for i in self.Active:
-             self.machines.append(make_machine(i),True)
-        for i in self.Retired:
-             self.machines.append(make_machine(i),None)
-             
 
+        for i in self.Active:
+             self.machines.append({i:make_machine(i,True)})
+        for i in self.Retired:
+             self.machines.append(i:make_machine(i,None))}
+             
     def get_active(self):
         self.Active = os.listdir(os.path.join(MACHINE_PATH,"Active"))
         for i in self.Active:
@@ -70,14 +69,14 @@ class localget(onlineget):
             self.machine_path[i]=os.path.join(os.path.join(MACHINE_PATH,"Retired"),i)
 
     def list_active(self):
-        self.get_active()
+        self.get_machines()
         for i in self.Active:
-            print(self.make_machine(i))
+            print(self.machines[i])
     
     def list_retired(self):
-        self.get_retired()
+        self.get_machines()
         for i in self.Retired:
-            print(self.make_machine(i))
+            print(self.machines[i])
         
     def prt(self,args2):
         if(not args2.active and not args2.retired):
