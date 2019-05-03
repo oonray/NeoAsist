@@ -114,7 +114,7 @@ class localget(onlineget):
             print(ps)
             self.conf["vpnid"] = ps
             self.conf["last"] = name
-            self.write(CONFIG_PATH+CONFIG_FILE)  
+            self.write()  
         except Exception as e:
             print(e)
             exit()
