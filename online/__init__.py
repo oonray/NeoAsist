@@ -68,7 +68,7 @@ class machine:
             self.data=data
             self.hostname=self.name+".htb"
         else:
-            self.is_Active = True if self.retired == None else False
+            self.is_Active = True if retired == None else False
 
     def own_user(self,h,d,key):
         """Owns the user on a machine
