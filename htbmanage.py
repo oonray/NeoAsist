@@ -184,34 +184,11 @@ if(base_arg.local):
            f.write(json.dumps(getter.conf))
 
     if(args.start_session):
-        if(args.start_last):
-            os.chdir(getter.last)
-        else:
-            os.chdir(os.path.join(os.path.join(MACHINE_PATH,status),args.start_session))
+            start_session(args.start_session)
 
-        status=""
-        Active = os.listdir(os.path.join(MACHINE_PATH,"Active"))
-        Retired = os.listdir(os.path.join(MACHINE_PATH,"Retired"))
-        for i,x in zip(Active,Retired):
-            if(i == args.start_session):
-                status="Active"
-            if(x == args.start_session):
-                status="Retired"
-        try:
-                os.system("tmux")
-                if(not sum([int(i) for i in getter.conf["vpnid"].split("\n")])>0):
-                    os.popen("openvpn {}".format(os.path.join(CONFIG_PATH,"vpn.ovpn")))
-                ps = os.popen("ps -aux | grep openvpn {}/vpn.ovpn | awk '{print $2}'".format(CONFIG_PATH))
-                getter.conf["vpnid"] = ps.read()
-                getter.conf["last"] = os.path.join(os.path.join(MACHINE_PATH,status),args.start_session)
-                getter.write(CONFIG_PATH+CONFIG_FILE)
-        
-        except Exception as e:
-            print(e)
-            exit()
-
-  
-
+    if(args.start_last):
+            start_session(getter.last)
+    
     if(args.kill_vpn):
         os.popen('for i in $(ps -aux | grep openvpn'+"{}/vpn.ovpn | awk ".format(CONFIG_PATH)+'\'{print $2}\'); do kill $i; done')
         getter.conf["vpnid"]=0

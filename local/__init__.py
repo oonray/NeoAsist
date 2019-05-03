@@ -90,9 +90,35 @@ class localget(onlineget):
             prt = self.list_retired()
         [print(i) for i in prt]
 
-    def prtm(args2):
+    def prtm(self,args2):
         for i in machines.values():
             if i.name == args2.list_machine:
                 print(i)
+    
+    def start_session(self,name):
+        status=""
+        Active = os.listdir(os.path.join(MACHINE_PATH,"Active"))
+        Retired = os.listdir(os.path.join(MACHINE_PATH,"Retired"))
+        for i,x in zip(Active,Retired):
+            if(i == args.name):
+                status="Active"
+            if(x == args.name):
+                status="Retired"
+
+        os.chdir(os.path.join(os.path.join(MACHINE_PATH,status),name))
+        try:
+            os.system("tmux")
+            if(not sum([int(i) for i in getter.conf["vpnid"].split("\n")])>0):
+                os.popen("openvpn {}".format(os.path.join(CONFIG_PATH,"vpn.ovpn")))
+            ps = os.popen("ps -aux | grep openvpn {}/vpn.ovpn | awk '{print $2}'".format(CONFIG_PATH))
+            getter.conf["vpnid"] = ps.read()
+            getter.conf["last"] = name
+            getter.write(CONFIG_PATH+CONFIG_FILE)  
+        except Exception as e:
+            print(e)
+            exit()
+
+  
+
 
 
