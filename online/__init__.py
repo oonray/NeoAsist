@@ -163,7 +163,7 @@ class onlineget:
         return self.machines
 
     def add_to_hosts(self,name="",ip=""):
-         print("{}[+]{} Adding Machines to host!".format(Fore.GREEN,Fore.RESET))
+        print("{}[+]{} Adding Machines to host!".format(Fore.GREEN,Fore.RESET))
         with open("/etc/hosts","r") as f:
             hosts = f.readlines()
         machines = {"localhost"}
