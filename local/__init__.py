@@ -118,7 +118,8 @@ class localget(onlineget):
                 self.conf["vpnid"] = ps
             self.conf["last"] = name
             self.write()
-            os.system("tmux")  
+            os.system("tmux") 
+             
         except Exception as e:
             print(e)
             exit()
