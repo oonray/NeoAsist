@@ -99,6 +99,7 @@ class machine:
         :returns: request.response
         :rtype: requests.response
         """
+
         return requests.post(BASE_URL + tokenize('/machines/own/root/{}/'.format(self.id), key), data={"hash": h, "diff": d})
     
     def reset(self,key):
@@ -234,3 +235,5 @@ class onlineget:
     def load(self):
         with open(self.path,"r") as f:
             self.conf = json.loads(f.read())
+        if(self.conf["key"] == "your api-key here"):
+            raise Exception
