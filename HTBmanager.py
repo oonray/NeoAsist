@@ -14,10 +14,8 @@ from pip._internal import main as pipmain
 
 sys.path.append('/opt/HTBManager')
 
-try:    
-    from online import *
-    from local import *
-except:pass
+from online import *
+from local import *
 
 CONFIG_PATH = "/etc/htb/"
 CONFIG_FILE = "htb.conf"
