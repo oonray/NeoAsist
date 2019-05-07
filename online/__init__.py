@@ -235,5 +235,5 @@ class onlineget:
     def load(self):
         with open(self.path,"r") as f:
             self.conf = json.loads(f.read())
-        if(self.conf["key"] == "your api-key here"):
+        if("api-key here" in self.conf["key"]):
             raise Exception
