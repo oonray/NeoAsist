@@ -173,7 +173,7 @@ class onlineget:
                     computer = i.split()[1]
                     machines.add(computer)
                 except Exception as e:
-                    print(e)
+                    pass
 
         if(name != "" and ip != ""):
             for i in hosts:
