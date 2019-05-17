@@ -97,7 +97,13 @@ class localget(onlineget):
         for i in machines.values():
             if i.name == args2.list_machine:
                 print(i)
-    
+    def start_vpn(self):
+         ids = [int(i) for i in self.conf["vpnid"].split("\n") if i != ""] 
+            if(not sum(ids)>0):
+                os.popen("openvpn {}".format(file))
+                ps = os.popen("ps -aux | grep {}".format(file)+' | awk \'{print $2}\'').read()
+                self.conf["vpnid"] = ps
+
     def start_session(self,name,file):
         status=""
         Active = os.listdir(os.path.join(MACHINE_PATH,"Active"))
@@ -111,11 +117,7 @@ class localget(onlineget):
 
         os.chdir(os.path.join(os.path.join(MACHINE_PATH,status),name))
         try:
-            ids = [int(i) for i in self.conf["vpnid"].split("\n") if i != ""] 
-            if(not sum(ids)>0):
-                os.popen("openvpn {}".format(file))
-                ps = os.popen("ps -aux | grep {}".format(file)+' | awk \'{print $2}\'').read()
-                self.conf["vpnid"] = ps
+            self.start_vpn()
             self.conf["last"] = name
             self.write()
             os.system("tmux") 

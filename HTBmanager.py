@@ -63,7 +63,8 @@ parser_local.add_argument("-k","--key",type=str,help="Change API Key")
 
 parser_local.add_argument("-ah","--add-host",type=str,help="adds host to the ip")
 parser_local.add_argument("-ip","--ip",type=str,help="ip of the machine to change")
-parser_local.add_argument("-kv","--kill_vpn",action="store_true",help="ip of the machine to change")
+parser_local.add_argument("-kv","--kill_vpn",action="store_true",help="Stop VPN")
+parser_local.add_argument("-ks","--start_vpn",action="store_true",help="Start VPN")
 
 parser_local.add_argument("-stds","--std_scan",action="store_true",help="Start tcp and udp scan")
 parser_local.add_argument("-ss","--start-session",type=str,help="Starts Tmux session with the local machine name provided")
@@ -191,6 +192,9 @@ if(base_arg.local):
     if(args.start_last):
             getter.start_session(getter.last, CONFIG_PATH+"vpn.ovpn")
     
+    if(args.start_vpn):
+        getter.start_vpn()
+        
     if(args.kill_vpn):
         os.system('for i in $(ps -aux | grep '+"{}vpn.ovpn | awk ".format(CONFIG_PATH)+'\'{print $2}\'); do kill $i; done')
         getter.conf["vpnid"]="0\n"
