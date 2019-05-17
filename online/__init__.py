@@ -206,11 +206,24 @@ class onlineget:
         return retired
 
     def create(self):
+        apath = os.path.join(MACHINE_PATH,"Active")
+        rpath = os.path.join(MACHINE_PATH,"Retired")
+
         self.make_all_machines()
         self.add_to_hosts()
+
+        Active = os.listdir(apath)
+        activeM = self.list_active()
+        active = [i.name for i in activeM]
+
+        for i in Active:
+            if i not in active:
+                 os.system("mv {} {}".format(os.path.join(apath,i),os.path.join(rpath,i))
+
         for i in self.machines.values():
             i.create_folder()
             i.save()
+        
 
     def prt(self,args2):
         if(not args2.active and not args2.retired):
