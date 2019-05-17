@@ -111,9 +111,11 @@ class localget(onlineget):
         status="Retired"
         if(name in Active):
             status="Active"
-            
+        try:    
         location = os.path.join(MACHINE_PATH,status)
         os.chdir(os.path.join(location,name))
+        except:
+            raise ValueError("The Machine name cannot be found!")
 
         try:
             self.start_vpn(file)
