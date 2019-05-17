@@ -116,7 +116,7 @@ class localget(onlineget):
         os.chdir(os.path.join(location,name))
 
         try:
-            self.start_vpn()
+            self.start_vpn(file)
             self.conf["last"] = name
             self.write()
             os.system("tmux") 
