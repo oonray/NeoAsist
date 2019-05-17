@@ -98,8 +98,8 @@ class localget(onlineget):
             if i.name == args2.list_machine:
                 print(i)
     def start_vpn(self):
-         ids = [int(i) for i in self.conf["vpnid"].split("\n") if i != ""] 
-            if(not sum(ids)>0):
+        ids = [int(i) for i in self.conf["vpnid"].split("\n") if i != ""] 
+        if(not sum(ids)>0):
                 os.popen("openvpn {}".format(file))
                 ps = os.popen("ps -aux | grep {}".format(file)+' | awk \'{print $2}\'').read()
                 self.conf["vpnid"] = ps
