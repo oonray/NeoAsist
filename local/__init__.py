@@ -114,7 +114,7 @@ class localget(onlineget):
         try:    
             location = os.path.join(MACHINE_PATH,status)
             os.chdir(os.path.join(location,name))
-        except:
+        except Exception as e:
             raise ValueError("The Machine name cannot be found!")
 
         try:
