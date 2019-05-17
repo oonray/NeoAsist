@@ -218,7 +218,7 @@ class onlineget:
 
         for i in Active:
             if i not in active:
-                 os.system("mv {} {}".format(os.path.join(apath,i),os.path.join(rpath,i))
+                 os.system("mv {} {}".format(os.path.join(apath,i),os.path.join(rpath,i)))
 
         for i in self.machines.values():
             i.create_folder()
