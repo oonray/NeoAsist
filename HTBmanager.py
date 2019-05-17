@@ -193,8 +193,8 @@ if(base_arg.local):
             getter.start_session(getter.last, CONFIG_PATH+"vpn.ovpn")
     
     if(args.start_vpn):
-        getter.start_vpn()
-        
+        getter.start_vpn(CONFIG_PATH+"vpn.ovpn")
+
     if(args.kill_vpn):
         os.system('for i in $(ps -aux | grep '+"{}vpn.ovpn | awk ".format(CONFIG_PATH)+'\'{print $2}\'); do kill $i; done')
         getter.conf["vpnid"]="0\n"

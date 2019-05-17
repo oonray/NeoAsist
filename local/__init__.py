@@ -97,7 +97,7 @@ class localget(onlineget):
         for i in machines.values():
             if i.name == args2.list_machine:
                 print(i)
-    def start_vpn(self):
+    def start_vpn(self,file):
         ids = [int(i) for i in self.conf["vpnid"].split("\n") if i != ""] 
         if(not sum(ids)>0):
                 os.popen("openvpn {}".format(file))
