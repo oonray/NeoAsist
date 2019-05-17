@@ -107,15 +107,14 @@ class localget(onlineget):
     def start_session(self,name,file):
         status=""
         Active = os.listdir(os.path.join(MACHINE_PATH,"Active"))
-        Retired = os.listdir(os.path.join(MACHINE_PATH,"Retired"))
 
-        for i,x in zip(Active,Retired):
-            if(i == name):
-                status="Active"
-            if(x == name):
-                status="Retired"
+        status="Retired"
+        if(name in Active):
+            status="Active"
+            
+        location = os.path.join(MACHINE_PATH,status)
+        os.chdir(os.path.join(location,name))
 
-        os.chdir(os.path.join(os.path.join(MACHINE_PATH,status),name))
         try:
             self.start_vpn()
             self.conf["last"] = name
