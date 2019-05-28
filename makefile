@@ -8,4 +8,4 @@ clean:
 	rm /usr/bin/HTBmanager
 	cd ~
 	rm -rf /etc/htb
-	rm -rf /opt/HTBManager
+	rm -rf /opt/HTBmanager
