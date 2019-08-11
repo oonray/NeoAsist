@@ -55,7 +55,7 @@ def start_vpn():
 
 
 """
-Start Last
+Start Last session
 """
 start_group.add_argument("-l",help="Continue the last session", action="store_true")
 def start_last():
@@ -79,8 +79,7 @@ List Machines
 list_group.add_argument("-m",help="Lists active machines")
 def list_all_machines():
    url = "/machines/get/all"
-   add_token(url,get_api_token())
-   pass
+   return requests.get(add_token(url,get_api_token()))
 
 def print_all_machines(machines):
     print(machines)
@@ -117,5 +116,6 @@ Add Host to /etc/hosts
 Remove Host form /etc/hosts
 """
 
-
+if __name__ == "__main__":
+    print(list_all_machines())
 
