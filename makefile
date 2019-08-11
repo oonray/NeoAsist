@@ -33,7 +33,7 @@ all:
 	@echo '}' >> $(config_folder)/htb.conf
 	
 	@echo [+] Generating python Variables
-	@echo 'CONF_FOLDER="$(CONF_FOLDER)"' > variables.py
+	@echo 'CONF_FOLDER="$(config_folder)"' > variables.py
 	@echo 'MACHINE_FOLDER="$(machine_folder)"' >> variables.py
 
 install:
