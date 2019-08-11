@@ -1,0 +1,2 @@
+CONF_FOLDER=""
+MACHINE_FOLDER="/home/oonray/HTB"
