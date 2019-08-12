@@ -85,7 +85,7 @@ List Machines
 list_group.add_argument("-m",help="Lists active machines")
 def get_all_machines():
    url = "machines/get/all"
-   return get(add_token(url))
+   return get(add_token(url,get_api_token()))
 
 def print_all_machines(machines):
     print(machines)
