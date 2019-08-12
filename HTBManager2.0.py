@@ -20,7 +20,9 @@ base_url="https://www.hackthebox.eu/"
 +######
 """
 def add_token(url,token):
-    return "{}/{}?api_token={}".format(base_url,url,token)
+    ret =  "{}/{}?api_token={}".format(base_url,url,token)
+    print(ret)
+    return ret
 
 def get_api_token():
     with open(os.path.join(variables.CONF_FOLDER,"htb.conf")) as f:
