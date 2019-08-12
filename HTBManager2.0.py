@@ -21,7 +21,7 @@ headers = {'Content-Type': 'application/json'}
 +######
 """
 def add_token(url,token):
-    ret =  "{}{}".format(base_url,url,token)
+    ret =  "{}{}?api_token={}".format(base_url,url,token)
     print(ret)
     return ret
 
@@ -32,12 +32,11 @@ def get_api_token():
             print("You must add a api key to {}/htb.conf".format(variables.CONF_FOLDER))
             exit()
         return key
-
 def get_payload():
     return {'api_key':get_api_token()}
 
 def get(url):
-    return requests.get(url,headers=headers,params=get_payload())
+    return requests.get(url,headers=headers)
 
 argparser.add_argument("action",help="The action you want to take eg. START, LIST, DOWNLOAD")
 
