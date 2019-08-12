@@ -7,7 +7,7 @@
 This progam is made to manage the different aspects of Hack The Box Automatically.
 It is designed to make a structured setup for your machines.
 """
-import variables, argparse, json. sys, os
+import variables, argparse, json, sys, os
 
 argparser = argparse.ArgumentParser(description="Manages Hack The Box Machines and Hacking Session")
 
@@ -77,9 +77,9 @@ list_group = argparser.add_argument_group("LIST")
 List Machines
 """
 list_group.add_argument("-m",help="Lists active machines")
-def list_all_machines():
+def get_all_machines():
    url = "/machines/get/all"
-   return requests.get(add_token(url,get_api_token()))
+   return requests.get(add_token(url,get_api_token())).json()
 
 def print_all_machines(machines):
     print(machines)
@@ -117,5 +117,5 @@ Remove Host form /etc/hosts
 """
 
 if __name__ == "__main__":
-    print(list_all_machines())
+    print(get_all_machines())
 
