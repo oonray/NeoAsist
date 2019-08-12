@@ -20,7 +20,7 @@ base_url="https://www.hackthebox.eu/"
 +######
 """
 def add_token(url,token):
-    ret =  "{}/{}?api_token={}".format(base_url,url,token)
+    ret =  "{}{}?api_token={}".format(base_url,url,token)
     print(ret)
     return ret
 
@@ -80,7 +80,7 @@ List Machines
 """
 list_group.add_argument("-m",help="Lists active machines")
 def get_all_machines():
-   url = "/machines/get/all"
+   url = "machines/get/all"
    return requests.get(add_token(url,get_api_token()))
 
 def print_all_machines(machines):
