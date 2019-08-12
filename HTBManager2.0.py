@@ -13,6 +13,7 @@ argparser = argparse.ArgumentParser(description="Manages Hack The Box Machines a
 
 
 base_url="https://www.hackthebox.eu/api/"
+headers = {'Content-Type': 'application/json'}
 
 """
 +######
@@ -31,6 +32,9 @@ def get_api_token():
             print("You must add a api key to {}/htb.conf".format(variables.CONF_FOLDER))
             exit()
         return key
+
+def get(url):
+    return requests.get(url,header=headers)
 
 argparser.add_argument("action",help="The action you want to take eg. START, LIST, DOWNLOAD")
 
@@ -81,7 +85,7 @@ List Machines
 list_group.add_argument("-m",help="Lists active machines")
 def get_all_machines():
    url = "machines/get/all"
-   return requests.get(add_token(url,get_api_token()))
+   return get(add_token(url))
 
 def print_all_machines(machines):
     print(machines)
