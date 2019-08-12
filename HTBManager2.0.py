@@ -34,7 +34,7 @@ def get_api_token():
         return key
 
 def get(url):
-    return requests.get(url,header=headers)
+    return requests.get(url,headers=headers)
 
 argparser.add_argument("action",help="The action you want to take eg. START, LIST, DOWNLOAD")
 
