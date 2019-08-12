@@ -7,7 +7,7 @@
 This progam is made to manage the different aspects of Hack The Box Automatically.
 It is designed to make a structured setup for your machines.
 """
-import variables, argparse, json, sys, os
+import variables, argparse, json, sys, os, requests
 
 argparser = argparse.ArgumentParser(description="Manages Hack The Box Machines and Hacking Session")
 
