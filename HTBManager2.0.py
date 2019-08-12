@@ -12,7 +12,7 @@ import variables, argparse, json, sys, os, requests
 argparser = argparse.ArgumentParser(description="Manages Hack The Box Machines and Hacking Session")
 
 
-base_url="https://www.hackthebox.eu/"
+base_url="https://www.hackthebox.eu/api/"
 
 """
 +######
