@@ -23,7 +23,20 @@ all:
 	sudo mkdir $(config_folder)
 	sudo chown $(USER) $(config_folder)
 
-	@echo 
+	@echo [+] Creating Machine Folders
+	mkdir $(machine_folder)/Active
+	mkdir $(machine_folder)/Active/Linux
+	mkdir $(machine_folder)/Active/Windows
+
+	mkdir $(machine_folder)/Retired
+	mkdir $(machine_folder)/Retired/Linux
+    mkdir $(machine_folder)/Retired/Windows
+
+    mkdir $(machine_folder)/OSCP/	
+    mkdir $(machine_folder)/OSCP/Linux
+	mkdir $(machine_folder)/OSCP/Windows
+
+	@echo 	
 	@echo [.] Creating Config File
 	@echo '{' > $(config_folder)/htb.conf
 	@echo '"key":"$(KEY)",' >> $(config_folder)/htb.conf
