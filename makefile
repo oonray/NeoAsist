@@ -25,27 +25,23 @@ all:
 	sudo chown $(USER) $(config_folder)
 
 	@echo [+] Creating Machine Folders
-	mkdir $(machine_folder)
-	mkdir $(active)
-	mkdir $(active)/Linux
-	mkdir $(active)/Windows
-	mkdir $(active)/FreeBSD
-	mkdir $(active)/Other
-	mkdir $(active)/Solaris
+	mkdir -p $(active)/Linux
+	mkdir -p $(active)/Windows
+	mkdir -p $(active)/FreeBSD
+	mkdir -p $(active)/Other
+	mkdir -p $(active)/Solaris
 
-	mkdir $(machine_folder)/Retired
-	mkdir $(machine_folder)/Retired/Linux
-	mkdir $(machine_folder)/Retired/Windows
-	mkdir $(machine_folder)/Retired/FreeBSD
-	mkdir $(machine_folder)/Retired/Other
-	mkdir $(machine_folder)/Retired/Solaris
+	mkdir -p $(machine_folder)/Retired/Linux
+	mkdir -p $(machine_folder)/Retired/Windows
+	mkdir -p $(machine_folder)/Retired/FreeBSD
+	mkdir -p $(machine_folder)/Retired/Other
+	mkdir -p $(machine_folder)/Retired/Solaris
 	
-	mkdir $(machine_folder)/OSCP/
-	mkdir $(machine_folder)/OSCP/Linux
-	mkdir $(machine_folder)/OSCP/Windows
-	mkdir $(machine_folder)/OSCP/FreeBSD
-	mkdir $(machine_folder)/OSCP/Other
-	mkdir $(machine_folder)/OSCP/Solaris	
+	mkdir -p $(machine_folder)/OSCP/Linux
+	mkdir -p $(machine_folder)/OSCP/Windows
+	mkdir -p $(machine_folder)/OSCP/FreeBSD
+	mkdir -p $(machine_folder)/OSCP/Other
+	mkdir -p $(machine_folder)/OSCP/Solaris	
 
 	@echo 	
 	@echo [.] Creating Config File
