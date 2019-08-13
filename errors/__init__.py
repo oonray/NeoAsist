@@ -4,7 +4,7 @@ init()
 
 def base_string():
 
-    return "{}[!]{}".format(Fore.RED,Fore.RESET_ALL)
+    return "{}[!]{}".format(Fore.RED,Style.RESET_ALL)
 
 def print_error(error):
     print("{}{}".format(base_string(),error))
