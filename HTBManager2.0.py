@@ -135,5 +135,5 @@ Remove Host form /etc/hosts
 """
 
 if __name__ == "__main__":
-    get(add_token("/lol",get_token()))
+    get(add_token("/lol",get_api_token()))
 
