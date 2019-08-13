@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#/usr/bin/python3
 """
 :author: Alexander Bjørnsrud <alexanderbjornsrud@gmail.com>
 :file: htbmanage.py
@@ -140,6 +140,7 @@ def make_directory(machine):
     cmd = "mkdir {}".format(path)
     cmd2 = "echo '{}' > {}".format(machine["ip"],os.path.join(path,"ip"))
     os.system(cmd)
+    os.system(cmd2)
     return True
 
 """
