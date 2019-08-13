@@ -126,16 +126,17 @@ Download ALL
 """
 
 def make_directory(machine):
-    cmd = "mkdir {}".format(
-           os.path.join(variables.MACHINE_FOLDER,
+    path = os.path.join(variables.MACHINE_FOLDER,
                 os.path.join("Active" if machine["retired_date"] == None else "Retired",
                      os.path.join(
                          machine["os"], machine["name"]
                     )
                 )
           )
-    )
+    cmd = "mkdir {}".format(path)
+    cmd2 = "echo '{}' > {}".format(machine["ip"],os.path.join(path,"ip"))
     print(cmd)
+    print(cmd2)
     #os.system(cmd)
     return True
 
