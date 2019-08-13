@@ -119,7 +119,7 @@ List OSCP
 | Download
 +##########+
 """
-download_group =argparser.add_argument_group("DOWNLOAD")
+download_group = argparser.add_argument_group("DOWNLOAD")
 
 """
 Download ALL
@@ -139,16 +139,9 @@ def make_directory(machine):
           )
     cmd = "mkdir {}".format(path)
     cmd2 = "echo '{}' > {}".format(machine["ip"],os.path.join(path,"ip"))
-    print(cmd)
-    print(cmd2)
-    #os.system(cmd)
+    os.system(cmd)
+    os.system(cmd2)
     return True
-
-"""
-Download Active
-Download Retired
-Download OSCP
-"""
 
 """
 Stop VPN
