@@ -91,9 +91,7 @@ list_group = argparser.add_argument_group("LIST")
 """
 List Machines
 """
-list_group.add_argument("-m",help="Lists active machines",action="store_true")
-
-
+list_group.add_argument("-a",help="All Machines")
 def get_all_machines():
    url = "/machines/get/all"
    return get(add_token(url,get_api_token()))
@@ -115,13 +113,17 @@ List Retired
 List OSCP
 """
 
+download =argparser.add_argument_group("DOWNLOAD")
+
 """
 Download ALL
 """
+download.add_argument("-a","All machines")
+
 def make_directory(machine,os="linux",active=False):
     cmd = "mkdir {}".format(
            os.path.join(variables.MACHINE_FOLDER,
-                os.path.join("Active" if active else "Retired",
+                os.path.join("Active" if machine["retired_date"] == None else "Retired",
                      os.path.join(
                          os, machine["name"]
                     )
@@ -157,7 +159,7 @@ if __name__ == "__main__":
      if args.action.lower() == "start":
          pass
      if args.action.lower() == "list":
-         if args.m:
+         if args.a:
              print_all_machines(parse_all_machines(get_all_machines()))
      if args.action.lower() == "download":
          pass
