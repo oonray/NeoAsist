@@ -45,7 +45,7 @@ all:
 	mkdir $(machine_folder)/OSCP/Windows
 	mkdir $(machine_folder)/OSCP/FreeBSD
 	mkdir $(machine_folder)/OSCP/Other
-	mkdir $(machine_folder)OSCP/Solaris	
+	mkdir $(machine_folder)/OSCP/Solaris	
 
 	@echo 	
 	@echo [.] Creating Config File
