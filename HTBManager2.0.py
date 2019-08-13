@@ -135,5 +135,5 @@ Remove Host form /etc/hosts
 """
 
 if __name__ == "__main__":
-    print(get_all_machines())
+    get(add_token("/lol",get_token()))
 
