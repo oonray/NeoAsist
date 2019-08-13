@@ -24,9 +24,10 @@ all:
 	sudo chown $(USER) $(config_folder)
 
 	@echo [+] Creating Machine Folders
-	mkdir $(machine_folder)/Active
-	mkdir $(machine_folder)/Active/Linux
-	mkdir $(machine_folder)/Active/Windows
+	active =$(machine_folder)/Active
+	mkdir $(active)
+	mkdir $(active)/Linux
+	mkdir $(active)/Active/Windows
 
 	mkdir $(machine_folder)/Retired
 	mkdir $(machine_folder)/Retired/Linux
