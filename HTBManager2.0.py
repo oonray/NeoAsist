@@ -114,9 +114,10 @@ List OSCP
 """
 Download ALL
 """
-def download_all():
-    pass
-
+def make_directory(machine,os="linux",active=False):
+    cmd = "mkdir {}".format()
+    os.system(cmd)
+    return True
 
 """
 Download Active
