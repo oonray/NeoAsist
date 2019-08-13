@@ -85,7 +85,7 @@ list_group = argparser.add_argument_group("LIST")
 List Machines
 """
 list_group.add_argument("-m",help="Lists active machines")
-def list_all_machines():
+def get_all_machines():
    url = "/machines/get/all"
    return requests.get(add_token(url,get_api_token()),headers=headers)
 
