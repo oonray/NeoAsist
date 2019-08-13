@@ -8,7 +8,7 @@ This progam is made to manage the different aspects of Hack The Box Automaticall
 It is designed to make a structured setup for your machines.
 """
 import variables, argparse, json, sys, os, requests, colorama
-from error import fetch_error
+from errors import fetch_error
 
 
 argparser = argparse.ArgumentParser(description="Manages Hack The Box Machines and Hacking Session")
