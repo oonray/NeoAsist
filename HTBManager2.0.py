@@ -91,7 +91,7 @@ list_group = argparser.add_argument_group("LIST")
 """
 List Machines
 """
-list_group.add_argument("-m",help="Lists active machines")
+list_group.add_argument("-m",help="Lists active machines",action="store_true")
 
 
 def get_all_machines():
@@ -119,8 +119,17 @@ List OSCP
 Download ALL
 """
 def make_directory(machine,os="linux",active=False):
-    cmd = "mkdir {}".format()
-    os.system(cmd)
+    cmd = "mkdir {}".format(
+           os.path.join(variables.MACHINE_FOLDER,
+                os.path.join("Active" if active else "Retired",
+                     os.path.join(
+                         os, machine["name"]
+                    )
+                )
+          )
+    )
+    print(cmd)
+    #os.system(cmd)
     return True
 
 """
@@ -143,7 +152,25 @@ Remove Host form /etc/hosts
 """
 
 if __name__ == "__main__":
-    args = argparser.parse_args()
-    print(args)
+     args = argparser.parse_args()
+     #start list downlad stop add remove update
+     if args.action.lower() == "start":
+         pass
+     if args.action.lower() == "list":
+         if args.action.m:
+             print_all_machines(parse_all_machines(get_all_machines()))
+     if args.action.lower() == "download":
+         pass
+     if args.action.lower() == "stop":
+         pass
+     if args.action.lower() == "add":
+         pass
+     if args.action.lower() == "remove":
+         pass
+     if args.action.lower() == "update":
+         pass
+
+     a = parse_all_machines(get_all_machines())
+     print(a[a.keys()[0]])
 
 
