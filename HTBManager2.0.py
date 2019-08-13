@@ -13,7 +13,7 @@ argparser = argparse.ArgumentParser(description="Manages Hack The Box Machines a
 
 
 base_url = "https://www.hackthebox.eu/api"
-headers = {"UserAgent":"curl/7.65.1"}
+headers = {"User-Agent":"curl/7.65.1"}
 
 """
 +######
