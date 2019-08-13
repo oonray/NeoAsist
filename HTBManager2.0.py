@@ -102,8 +102,8 @@ def parse_all_machines(request):
     parsed_data = json.dumps(request.data)
     return parsed_data
 
-def print_all_machines(machines):
-    print(machines)
+def print_all_machines(machines_parsed):
+    pass
 
 """
 List Active
@@ -138,5 +138,5 @@ Remove Host form /etc/hosts
 """
 
 if __name__ == "__main__":
-    get(add_token("/lol",get_api_token()))
+    print(parse_all_machines(get_all_machines()))
 
