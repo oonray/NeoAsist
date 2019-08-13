@@ -138,5 +138,5 @@ Remove Host form /etc/hosts
 """
 
 if __name__ == "__main__":
-    print(parse_all_machines(get_all_machines()))
+    print(type(parse_all_machines(get_all_machines())))
 
