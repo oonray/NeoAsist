@@ -30,10 +30,10 @@ all:
 
 	mkdir $(machine_folder)/Retired
 	mkdir $(machine_folder)/Retired/Linux
-    mkdir $(machine_folder)/Retired/Windows
+	mkdir $(machine_folder)/Retired/Windows
 
-    mkdir $(machine_folder)/OSCP/	
-    mkdir $(machine_folder)/OSCP/Linux
+	mkdir $(machine_folder)/OSCP/
+	mkdir $(machine_folder)/OSCP/Linux
 	mkdir $(machine_folder)/OSCP/Windows
 
 	@echo 	
