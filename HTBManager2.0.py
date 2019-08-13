@@ -46,7 +46,7 @@ def check_response(response):
         fetch_error()
 
 argparser.add_argument("action",help="The action you want to take eg. START, LIST, DOWNLOAD")
-argparser.add_argument("-a",help="All Machines")
+argparser.add_argument("-a",help="All Machines",action="store_true")
 
 
 """
