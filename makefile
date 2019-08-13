@@ -2,6 +2,7 @@ requirements = $(PWD)/requirements.txt
 config_folder = /etc/HTB
 machine_folder = $(HOME)/HTB
 KEY = <your api key here>
+active =$(machine_folder)/Active
 
 all:
 	@echo [+] Installing Reqirements
@@ -24,7 +25,6 @@ all:
 	sudo chown $(USER) $(config_folder)
 
 	@echo [+] Creating Machine Folders
-	active =$(machine_folder)/Active
 	mkdir $(active)
 	mkdir $(active)/Linux
 	mkdir $(active)/Active/Windows
