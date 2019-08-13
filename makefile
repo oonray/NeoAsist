@@ -28,7 +28,7 @@ all:
 	mkdir $(machine_folder)
 	mkdir $(active)
 	mkdir $(active)/Linux
-	mkdir $(active)/Active/Windows
+	mkdir $(active)/Windows
 
 	mkdir $(machine_folder)/Retired
 	mkdir $(machine_folder)/Retired/Linux
