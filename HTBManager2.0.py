@@ -103,7 +103,7 @@ def parse_all_machines(request):
     parsed_data = json.loads(request.text)
     for i in parsed_data:
          ret[i["name"]] = i
-    return parsed_data
+    return ret
 
 def print_all_machines(machines_parsed):
     for i in machines_parsed:
