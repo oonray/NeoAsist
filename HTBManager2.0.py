@@ -99,11 +99,15 @@ def get_all_machines():
    return get(add_token(url,get_api_token()))
 
 def parse_all_machines(request):
+    ret = {}
     parsed_data = json.loads(request.text)
+    for i in parsed_data:
+         ret[i["name"]] = i
     return parsed_data
 
 def print_all_machines(machines_parsed):
-    pass
+    for i in machines_parsed:
+        print(i)
 
 """
 List Active
@@ -139,5 +143,7 @@ Remove Host form /etc/hosts
 """
 
 if __name__ == "__main__":
-    print(parse_all_machines(get_all_machines())[0])
+    args = argparser.parse_args()
+    print(args)
+
 
