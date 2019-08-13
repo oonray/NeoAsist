@@ -157,7 +157,7 @@ if __name__ == "__main__":
      if args.action.lower() == "start":
          pass
      if args.action.lower() == "list":
-         if args.action.m:
+         if args.m:
              print_all_machines(parse_all_machines(get_all_machines()))
      if args.action.lower() == "download":
          pass
