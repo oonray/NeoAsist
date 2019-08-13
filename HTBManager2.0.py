@@ -171,6 +171,6 @@ if __name__ == "__main__":
          pass
 
      a = parse_all_machines(get_all_machines())
-     print(a["Beep"])
+     print(a["Helpline"])
 
 
