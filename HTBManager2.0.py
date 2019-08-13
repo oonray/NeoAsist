@@ -99,7 +99,7 @@ def get_all_machines():
    return get(add_token(url,get_api_token()))
 
 def parse_all_machines(request):
-    parsed_data = json.dumps(request.txt)
+    parsed_data = json.dumps(request.text)
     return parsed_data
 
 def print_all_machines(machines_parsed):
