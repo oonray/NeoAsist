@@ -126,8 +126,12 @@ Download ALL
 """
 
 def make_directory(machine):
+    location = "Active" if machine["retired_date"] == None else "Retired"
+    if machine.name in variabes.OSCP.keys():
+        location = "OSCP"
+
     path = os.path.join(variables.MACHINE_FOLDER,
-                os.path.join("Active" if machine["retired_date"] == None else "Retired",
+                os.path.join(location,
                      os.path.join(
                          machine["os"], machine["name"]
                     )
