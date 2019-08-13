@@ -25,6 +25,7 @@ all:
 	sudo chown $(USER) $(config_folder)
 
 	@echo [+] Creating Machine Folders
+	mkdir $(machine_folder)
 	mkdir $(active)
 	mkdir $(active)/Linux
 	mkdir $(active)/Active/Windows
