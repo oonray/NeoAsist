@@ -114,18 +114,23 @@ List Retired
 List OSCP
 """
 
+"""
++##########+
+| Download
++##########+
+"""
 download_group =argparser.add_argument_group("DOWNLOAD")
 
 """
 Download ALL
 """
 
-def make_directory(machine,os="linux",active=False):
+def make_directory(machine):
     cmd = "mkdir {}".format(
            os.path.join(variables.MACHINE_FOLDER,
                 os.path.join("Active" if machine["retired_date"] == None else "Retired",
                      os.path.join(
-                         os, machine["name"]
+                         machine["os"], machine["name"]
                     )
                 )
           )
@@ -162,7 +167,11 @@ if __name__ == "__main__":
          if args.a:
              print_all_machines(parse_all_machines(get_all_machines()))
      if args.action.lower() == "download":
-         pass
+         if args.a:
+             m = parse_all_machines(get_all_machines())
+             for i in m.values():
+                 make_directory(i)
+
      if args.action.lower() == "stop":
          pass
      if args.action.lower() == "add":
