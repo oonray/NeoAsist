@@ -7,14 +7,15 @@
 This progam is made to manage the different aspects of Hack The Box Automatically.
 It is designed to make a structured setup for your machines.
 """
-import variables, argparse, json, sys, os, requests
+import variables, argparse, json, sys, os, requests, colorama
+from error import fetch_error
+
 
 argparser = argparse.ArgumentParser(description="Manages Hack The Box Machines and Hacking Session")
 
 
 base_url = "https://www.hackthebox.eu/api"
 headers = {"User-Agent":"curl/7.65.1"}
-
 """
 +######
 | MisC
@@ -32,11 +33,14 @@ def get_api_token():
             print("You must add a api key to {}/htb.conf".format(variables.CONF_FOLDER))
             exit()
         return key
-def get_payload():
-    return {'api_key':get_api_token()}
+
 
 def get(url):
     return requests.get(url,headers=headers)
+
+def check_response(response):
+    if response.status != 200:
+        fetch_error()
 
 argparser.add_argument("action",help="The action you want to take eg. START, LIST, DOWNLOAD")
 
@@ -85,9 +89,15 @@ list_group = argparser.add_argument_group("LIST")
 List Machines
 """
 list_group.add_argument("-m",help="Lists active machines")
+
+
 def get_all_machines():
    url = "/machines/get/all"
-   return requests.get(add_token(url,get_api_token()),headers=headers)
+   return get(add_token(url,get_api_token()))
+
+def parse_all_machines(request):
+    parsed_data = json.dumps(request.data)
+    return parsed_data
 
 def print_all_machines(machines):
     print(machines)
