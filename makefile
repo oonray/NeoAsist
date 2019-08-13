@@ -35,7 +35,7 @@ all:
 	@echo [+] Generating python Variables
 	@echo 'CONF_FOLDER="$(config_folder)"' > variables.py
 	@echo 'MACHINE_FOLDER="$(machine_folder)"' >> variables.py
-    @echo 'OSCP = ["Lame","Branfuck","Shocker","Bashed","Nibbles","Beep","Cronos","Nineveh","Sencse","Solidstate","Kotark","Node","Valentine","Poison","Sunday","Tartarsause","Legacy","Blue","Devel","Optimum","Bastard","Granny","Arctic","Grandpa","Silo","Bounty","Jerry"]' >> variables.py
+	@echo 'OSCP = ["Lame","Branfuck","Shocker","Bashed","Nibbles","Beep","Cronos","Nineveh","Sencse","Solidstate","Kotark","Node","Valentine","Poison","Sunday","Tartarsause","Legacy","Blue","Devel","Optimum","Bastard","Granny","Arctic","Grandpa","Silo","Bounty","Jerry"]' >> variables.py
 
 install:
 	@echo [+] Installing manager from $(PWD)
