@@ -8,8 +8,9 @@ This progam is made to manage the different aspects of Hack The Box Automaticall
 It is designed to make a structured setup for your machines.
 """
 import variables, argparse, json, sys, os, requests, colorama
-from errors import fetch_error
+from errors import *
 
+init()
 
 argparser = argparse.ArgumentParser(description="Manages Hack The Box Machines and Hacking Session")
 
@@ -36,10 +37,12 @@ def get_api_token():
 
 
 def get(url):
-    return requests.get(url,headers=headers)
+    request = requests.get(url,headers=headers)
+    check_response(request)
+    return request
 
 def check_response(response):
-    if response.status != 200:
+    if response.status_code != 200:
         fetch_error()
 
 argparser.add_argument("action",help="The action you want to take eg. START, LIST, DOWNLOAD")

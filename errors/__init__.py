@@ -1,9 +1,9 @@
-import colorama
+from colorama import *
 
-colorama.init()
+init()
 
 def base_string():
-    return "{}[!]{}".format(colorama.Fore.RED,colorama.Fore.RESET_ALL)
+    return "{}[!]{}".format(Fore.RED,Fore.RESET_ALL)
 
 def print_error(error):
     print("{}{}".format(base_strint(),error))
