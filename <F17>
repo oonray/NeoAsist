@@ -12,9 +12,7 @@ import variables, argparse, json. sys, os
 argparser = argparse.ArgumentParser(description="Manages Hack The Box Machines and Hacking Session")
 
 
-base_url = "https://www.hackthebox.eu/"
-headers = {"UserAgent":"curl/7.65.1"}
-
+base_url="https://www.hackthebox.eu/"
 
 """
 +######
@@ -81,7 +79,7 @@ List Machines
 list_group.add_argument("-m",help="Lists active machines")
 def list_all_machines():
    url = "/machines/get/all"
-   return requests.get(add_token(url,get_api_token()),headers=headers)
+   return requests.get(add_token(url,get_api_token()))
 
 def print_all_machines(machines):
     print(machines)
