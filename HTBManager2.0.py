@@ -46,6 +46,8 @@ def check_response(response):
         fetch_error()
 
 argparser.add_argument("action",help="The action you want to take eg. START, LIST, DOWNLOAD")
+argparser.add_argument("-a",help="All Machines")
+
 
 """
 +#######
@@ -91,7 +93,6 @@ list_group = argparser.add_argument_group("LIST")
 """
 List Machines
 """
-list_group.add_argument("-a",help="All Machines")
 def get_all_machines():
    url = "/machines/get/all"
    return get(add_token(url,get_api_token()))
@@ -118,7 +119,6 @@ download_group =argparser.add_argument_group("DOWNLOAD")
 """
 Download ALL
 """
-download_group.add_argument("-a",help="All machines")
 
 def make_directory(machine,os="linux",active=False):
     cmd = "mkdir {}".format(
