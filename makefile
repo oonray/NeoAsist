@@ -29,14 +29,21 @@ all:
 	mkdir $(active)
 	mkdir $(active)/Linux
 	mkdir $(active)/Windows
+	mkdir $(active)/FreeBSD
+	mkdir $(active)/Other
 
 	mkdir $(machine_folder)/Retired
 	mkdir $(machine_folder)/Retired/Linux
 	mkdir $(machine_folder)/Retired/Windows
+	mkdir $(machine_folder)/OSCP/FreeBSD
+	mkdir $(machine_folder)/OSCP/Other
 
 	mkdir $(machine_folder)/OSCP/
 	mkdir $(machine_folder)/OSCP/Linux
 	mkdir $(machine_folder)/OSCP/Windows
+	mkdir $(machine_folder)/OSCP/FreeBSD
+	mkdir $(machine_folder)/OSCP/Other
+	
 
 	@echo 	
 	@echo [.] Creating Config File
