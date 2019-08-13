@@ -113,12 +113,12 @@ List Retired
 List OSCP
 """
 
-download =argparser.add_argument_group("DOWNLOAD")
+download_group =argparser.add_argument_group("DOWNLOAD")
 
 """
 Download ALL
 """
-download.add_argument("-a","All machines")
+download_group.add_argument("-a",help="All machines")
 
 def make_directory(machine,os="linux",active=False):
     cmd = "mkdir {}".format(
