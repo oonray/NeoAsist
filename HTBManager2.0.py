@@ -225,5 +225,5 @@ if __name__ == "__main__":
 
      a = parse_all_machines(get_all_machines())
      print(a["Helpline"])
-
+     print(get_config())
 
