@@ -24,7 +24,7 @@ headers = {"User-Agent":"curl/7.65.1"}
 """
 def get_config():
     with open(os.path.join(variables.CONF_FOLDER,"htb.conf"),"r") as f:
-         return json.dumps(f.read())[0]
+         return json.dumps(f.read())
 
 def write_config(config):
     with open(os.path.join(format(variables.CONF_FOLDER,"htb.conf")),"w"):
