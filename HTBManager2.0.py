@@ -24,11 +24,11 @@ headers = {"User-Agent":"curl/7.65.1"}
 """
 def get_config():
     with open(os.path.join(variables.CONF_FOLDER,"htb.conf"),"r") as f:
-         return json.dumps(f.read())
+         return json.dumps(f.read())[0]
 
 def write_config(config):
     with open(os.path.join(format(variables.CONF_FOLDER,"htb.conf")),"w"):
-        f.write(conf)
+        f.write(json.dumps(conf))
 
 def add_token(url,token):
     ret =  "{}{}?api_token={}".format(base_url,url,token)
