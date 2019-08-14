@@ -54,7 +54,7 @@ def check_response(response):
 
 argparser.add_argument("action",help="The action you want to take eg. START, STOP, LIST, DOWNLOAD")
 argparser.add_argument("-a",help="target all All",action="store_true")
-argparser.add_argument("-v",help="target VPN")
+argparser.add_argument("-v",help="target VPN",action="store_true")
 
 """
 +#######
