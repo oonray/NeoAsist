@@ -14,4 +14,4 @@ def fetch_error():
     print_error("Could not fetch Data.")
 
 def file_open_error(file):
-    print_error("Could not open file {}")
+    print_error("Could not open file {}".format(file))
