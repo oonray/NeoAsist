@@ -75,7 +75,7 @@ Start VPN
 """
 def start_vpn():
    conf = get_config()
-   ids = [int(i) for i in conf["vpnid"].split("\n"] if i != ""]
+   ids = [int(i) for i in conf["vpnid"].split("\n") if i != ""]
 
    if sum(ids) > 0:
       return 1
