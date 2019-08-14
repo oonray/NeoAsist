@@ -22,9 +22,16 @@ headers = {"User-Agent":"curl/7.65.1"}
 | MisC
 +######
 """
+def get_config():
+    with open(os.path.join(variables.CONF_FOLDER,"htb.conf"),"r") as f:
+         return json.dumps(f.read())
+
+def write_config(config):
+    with open(os.path.join(format(variables.CONF_FOLDER,"htb.conf")),"w"):
+        f.write(conf)
+
 def add_token(url,token):
     ret =  "{}{}?api_token={}".format(base_url,url,token)
-    print(ret)
     return ret
 
 def get_api_token():
@@ -45,9 +52,9 @@ def check_response(response):
     if response.status_code != 200:
         fetch_error()
 
-argparser.add_argument("action",help="The action you want to take eg. START, LIST, DOWNLOAD")
-argparser.add_argument("-a",help="All Machines",action="store_true")
-
+argparser.add_argument("action",help="The action you want to take eg. START, STOP, LIST, DOWNLOAD")
+argparser.add_argument("-a",help="target all All",action="store_true")
+argparser.add_argument("-v",help="target VPN")
 
 """
 +#######
@@ -66,10 +73,23 @@ def start_session():
 """
 Start VPN
 """
-start_group.add_argument("-v",help="Start VPN conneciton",action="store_true")
 def start_vpn():
-   pass
+   conf = get_config()
+   ids = [int(i) for i in self.conf["vpnid".split("\n")] if i != ""]
 
+   if sum(ids) > 0:
+      return 1
+
+   path = os.path.join(variables.CONF_FOLDER,"vpn.ovpn")
+   if os.path.exists(path) == False:
+       file_open_error(path)
+   os.popen("openvpn {}".format(os.path.join(variables.CONF_FOLDER,"vpn.ovpn"))
+           )
+
+   ps = os.popen("ps -aux | grep {} | awk \'{print $2}\'".format(path)).read()
+   conf["vpnid"] = ps
+   write_config(conf)
+   return 0
 
 """
 Start Last session
@@ -80,7 +100,10 @@ def start_last():
 
 """
 Start STD Scans
-Start Lease
+Start Session
+Start Deamon
+Start Machine
+Start Tmux
 """
 
 """
@@ -142,10 +165,28 @@ def make_directory(machine):
     os.system(cmd)
     os.system(cmd2)
     return True
+"""
++###########
+| STOP
++###########
+"""
+stop_grop = argparser.add_argument_group("STOP")
 
 """
 Stop VPN
-Stop Lease
+"""
+
+def stop_vpn():
+    conf = get_config()
+    os.system("for i in $(ps -aux | grep {} | awk \'{print $2}\'); do kill $i;done").format(os.path.join(variables.CONF_FOLDER,"vpn.ovpn"))
+    conf["vpnid"]="0\n"
+    write_config(conf)
+
+
+"""
+Stop Session
+Stop Deamon
+Stop Machine
 """
 
 """
@@ -160,7 +201,8 @@ if __name__ == "__main__":
      args = argparser.parse_args()
      #start list downlad stop add remove update
      if args.action.lower() == "start":
-         pass
+         if args.v:
+             start_vpn()
      if args.action.lower() == "list":
          if args.a:
              print_all_machines(parse_all_machines(get_all_machines()))
@@ -171,7 +213,9 @@ if __name__ == "__main__":
                  make_directory(i)
 
      if args.action.lower() == "stop":
-         pass
+         if args.v:
+             stop_vpn()
+
      if args.action.lower() == "add":
          pass
      if args.action.lower() == "remove":
