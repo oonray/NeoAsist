@@ -24,12 +24,14 @@ Overrides:
 ----------
 you can override the following parameters when making.
     *KEY
-    *config_folder
     *machine_folder
+
+The program will use the path to the directory of the make file to determine the install directory.
+The config path must be /etc/HTB as this is hard coded into the application.
 
 example:
 ```
-make KEY=<your api key> config_folder=<your config path> machine_folder=<the path where you want the
+make KEY=<your api key> machine_folder=<the path where you want the
 machines to be stored>
 
 ```
