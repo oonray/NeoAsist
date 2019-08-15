@@ -1,2 +1,0 @@
-CONF_FOLDER="/etc/HTB"
-MACHINE_FOLDER="/home/oonray/HTB"

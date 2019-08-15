@@ -8,6 +8,14 @@ This progam is made to manage the different aspects of Hack The Box Automaticall
 It is designed to make a structured setup for your machines.
 """
 import variables, argparse, json, sys, os, requests, colorama
+
+def get_config():
+    with open(os.path.join(variables.CONF_FOLDER,"htb.conf"),"r") as f:
+         return json.loads(f.read())
+
+conf = get_config()
+os.path.append(conf["install"])
+
 from errors import *
 
 init()
@@ -22,10 +30,6 @@ headers = {"User-Agent":"curl/7.65.1"}
 | MisC
 +######
 """
-def get_config():
-    with open(os.path.join(variables.CONF_FOLDER,"htb.conf"),"r") as f:
-         return json.loads(f.read())
-
 def write_config(config):
     with open(os.path.join(variables.CONF_FOLDER,"htb.conf"),"w") as f:
         f.write(json.dumps(config))

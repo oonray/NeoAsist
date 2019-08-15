@@ -48,6 +48,8 @@ all:
 	@echo '{' > $(config_folder)/htb.conf
 	@echo '"key":"$(KEY)",' >> $(config_folder)/htb.conf
 	@echo '"machines":"$(machine_folder)",' >> $(config_folder)/htb.conf
+	@echo '"config":"$(config_folder)",' >> $(config_folder)/htb.conf
+        @echo '"install":"$(PWD)",' >> $(config_folder)/htb.conf
 	@echo '"vpnid":"0",' >> $(config_folder)/htb.conf
 	@echo '"last":""' >> $(config_folder)/htb.conf
 	@echo '}' >> $(config_folder)/htb.conf
