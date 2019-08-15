@@ -86,7 +86,7 @@ def start_vpn():
    os.popen("openvpn {}".format(os.path.join(variables.CONF_FOLDER,"vpn.ovpn"))
            )
 
-   ps = os.popen('ps -aux | grep {} | awk \'\{print $2\}\''.format(path)).read()
+   ps = os.popen('ps -aux | grep {} | awk \'{}print $2{}\''.format(path,"{","}")).read()
    conf["vpnid"] = ps
    write_config(conf)
    return 0
@@ -178,7 +178,7 @@ Stop VPN
 
 def stop_vpn():
     conf = get_config()
-    os.system('for i in $(ps -aux | grep {} | awk \'{print $2}\'); do kill $i;done').format(os.path.join(variables.CONF_FOLDER,"vpn.ovpn"))
+    os.system('for i in $(ps -aux | grep {} | awk \'{}print $2{}\'); do kill $i;done').format(os.path.join(variables.CONF_FOLDER,"vpn.ovpn"),"{","}")
     conf["vpnid"]="0\n"
     write_config(conf)
 
