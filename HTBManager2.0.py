@@ -10,7 +10,7 @@ It is designed to make a structured setup for your machines.
 import variables, argparse, json, sys, os, requests, colorama
 
 def get_config():
-    with open(os.path.join(variables.CONF_FOLDER,"htb.conf"),"r") as f:
+    with open(os.path.join("/etc/HTB/htb.conf","htb.conf"),"r") as f:
          return json.loads(f.read())
 
 conf = get_config()
