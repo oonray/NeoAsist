@@ -178,7 +178,7 @@ Stop VPN
 
 def stop_vpn():
     conf = get_config()
-    os.system('for i in $(ps -aux | grep {} | awk \'{}print $2{}\'); do kill $i;done').format(os.path.join(variables.CONF_FOLDER,"vpn.ovpn"),"{","}")
+    os.system('for i in $(ps -aux | grep {} | awk \'{}print $2{}\'); do kill $i;done'.format(os.path.join(variables.CONF_FOLDER,"vpn.ovpn"),"{","}"))
     conf["vpnid"]="0\n"
     write_config(conf)
 
