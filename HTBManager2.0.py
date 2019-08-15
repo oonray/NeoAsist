@@ -86,7 +86,7 @@ def start_vpn():
    os.popen("openvpn {}".format(os.path.join(variables.CONF_FOLDER,"vpn.ovpn"))
            )
 
-   ps = os.popen('ps -aux | grep {} | awk \'{print $2}\''.format(path)).read()
+   ps = os.popen('ps -aux | grep {} | awk \'\{print $2\}\''.format(path)).read()
    conf["vpnid"] = ps
    write_config(conf)
    return 0
