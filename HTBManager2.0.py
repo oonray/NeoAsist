@@ -27,7 +27,7 @@ def get_config():
          return json.loads(f.read())
 
 def write_config(config):
-    with open(os.path.join(format(variables.CONF_FOLDER,"htb.conf")),"w"):
+    with open(os.path.join(variables.CONF_FOLDER,"htb.conf"),"w"):
         f.write(json.dumps(conf))
 
 def add_token(url,token):
