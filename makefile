@@ -1,4 +1,5 @@
-requirements = $(PWD)/requirements.txt
+current = $(PWD)
+requirements = $(current)/requirements.txt
 config_folder = /etc/HTB
 machine_folder = $(HOME)/HTB
 KEY = <your api key here>
