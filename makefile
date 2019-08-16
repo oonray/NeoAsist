@@ -1,5 +1,4 @@
-current = $(PWD)
-requirements = $(current)/requirements.txt
+requirements = $(PWD)/requirements.txt
 config_folder = /etc/HTB
 machine_folder = $(HOME)/HTB
 KEY = <your api key here>
@@ -43,22 +42,35 @@ all:
 	mkdir -p $(machine_folder)/OSCP/FreeBSD
 	mkdir -p $(machine_folder)/OSCP/Other
 	mkdir -p $(machine_folder)/OSCP/Solaris	
-
+	
 	@echo 	
 	@echo [.] Creating Config File
 	@echo '{' > $(config_folder)/htb.conf
+	
+	@echo [.] Adding the key
 	@echo '"key":"$(KEY)",' >> $(config_folder)/htb.conf
+	
+	@echo [.] Adding machine path
 	@echo '"machines":"$(machine_folder)",' >> $(config_folder)/htb.conf
+	
+	@echo [.] Adding config path
 	@echo '"config":"$(config_folder)",' >> $(config_folder)/htb.conf
-        @echo '"install":"$(PWD)",' >> $(config_folder)/htb.conf
+        
+	@echo [.] Adding install path
+	@echo '"install":"$(PWD)",' >> $(config_folder)/htb.conf
+	
+	@echo [.] Adding vpn config
 	@echo '"vpnid":"0",' >> $(config_folder)/htb.conf
-	@echo '"last":""' >> $(config_folder)/htb.conf
+	
+	@echo [.] Adding the memorization of last session
+	@echo '"last":"",' >> $(config_folder)/htb.conf
+	
+	@echo [.] Adding OSCP Machines
+	@echo '"OSCP":["Lame","Branfuck","Shocker","Bashed","Nibbles","Beep","Cronos","Nineveh","Sencse","Solidstate","Kotark","Node","Valentine","Poison","Sunday","Tartarsause","Legacy","Blue","Devel","Optimum","Bastard","Granny","Arctic","Grandpa","Silo","Bounty","Jerry"]' >> $(config_folder)/htb.conf
+	
+	@echo [+] DONE!
 	@echo '}' >> $(config_folder)/htb.conf
 	
-	@echo [+] Generating python Variables
-	@echo 'CONF_FOLDER="$(config_folder)"' > variables.py
-	@echo 'MACHINE_FOLDER="$(machine_folder)"' >> variables.py
-	@echo 'OSCP = ["Lame","Branfuck","Shocker","Bashed","Nibbles","Beep","Cronos","Nineveh","Sencse","Solidstate","Kotark","Node","Valentine","Poison","Sunday","Tartarsause","Legacy","Blue","Devel","Optimum","Bastard","Granny","Arctic","Grandpa","Silo","Bounty","Jerry"]' >> variables.py
 
 install:
 	@echo [+] Installing manager from $(PWD)
