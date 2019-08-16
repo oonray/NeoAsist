@@ -14,7 +14,7 @@ def get_config():
          return json.loads(f.read())
 
 conf = get_config()
-os.path.append(conf["install"])
+sys.path.append(conf["install"])
 
 from errors import *
 
