@@ -71,8 +71,13 @@ start_group = argparser.add_argument_group("START")
 Start Session
 """
 start_group.add_argument("-s",help="Session, Machine To start session with")
-def start_session():
-    pass
+
+def start_session(machine):
+    conf = get_config()
+    mpath = conf["machines"]
+    path = os.popen("find {} -name {}".format(mpath,machine)).read()
+    print(path)
+
 
 """
 Start VPN
@@ -105,16 +110,6 @@ def start_last():
 """
 Start STD Scans
 """
-"""
-Start Session
-"""
-def start_session(machine):
-    conf = get_config()
-    mpath = conf["machines"]
-    path = os.popen("find {} -name {}".format(mpath,machine))
-    print(path)
-
-
 """
 Start Deamon
 """
