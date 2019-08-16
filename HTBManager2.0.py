@@ -31,7 +31,7 @@ headers = {"User-Agent":"curl/7.65.1"}
 +######
 """
 def write_config(config):
-    with open(os.path.join(variables.CONF_FOLDER,"htb.conf"),"w") as f:
+    with open(os.path.join("/etc/HTB/","htb.conf"),"w") as f:
         f.write(json.dumps(config))
 
 def add_token(url,token):
@@ -39,12 +39,12 @@ def add_token(url,token):
     return ret
 
 def get_api_token():
-    with open(os.path.join(variables.CONF_FOLDER,"htb.conf")) as f:
-        key = json.loads(f.read())["key"]
-        if(key=="<your api key here>"):
-            print("You must add a api key to {}/htb.conf".format(variables.CONF_FOLDER))
-            exit()
-        return key
+    conf = get_config()
+    key = conf["key"]
+    if(key=="<your api key here>"):
+        print("You must add a api key to {}/htb.conf".format("/etc/HTB"))
+        exit()
+    return key
 
 
 def get(url):
@@ -84,10 +84,10 @@ def start_vpn():
    if sum(ids) > 0:
       return 1
 
-   path = os.path.join(variables.CONF_FOLDER,"vpn.ovpn")
+   path = os.path.join("/etc/HTB/","vpn.ovpn")
    if os.path.exists(path) == False:
        file_open_error(path)
-   os.popen("openvpn {}".format(os.path.join(variables.CONF_FOLDER,"vpn.ovpn"))
+   os.popen("openvpn {}".format(os.path.join("/etc/HTB/","vpn.ovpn"))
            )
 
    ps = os.popen('ps -aux | grep {} | awk \'{}print $2{}\''.format(path,"{","}")).read()
@@ -171,11 +171,13 @@ Download ALL
 """
 
 def make_directory(machine):
+    conf = get_config()
+
     location = "Active" if machine["retired_date"] == None else "Retired"
-    if machine["name"] in variables.OSCP:
+    if machine["name"] in conf["OSCP"]:
         location = "OSCP"
 
-    path = os.path.join(variables.MACHINE_FOLDER,
+    path = os.path.join(conf["machines"],
                 os.path.join(location,
                      os.path.join(
                          machine["os"], machine["name"]
@@ -200,7 +202,7 @@ Stop VPN
 
 def stop_vpn():
     conf = get_config()
-    os.system('for i in $(ps -aux | grep {} | awk \'{}print $2{}\'); do kill $i;done'.format(os.path.join(variables.CONF_FOLDER,"vpn.ovpn"),"{","}"))
+    os.system('for i in $(ps -aux | grep {} | awk \'{}print $2{}\'); do kill $i;done'.format(os.path.join("/etc/HTB/","vpn.ovpn"),"{","}"))
     conf["vpnid"]="0\n"
     write_config(conf)
 
