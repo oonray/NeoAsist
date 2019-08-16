@@ -7,10 +7,10 @@
 This progam is made to manage the different aspects of Hack The Box Automatically.
 It is designed to make a structured setup for your machines.
 """
-import variables, argparse, json, sys, os, requests, colorama
+import argparse, json, sys, os, requests, colorama
 
 def get_config():
-    with open(os.path.join("/etc/HTB/htb.conf","htb.conf"),"r") as f:
+    with open(os.path.join("/etc/HTB/","htb.conf"),"r") as f:
          return json.loads(f.read())
 
 conf = get_config()
@@ -104,9 +104,27 @@ def start_last():
 
 """
 Start STD Scans
+"""
+"""
 Start Session
+"""
+def start_session(machine):
+    conf = get_config()
+    mpath = conf["machines"]
+    path = os.popen("find {} -name {}".format(mpath,machine))
+    print(path)
+
+
+"""
 Start Deamon
+"""
+"""
 Start Machine
+"""
+def start_machine():
+    pass
+
+"""
 Start Tmux
 """
 
@@ -230,4 +248,4 @@ if __name__ == "__main__":
      a = parse_all_machines(get_all_machines())
      print(a["Helpline"])
      print(get_config())
-
+     start_session()
