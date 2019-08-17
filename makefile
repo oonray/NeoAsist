@@ -74,7 +74,7 @@ all:
 
 install:
 	@echo [+] Installing manager from $(PWD)
-	'ln -s $(PWD)/HTBManager2.0.py /usr/bin/HTBManager'
+	ln -s $(PWD)/HTBManager2.0.py /usr/bin/HTBManager
 
 clean:
 	rm /usr/bin/HTBmanager
