@@ -127,6 +127,7 @@ Start Machine
 """
 def start_machine(id):
     url = "/vm/vip/assign/{}".format(id)
+    url = "https://hackthebox.eu/api"+url
     requests.post(url,headers=post_headders)
 
 """
