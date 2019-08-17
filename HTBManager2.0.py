@@ -25,6 +25,15 @@ argparser = argparse.ArgumentParser(description="Manages Hack The Box Machines a
 
 base_url = "https://www.hackthebox.eu/api"
 headers = {"User-Agent":"curl/7.65.1"}
+post_headders = {
+"Host":"www.hackthebox.eu",
+"User-Agent":" Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0",
+"X-Requested-With":" XMLHttpRequest",
+"Authorization":" Bearer pVkNxdRdmZYMiPMeCO6KqPvJvRtAanGRn6eieRD8YxPwo6T7AfbPFpmWyczm",
+"Connection":" close",
+"Referer":" https://www.hackthebox.eu/home/machines",
+}
+
 """
 +######
 | MisC
@@ -116,8 +125,9 @@ Start Deamon
 """
 Start Machine
 """
-def start_machine():
-    pass
+def start_machine(id):
+    url = "/vm/vip/assign/{}".format(id)
+    requests.post(url,headders=post_headders)
 
 """
 Start Tmux
@@ -205,8 +215,13 @@ def stop_vpn():
 """
 Stop Session
 Stop Deamon
+"""
+
+"""
 Stop Machine
 """
+def stop_machine(id):
+    url = "/api/vm/vip/remove/{}".format(id)
 
 """
 Add Host to /etc/hosts
@@ -246,3 +261,4 @@ if __name__ == "__main__":
      print(a["Helpline"])
      print(get_config())
      start_session("Bastard")
+     start_machine(7)
