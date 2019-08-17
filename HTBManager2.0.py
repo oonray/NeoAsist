@@ -245,11 +245,7 @@ def stop_session(machine):
     mpath = conf["machines"]
     path = os.popen("find {} -name {}".format(mpath,machine)).read().rstrip()
     stop_vpn()
-
-    with open(os.path.join(path,"id"),"r") as f:
-        ids = int(f.read())
-
-    stop_machine(ids)
+    stop_machine(get_id(machine))
 
 
 """
@@ -260,9 +256,10 @@ Stop Deamon
 Stop Machine
 """
 def stop_machine(id):
-    url = "/api/vm/vip/remove/{}".format(id)
-    return requests.post(make_url(url),headers=post_headders)
-
+    url = "/vm/vip/remove/{}".format(id)
+    request =requests.post(make_url(url),headers=post_headders)
+    print(id,request.text)
+    return request
 """
 Stop Last
 """
