@@ -35,4 +35,8 @@ make KEY=<your api key> machine_folder=<the path where you want the
 machines to be stored>
 
 ```
-usage: HTBmanager [-h] [--online] [--local] [--install]
+
+USAGE:
+------
+
+usage: HTBmanager [start, stop, download, list, add, remove] <target>

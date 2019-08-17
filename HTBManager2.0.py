@@ -21,6 +21,7 @@ from errors import *
 init()
 
 argparser = argparse.ArgumentParser(description="Manages Hack The Box Machines and Hacking Session")
+argparser.add_argument("action",help="The action you want to take eg. START, STOP, LIST, DOWNLOAD")
 
 
 base_url = "https://www.hackthebox.eu/api"
@@ -75,27 +76,21 @@ def check_response(response):
     if response.status_code != 200:
         fetch_error()
 
-argparser.add_argument("action",help="The action you want to take eg. START, STOP, LIST, DOWNLOAD")
-argparser.add_argument("-a",help="Target All",action="store_true")
-argparser.add_argument("-v",help="Target VPN",action="store_true")
-argparser.add_argument("-s",help="Start Session, use with the machine option",action="store_true")
-argparser.add_argument("-l",help="Target last machine",action="store_true")
-argparser.add_argument("-m",help="Target Machine")
-
 """
 +#######
 | Start
 +#######
 """
 start_group = argparser.add_argument_group("START")
+t_vpn = start_group.add_argument("-v",help="Target VPN",action="store_true")
+t_session = start_group.add_argument("-s",help="Start Session, use with the machine option",action="store_true")
+t_last = start_group.add_argument("-l",help="Target last machine",action="store_true")
+t_machine = start_group.add_argument("-m",help="Target Machine")
+
 
 """
 Start Session
 """
-
-def start_tmux(path):
-    os.chdir(path)
-    os.system("tmux")
 
 def start_session(machine):
     conf = get_config()
@@ -136,9 +131,7 @@ def start_last():
     conf = get_config()
     start_session(conf["last"])
 
-"""
-Start STD Scans
-"""
+
 """
 Start Deamon
 """
@@ -154,6 +147,9 @@ def start_machine(id):
 """
 Start Tmux
 """
+def start_tmux(path):
+    os.chdir(path)
+    os.system("tmux")
 
 """
 +######
@@ -161,7 +157,7 @@ Start Tmux
 +######
 """
 list_group = argparser.add_argument_group("LIST")
-
+t_all = list_group.add_argument("-a",help="Target All",action="store_true")
 """
 List Machines
 """
@@ -192,7 +188,7 @@ List OSCP
 +##########+
 """
 download_group = argparser.add_argument_group("DOWNLOAD")
-
+download_group._group_actions.append(t_all)
 """
 Download ALL
 """
@@ -224,6 +220,11 @@ def make_directory(machine):
 +###########
 """
 stop_grop = argparser.add_argument_group("STOP")
+stop_grop._group_actions.append(t_vpn)
+stop_grop._group_actions.append(t_session)
+stop_grop._group_actions.append(t_last)
+stop_grop._group_actions.append(t_machine)
+
 
 """
 Stop VPN
