@@ -258,7 +258,7 @@ Stop Machine
 def stop_machine(id):
     url = "/api/vm/vip/remove/{}".format(id)
     request =requests.post(make_url(url),headers=post_headders)
-    print(request.text)
+    print(id,request.text)
     return request
 """
 Stop Last
