@@ -95,7 +95,7 @@ def start_session(machine):
     start_vpn()
     conf["last"] = path
 
-    with open(os.path,join(path,"id"),"r") as f:
+    with open(os.path.join(path,"id"),"r") as f:
         ids = int(f.read())
 
     start_machine(ids)
