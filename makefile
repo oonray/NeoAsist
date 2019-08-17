@@ -74,10 +74,9 @@ all:
 
 install:
 	@echo [+] Installing manager from $(PWD)
-	'ln -s $(PWD)/HTBmanager.py /usr/bin/HTBmanager'
+	'ln -s $(PWD)/HTBManager2.0.py /usr/bin/HTBManager'
 
 clean:
 	rm /usr/bin/HTBmanager
 	cd ~
-	rm -rf /etc/htb
-	rm -rf /opt/HTBmanager
+	rm -rf /etc/HTB
