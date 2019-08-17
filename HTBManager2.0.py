@@ -128,7 +128,6 @@ def start_vpn():
 """
 Start Last session
 """
-start_group.add_argument("-l",help="Continue the last session", action="store_true")
 def start_last():
     conf = get_config()
     start_session(conf["last"])
