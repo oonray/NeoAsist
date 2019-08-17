@@ -58,6 +58,13 @@ def get_api_token():
         exit()
     return key
 
+def get_id(machine):
+    conf = get_config()
+    mpath = conf["machines"]
+    path = os.popen("find {} -name {}".format(mpath,machine)).read().rstrip()
+
+    with open(os.path.join(path,"id"),"r") as f:
+         return int(f.read())
 
 def get(url):
     request = requests.get(url,headers=headers)
@@ -98,10 +105,7 @@ def start_session(machine):
     conf["last"] = machine
     write_config(conf)
 
-    with open(os.path.join(path,"id"),"r") as f:
-        ids = int(f.read())
-
-    start_machine(ids)
+    start_machine(get_id(machine))
     start_tmux(path)
 
 """
@@ -282,7 +286,7 @@ if __name__ == "__main__":
          if args.s and args.m:
              start_session(args.m)
          if args.m and not args.s:
-             start_machine(args.m)
+             start_machine(get_id(args.m))
          if args.l:
              start_last()
 
@@ -302,7 +306,7 @@ if __name__ == "__main__":
          if args.s and args.m:
               stop_session(args.m)
          if args.m and not args.s:
-              stop_machine(args.m)
+              stop_machine(get_id(args.m))
          if args.l:
              stop_last()
 
