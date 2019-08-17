@@ -47,7 +47,7 @@ def make_url(path):
     return base_url+path
 
 def add_token(url,token):
-    ret =  "{}{}?api_token={}".format(make_url(url),token)
+    ret =  "{}?api_token={}".format(make_url(url),token)
     return ret
 
 def get_api_token():
@@ -84,12 +84,22 @@ Start Session
 """
 start_group.add_argument("-s",help="Session, Machine To start session with")
 
+def start_tmux(path):
+    os.chdir(path)
+    os.system("tmux")
+
 def start_session(machine):
     conf = get_config()
     mpath = conf["machines"]
     path = os.popen("find {} -name {}".format(mpath,machine)).read()
-    print(path)
+    start_vpn()
+    conf["last"] = path
 
+    with open(os.path,joine(path,"id"),"r") as f:
+        ids = int(f.read())
+
+    start_machine(ids)
+    start_tmux(path)
 
 """
 Start VPN
@@ -117,7 +127,7 @@ Start Last session
 """
 start_group.add_argument("-l",help="Continue the last session", action="store_true")
 def start_last():
-    pass
+    conf = get_config()
 
 """
 Start STD Scans
@@ -194,6 +204,7 @@ def make_directory(machine):
           )
     cmd = "mkdir {}".format(path)
     cmd2 = "echo '{}' > {}".format(machine["ip"],os.path.join(path,"ip"))
+    cmd3 = "echo {} > {}".format(machine["id"],os.path.join(path,"id"))
     os.system(cmd)
     os.system(cmd2)
     return True
