@@ -69,8 +69,11 @@ def check_response(response):
         fetch_error()
 
 argparser.add_argument("action",help="The action you want to take eg. START, STOP, LIST, DOWNLOAD")
-argparser.add_argument("-a",help="target all All",action="store_true")
-argparser.add_argument("-v",help="target VPN",action="store_true")
+argparser.add_argument("-a",help="Target All",action="store_true")
+argparser.add_argument("-v",help="Target VPN",action="store_true")
+argparser.add_argument("-s",help="Start Session, use with the machine option",action="store_true")
+argparser.add_argument("-l",help="Target last machine",action="store_true")
+argparser.add_argument("-m",help="Target Machine")
 
 """
 +#######
@@ -82,7 +85,6 @@ start_group = argparser.add_argument_group("START")
 """
 Start Session
 """
-start_group.add_argument("-s",help="Session, Machine To start session with")
 
 def start_tmux(path):
     os.chdir(path)
@@ -276,8 +278,12 @@ if __name__ == "__main__":
      if args.action.lower() == "start":
          if args.v:
              start_vpn()
-         if args.s:
-             start_session(args.s)
+         if args.s and args.m:
+             start_session(args.m)
+         if args.m and not args.s:
+             start_machine(args.m)
+         if args.l:
+             start_last()
 
      if args.action.lower() == "list":
          if args.a:
@@ -292,8 +298,10 @@ if __name__ == "__main__":
      if args.action.lower() == "stop":
          if args.v:
              stop_vpn()
-         if args.s:
-              stop_session(args.s)
+         if args.s and args.m:
+              stop_session(args.m)
+         if args.m and not args.s:
+              stop_machine(args.m)
          if args.l:
              stop_last()
 
