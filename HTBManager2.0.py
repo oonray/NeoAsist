@@ -43,8 +43,11 @@ def write_config(config):
     with open(os.path.join("/etc/HTB/","htb.conf"),"w") as f:
         f.write(json.dumps(config))
 
+def make_url(path):
+    return base_url+path
+
 def add_token(url,token):
-    ret =  "{}{}?api_token={}".format(base_url,url,token)
+    ret =  "{}{}?api_token={}".format(make_url(url),token)
     return ret
 
 def get_api_token():
@@ -127,8 +130,7 @@ Start Machine
 """
 def start_machine(id):
     url = "/vm/vip/assign/{}".format(id)
-    url = "https://hackthebox.eu/api"+url
-    requests.post(url,headers=post_headders)
+    return requests.post(make_url(url),headers=post_headders)
 
 """
 Start Tmux
@@ -223,6 +225,7 @@ Stop Machine
 """
 def stop_machine(id):
     url = "/api/vm/vip/remove/{}".format(id)
+    return requests.post(make_url(url),headers=post_headders)
 
 """
 Add Host to /etc/hosts
@@ -262,4 +265,4 @@ if __name__ == "__main__":
      print(a["Helpline"])
      print(get_config())
      start_session("Bastard")
-     start_machine(7)
+     print(start_machine(7).text)
