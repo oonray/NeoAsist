@@ -144,7 +144,7 @@ Start Machine
 def start_machine(id):
     url = "/vm/vip/assign/{}".format(id)
     request =requests.post(make_url(url),headers=post_headders)
-    print(request)
+    print(request.text)
     return request
 
 """
