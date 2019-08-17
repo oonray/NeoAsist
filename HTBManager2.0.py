@@ -93,7 +93,8 @@ def start_session(machine):
     mpath = conf["machines"]
     path = os.popen("find {} -name {}".format(mpath,machine)).read().rstrip()
     start_vpn()
-    conf["last"] = path
+    conf["last"] = machine
+    write_config(conf)
 
     with open(os.path.join(path,"id"),"r") as f:
         ids = int(f.read())
@@ -128,6 +129,7 @@ Start Last session
 start_group.add_argument("-l",help="Continue the last session", action="store_true")
 def start_last():
     conf = get_config()
+    start_session(conf["last"])
 
 """
 Start STD Scans
@@ -229,6 +231,20 @@ def stop_vpn():
 
 """
 Stop Session
+"""
+def stop_session(machine):
+    conf = get_config()
+    mpath = conf["machines"]
+    path = os.popen("find {} -name {}".format(mpath,machine)).read().rstrip()
+    stop_vpn()
+
+    with open(os.path.join(path,"id"),"r") as f:
+        ids = int(f.read())
+
+    stop_machine(ids)
+
+
+"""
 Stop Deamon
 """
 
@@ -238,6 +254,13 @@ Stop Machine
 def stop_machine(id):
     url = "/api/vm/vip/remove/{}".format(id)
     return requests.post(make_url(url),headers=post_headders)
+
+"""
+Stop Last
+"""
+def stop_last():
+    conf = get_config()
+    stop_session(conf["last"])
 
 """
 Add Host to /etc/hosts
@@ -253,9 +276,13 @@ if __name__ == "__main__":
      if args.action.lower() == "start":
          if args.v:
              start_vpn()
+         if args.s:
+             start_session(args.s)
+
      if args.action.lower() == "list":
          if args.a:
              print_all_machines(parse_all_machines(get_all_machines()))
+
      if args.action.lower() == "download":
          if args.a:
              m = parse_all_machines(get_all_machines())
@@ -265,6 +292,10 @@ if __name__ == "__main__":
      if args.action.lower() == "stop":
          if args.v:
              stop_vpn()
+         if args.s:
+              stop_session(args.s)
+         if args.l:
+             stop_last()
 
      if args.action.lower() == "add":
          pass
@@ -273,8 +304,3 @@ if __name__ == "__main__":
      if args.action.lower() == "update":
          pass
 
-     a = parse_all_machines(get_all_machines())
-     print(a["Helpline"])
-     print(get_config())
-     print(start_machine(7).text)
-     start_session("Bastard")
