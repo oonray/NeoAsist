@@ -91,7 +91,7 @@ def start_tmux(path):
 def start_session(machine):
     conf = get_config()
     mpath = conf["machines"]
-    path = os.popen("find {} -name {}".format(mpath,machine)).read()
+    path = os.popen("find {} -name {}".format(mpath,machine)).read().rstrip()
     start_vpn()
     conf["last"] = path
 
