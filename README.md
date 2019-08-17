@@ -39,4 +39,33 @@ machines to be stored>
 USAGE:
 ------
 
-usage: HTBmanager [start, stop, download, list, add, remove] <target>
+```
+usage: HTBManager2.0.py [-h] [-v] [-s] [-l] [-m M] [-a] action
+
+Manages Hack The Box Machines and Hacking Session
+
+positional arguments:
+  action      The action you want to take eg. START, STOP, LIST, DOWNLOAD
+
+optional arguments:
+  -h, --help  show this help message and exit
+
+START:
+  -v          Target VPN
+  -s          Start Session, use with the machine option
+  -l          Target last machine
+  -m M        Target Machine
+
+LIST:
+  -a          Target All
+
+DOWNLOAD:
+  -a          Target All
+
+STOP:
+  -v          Target VPN
+  -s          Start Session, use with the machine option
+  -l          Target last machine
+  -m M        Target Machine
+
+```
