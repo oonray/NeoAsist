@@ -29,7 +29,7 @@ post_headders = {
 "Host":"www.hackthebox.eu",
 "User-Agent":" Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0",
 "X-Requested-With":" XMLHttpRequest",
-"Authorization":" Bearer pVkNxdRdmZYMiPMeCO6KqPvJvRtAanGRn6eieRD8YxPwo6T7AfbPFpmWyczm",
+"Authorization":" Bearer {}".format(get_config()["key"]),
 "Connection":" close",
 "Referer":" https://www.hackthebox.eu/home/machines",
 }
