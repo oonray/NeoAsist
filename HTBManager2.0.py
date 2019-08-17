@@ -202,11 +202,12 @@ def make_directory(machine):
                     )
                 )
           )
-    cmd = "mkdir {}".format(path)
+    cmd = "mkdir -P {}".format(path)
     cmd2 = "echo '{}' > {}".format(machine["ip"],os.path.join(path,"ip"))
     cmd3 = "echo {} > {}".format(machine["id"],os.path.join(path,"id"))
-    os.system(cmd)
-    os.system(cmd2)
+    os.popen(cmd)
+    os.popen(cmd2)
+    os.popen(cmd3)
     return True
 """
 +###########
