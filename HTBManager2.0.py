@@ -127,7 +127,7 @@ Start Machine
 """
 def start_machine(id):
     url = "/vm/vip/assign/{}".format(id)
-    requests.post(url,headders=post_headders)
+    requests.post(url,headers=post_headders)
 
 """
 Start Tmux
