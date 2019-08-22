@@ -7,7 +7,7 @@
 This progam is made to manage the different aspects of Hack The Box Automatically.
 It is designed to make a structured setup for your machines.
 """
-import argparse, json, sys, os, requests, colorama
+import argparse, json, sys, os, requests, colorama, subprocess
 
 def get_config():
     with open(os.path.join("/etc/HTB/","htb.conf"),"r") as f:
@@ -210,9 +210,16 @@ def make_directory(machine):
     cmd = "mkdir -p {}".format(path)
     cmd2 = "echo '{}' > {}".format(machine["ip"],os.path.join(path,"ip"))
     cmd3 = "echo {} > {}".format(machine["id"],os.path.join(path,"id"))
-    os.popen(cmd)
-    os.popen(cmd2)
-    os.popen(cmd3)
+
+    try:
+        subprocess.check_output(cmd.split())
+        os.popen(cmd2)
+        os.popen(cmd3)
+    except:
+        subprocess.check_output(cmd.split())
+        os.popen(cmd2)
+        os.popen(cmd3)
+
     return True
 """
 +###########
