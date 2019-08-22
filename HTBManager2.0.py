@@ -158,24 +158,49 @@ def start_tmux(path):
 """
 list_group = argparser.add_argument_group("LIST")
 t_all = list_group.add_argument("-a",help="Target All",action="store_true")
+t_run = list_group.add_argument("-r",help="List only running machines",action="store_true")
 """
 List Machines
 """
 def get_all_machines():
    url = "/machines/get/all"
    return get(add_token(url,get_api_token()))
+   
+def get_all_machines_status():
+   url = "/machines/assigned"
+   return get(add_token(url,get_api_token()))
+   
 
 def parse_all_machines(request):
     ret = {}
     parsed_data = json.loads(request.text)
     for i in parsed_data:
-         ret[i["name"]] = i
+         ret[i["name"],str(i["id"]),str(i["ip"])] = i
     return ret
+    
+def parse_all_machines_status(request):
+    ret = {}
+    parsed_data = json.loads(request.text)
+    for i in parsed_data:
+         ret[str(i["id"])] = i
+    return ret
+    
 
-def print_all_machines(machines_parsed):
-    for i in machines_parsed:
-        print(i)
-
+def print_all_machines(machines_parsed) :
+	for i in machines_parsed:
+			print(i)
+			
+			
+def print_all_machines_filter(filterTag = "" ) :
+	if(filterTag == 'R'):
+		status_parsed = parse_all_machines_status(get_all_machines_status())
+		machines_parsed = parse_all_machines(get_all_machines())
+		for i in machines_parsed:
+			if(i[1] in status_parsed):
+				 print(i[0] + " is assigned you and running on IP " + i[2])
+	else:
+		for i in machines_parsed:
+			print(i)
 """
 List Active
 List Retired
@@ -289,7 +314,9 @@ if __name__ == "__main__":
              start_last()
 
      if args.action.lower() == "list":
-         if args.a:
+         if args.a and args.r:
+             print_all_machines_filter("R")
+         if args.a and not args.r:
              print_all_machines(parse_all_machines(get_all_machines()))
 
      if args.action.lower() == "download":
