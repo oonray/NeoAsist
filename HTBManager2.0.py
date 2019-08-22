@@ -188,9 +188,8 @@ def parse_all_machines_status(request):
 
 def print_all_machines(machines_parsed) :
 	for i in machines_parsed:
-			print(i)
-			
-			
+			print(i[0])
+				
 def print_all_machines_filter(filterTag = "" ) :
 	if(filterTag == 'R'):
 		status_parsed = parse_all_machines_status(get_all_machines_status())
