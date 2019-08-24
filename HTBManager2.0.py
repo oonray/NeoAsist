@@ -317,6 +317,7 @@ def update_owns(owns):
 
     for i in modify:
         path = os.popen(cmd.format(conf["machines"],i)).read().strip()
+        """
         if not "DONE" in path and " " not in path and path != None:
             print(path)
             status, m_os, name = path.split("/")[-3:]
@@ -335,7 +336,7 @@ def update_owns(owns):
                subprocess.check_call(cmd2.split())
             except:
                subprocess.check_call(cmd2.split())
-
+       """
 
 if __name__ == "__main__":
      args = argparser.parse_args()
