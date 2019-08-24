@@ -173,6 +173,13 @@ def parse_all_machines(request):
          ret[i["name"]] = i
     return ret
 
+def id_all_machines(request):
+    ret = {}
+    parsed_data = json.loads(request.text)
+    for i in parsed_data:
+        ret[i["id"]] = i
+    return ret
+
 def print_all_machines(machines_parsed):
     for i in machines_parsed:
         print(i)
@@ -296,7 +303,21 @@ def get_owns():
     return request
 
 def update_owns(owns):
-    pass
+    conf = get_config()
+    cmd = "find {} -maxdepth 4 -type d"
+
+    owns = json.loads(get_owns())
+    machines = id_all_machines(get_all_machines())
+    modify = []
+
+    for i in owns:
+        id,owned_user,owned_root = i
+        if owned_root:
+            modify.append(machines[i]["name"])
+
+   for i in modify:
+        path = os.popen(cmd.format(i)).read()
+        print(path)
 
 
 if __name__ == "__main__":
