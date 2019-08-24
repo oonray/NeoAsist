@@ -291,10 +291,10 @@ update_group = argparser.add_argument_group("UPDATE")
 
 def get_owns():
     url = "/home/machine/owned"
-    request = requests.get(make_url(url),headers=headers)
+    request = get(make_url(url))
     return request
 
-def update_owns():
+def update_owns(owns):
     pass
 
 
