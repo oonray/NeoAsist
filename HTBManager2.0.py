@@ -320,10 +320,11 @@ def update_owns(owns):
     for i in modify:
         path = os.popen(cmd.format(conf["machines"],i)).read().strip()
         print(path)
-        if "DONE" not in path:
+        if "DONE" not in path if path not "":
             try:
                status, m_os, name = path.split("/")[-3:]
             except:
+                print("PATH:"+path)
                 print(path.split("/"))
                 status, m_os, name = path.split("/")[-3:]
 
