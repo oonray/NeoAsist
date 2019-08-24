@@ -318,8 +318,8 @@ def update_owns(owns):
     for i in modify:
         path = os.popen(cmd.format(conf["machines"],i)).read()
         print(path)
-        os, name = path.split()[-2:]
-        print(os,name)
+        m_os, name = path.split()[-2:]
+        print(m_os,name)
 
 if __name__ == "__main__":
      args = argparser.parse_args()
