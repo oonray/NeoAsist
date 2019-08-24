@@ -42,7 +42,9 @@ all:
 	mkdir -p $(machine_folder)/OSCP/FreeBSD
 	mkdir -p $(machine_folder)/OSCP/Other
 	mkdir -p $(machine_folder)/OSCP/Solaris	
-	
+    
+	mkdir -p $(machine_folder)/DONE
+
 	@echo 	
 	@echo [.] Creating Config File
 	@echo '{' > $(config_folder)/htb.conf

@@ -282,6 +282,22 @@ Add Host to /etc/hosts
 Remove Host form /etc/hosts
 """
 
+"""
++####
+|UPDATE
++#####
+"""
+update_group = argparser.add_argument_group("UPDATE")
+
+def get_owns():
+    url = "/home/machine/owned"
+    reqest = request.get(make_url(url),headers=headers)
+    return requests
+
+def update_owns():
+    pass
+
+
 if __name__ == "__main__":
      args = argparser.parse_args()
      #start list downlad stop add remove update
@@ -321,4 +337,6 @@ if __name__ == "__main__":
          pass
      if args.action.lower() == "update":
          pass
+
+     print(get_owns().text)
 
