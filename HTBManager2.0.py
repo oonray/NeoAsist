@@ -316,7 +316,7 @@ def update_owns(owns):
             modify.append(machines[ids]["name"])
 
     for i in modify:
-        path = os.popen(cmd.format(conf["machines"],i)).read()
+        path = os.popen(cmd.format(conf["machines"],i)).read().strip()
         if not "DONE" in path and " " not in path and path not None:
             print(path)
             status, m_os, name = path.split("/")[-3:]
