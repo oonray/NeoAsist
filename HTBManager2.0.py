@@ -74,6 +74,7 @@ def get(url):
 
 def check_response(response):
     if response.status_code != 200:
+        print(response.url)
         fetch_error()
 
 """
