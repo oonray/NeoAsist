@@ -291,7 +291,7 @@ Remove Host form /etc/hosts
 update_group = argparser.add_argument_group("UPDATE")
 
 def get_owns():
-    url = "/home/machine/owned"
+    url = "/machine/owned"
     request = get(add_token(url,get_api_token()))
     return request
 
