@@ -317,23 +317,24 @@ def update_owns(owns):
 
     for i in modify:
         path = os.popen(cmd.format(conf["machines"],i)).read()
-        print(path)
-        status, m_os, name = path.split("/")[-3:]
-        new_path = os.path.join(
+        if not "DONE" in path and path != "":
+            print(path)
+            status, m_os, name = path.split("/")[-3:]
+            new_path = os.path.join(
                        os.path.join(
                          os.path.join(conf["machines"],"DONE"),
                            status),
                          m_os)
-        cmd = "mkdir -p {}".format(new_path)
-        try:
-            subprocess.check_call(cmd.split())
-        except:
-            subprocess.check_call(cmd.split())
-        cmd2 = "mv {} {}".format(path,new_path)
-        try:
-            subprocess.check_call(cmd2.split())
-        except:
-            subprocess.check_call(cmd2.split())
+            cmd = "mkdir -p {}".format(new_path)
+            try:
+                subprocess.check_call(cmd.split())
+            except:
+                subprocess.check_call(cmd.split())
+            cmd2 = "mv {} {}".format(path,new_path)
+            try:
+               subprocess.check_call(cmd2.split())
+            except:
+               subprocess.check_call(cmd2.split())
 
 
 if __name__ == "__main__":
