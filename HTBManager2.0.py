@@ -304,7 +304,7 @@ def get_owns():
 
 def update_owns(owns):
     conf = get_config()
-    cmd = "find {} -maxdepth 4 -name {} -type d"
+    cmd = "find {} -name {} -type d"
 
     owns = json.loads(get_owns().text)
     machines = id_all_machines(get_all_machines())
@@ -318,8 +318,8 @@ def update_owns(owns):
     for i in modify:
         path = os.popen(cmd.format(conf["machines"],i)).read()
         print(path)
-        m_os, name = path.split("/")[-2:]
-        print(m_os,name)
+        status, m_os, name = path.split("/")[-3:]
+
 
 if __name__ == "__main__":
      args = argparser.parse_args()
