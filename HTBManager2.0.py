@@ -306,7 +306,7 @@ def update_owns(owns):
     conf = get_config()
     cmd = "find {} -maxdepth 4 -type d"
 
-    owns = json.loads(get_owns())
+    owns = json.loads(get_owns().text)
     machines = id_all_machines(get_all_machines())
     modify = []
 
