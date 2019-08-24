@@ -311,9 +311,10 @@ def update_owns(owns):
     modify = []
 
     for i in owns:
-        id,owned_user,owned_root = i
+        ids,owned_user,owned_root = i
+        print(i)
         if owned_root:
-            modify.append(machines[id]["name"])
+            modify.append(machines[ids]["name"])
 
     for i in modify:
         path = os.popen(cmd.format(i)).read()
