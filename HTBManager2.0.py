@@ -311,8 +311,7 @@ def update_owns(owns):
     modify = []
 
     for i in owns:
-        ids,owned_user,owned_root = i
-        print(i)
+        ids,owned_user,owned_root = i.values()
         if owned_root:
             modify.append(machines[ids]["name"])
 
