@@ -315,7 +315,7 @@ def update_owns(owns):
         if owned_root:
             modify.append(machines[i]["name"])
 
-   for i in modify:
+    for i in modify:
         path = os.popen(cmd.format(i)).read()
         print(path)
 
@@ -360,5 +360,5 @@ if __name__ == "__main__":
      if args.action.lower() == "update":
          pass
 
-     print(get_owns().text)
+     print(update_owns(get_owns()))
 
