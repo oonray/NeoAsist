@@ -340,7 +340,7 @@ def update_owns(owns):
                 subprocess.check_call(cmd.split())
             except:
                 subprocess.check_call(cmd.split())
-            cmd2 = "mv {} {}".format(path,new_path)
+            cmd2 = "mv -f {} {}".format(path,new_path)
             try:
                subprocess.check_call(cmd2.split())
             except:
