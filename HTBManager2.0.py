@@ -159,6 +159,7 @@ def start_tmux(path):
 """
 list_group = argparser.add_argument_group("LIST")
 t_all = list_group.add_argument("-a",help="Target All",action="store_true")
+t_owns = list_group.add_argument("-o",help="Target Owns",action="store_true")
 """
 List Machines
 """
@@ -360,6 +361,8 @@ if __name__ == "__main__":
      if args.action.lower() == "list":
          if args.a:
              print_all_machines(parse_all_machines(get_all_machines()))
+         if args.o:
+             print_all_machines(parse_all_machines(get_owns()))
 
      if args.action.lower() == "download":
          if args.a:
