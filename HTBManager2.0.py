@@ -297,6 +297,7 @@ Remove Host form /etc/hosts
 +#####
 """
 update_group = argparser.add_argument_group("UPDATE")
+update_group._group_actions.append(t_all)
 
 def get_owns():
     url = "/machines/owns"
@@ -385,7 +386,8 @@ if __name__ == "__main__":
      if args.action.lower() == "remove":
          pass
      if args.action.lower() == "update":
-         update_owns(get_owns())
+         if args.a:
+            update_owns(get_owns())
 
      update_owns(get_owns())
 
