@@ -382,7 +382,7 @@ if __name__ == "__main__":
      if args.action.lower() == "remove":
          pass
      if args.action.lower() == "update":
-         pass
+         update_owns(get_owns())
 
      update_owns(get_owns())
 
