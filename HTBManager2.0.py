@@ -319,6 +319,7 @@ def get_owns():
     return get(add_token(url,get_api_token()))
 
 def update_retired(parsed_machines):
+    conf = get_config()
     for machine in parsed_machines.values():
         if machine["retired_date"] != None:
             active = os.path.join(conf["machines"],
@@ -331,7 +332,7 @@ def update_retired(parsed_machines):
             retired = os.path.join(conf["machines"],
                                 os.path.join("Retired",
                                              os.path.join(
-                                                 machine["os"], machine["name"]
+                                                 machine["os"]
                                              )
                                 )
             )
