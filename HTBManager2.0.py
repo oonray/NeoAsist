@@ -337,7 +337,9 @@ def update_retired(parsed_machines):
                                 )
             )
             if os.path.isdir(active):
-                subprocess.check_call("rm -rf {}".format(os.path.join(retired,machine["name"])))
+                try:
+                    subprocess.check_call("rm -rf {}".format(os.path.join(retired,machine["name"])))
+                except:pass
                 cmd2 = "mv -f {} {}".format(active, retired)
                 try:
                     subprocess.check_call(cmd2.split())
