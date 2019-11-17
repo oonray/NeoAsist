@@ -1,6 +1,8 @@
 requirements = $(PWD)/requirements.txt
 config_folder = /etc/HTB
 machine_folder = $(HOME)/HTB
+challenge_folder = $(machine_folder)/Challenges
+fortress_folder = $(machine_folder)/Fortress
 KEY = <your api key here>
 active =$(machine_folder)/Active
 
@@ -44,6 +46,9 @@ all:
 	mkdir -p $(machine_folder)/OSCP/Solaris	
     
 	mkdir -p $(machine_folder)/DONE
+
+	mkdir -p $(challenge_folder)
+	mkdir -p $(fortress_folder)
 
 	@echo 	
 	@echo [.] Creating Config File

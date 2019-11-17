@@ -291,6 +291,21 @@ Add Host to /etc/hosts
 Remove Host form /etc/hosts
 """
 
+
+
+"""
++###########
+| FORTRESS
++###########
+"""
+stop_grop = argparser.add_argument_group("FORTRESS")
+stop_grop._group_actions.append(t_vpn)
+stop_grop._group_actions.append(t_session)
+
+def start_fortress():
+    pass
+
+
 """
 +####
 |UPDATE
@@ -301,8 +316,37 @@ update_group._group_actions.append(t_all)
 
 def get_owns():
     url = "/machines/owns"
-    request = get(add_token(url,get_api_token()))
-    return request
+    return get(add_token(url,get_api_token()))
+
+def update_retired(parsed_machines):
+    for machine in parsed_machines.values():
+        if machine["retired_date"] != None:
+            active = os.path.join(conf["machines"],
+                                os.path.join("Active",
+                                             os.path.join(
+                                                 machine["os"], machine["name"]
+                                             )
+                                )
+            )
+            retired = os.path.join(conf["machines"],
+                                os.path.join("Retired",
+                                             os.path.join(
+                                                 machine["os"], machine["name"]
+                                             )
+                                             )
+                                )
+            if os.path.isdir(active):
+                cmd = "mkdir -p {}".format(retired)
+                try:
+                    subprocess.check_call(cmd.split())
+                except:
+                    subprocess.check_call(cmd.split())
+                cmd2 = "mv -f {} {}".format(active, retired)
+                try:
+                    subprocess.check_call(cmd2.split())
+                except:
+                    subprocess.check_call(cmd2.split())
+
 
 def update_owns(owns):
     conf = get_config()
@@ -317,11 +361,8 @@ def update_owns(owns):
         if owned_root:
             modify.append(machines[ids]["name"])
 
-    print(modify)
-
     for i in modify:
         path = os.popen(cmd.format(conf["machines"],i)).read().strip()
-        print(path)
         if "DONE" not in path and " " not in path and path != "":
             try:
                status, m_os, name = path.split("/")[-3:]
@@ -363,7 +404,7 @@ if __name__ == "__main__":
          if args.a:
              print_all_machines(parse_all_machines(get_all_machines()))
          if args.o:
-             print_all_machines(parse_all_machines(get_owns()))
+             print("[!] ERROR not yet implemented ")
 
      if args.action.lower() == "download":
          if args.a:
@@ -388,6 +429,6 @@ if __name__ == "__main__":
      if args.action.lower() == "update":
          if args.a:
             update_owns(get_owns())
+            update_retired(parse_all_machines(get_all_machines()))
 
-     update_owns(get_owns())
 
