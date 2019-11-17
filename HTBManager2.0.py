@@ -333,9 +333,11 @@ def update_retired(parsed_machines):
                                              os.path.join(
                                                  machine["os"], machine["name"]
                                              )
-                                             )
                                 )
+            )
             if os.path.isdir(active):
+                print(active)
+                print(retired)
                 cmd = "mkdir -p {}".format(retired)
                 try:
                     subprocess.check_call(cmd.split())
