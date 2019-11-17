@@ -340,7 +340,7 @@ def update_retired(parsed_machines):
                 try:
                     cmd = "rm -rf {}".format(os.path.join(retired,machine["name"]))
                     print(cmd)
-                    subprocess.check_call(cmd)
+                    subprocess.check_call(cmd.split())
                 except:pass
                 cmd2 = "mv -f {} {}".format(active, retired)
                 try:
