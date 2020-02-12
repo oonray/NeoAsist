@@ -9,6 +9,11 @@ The config can be overrrided using a $(HOME)/.htbrc file
 
 package main
 
-func main() {
+const (
+    logpath = "/var/log/htb/"    
+    debug = false
+)
 
+
+func main() {
 }

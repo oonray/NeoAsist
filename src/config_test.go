@@ -7,8 +7,10 @@ import (
 	"github.com/fatih/color"
 	"io/ioutil"
 	"os"
+    "log"
 	"reflect"
 	"testing"
+    "strings"
 )
 
 var conf Config
@@ -23,6 +25,10 @@ func Test_create_config(t *testing.T) {
 
 	if _, err := os.Stat(path); os.IsNotExist(err) {
 		t.Errorf("%s Path %s not created by config", color.RedString("[!]"), err)
+	}
+	
+    if _, err := os.Stat(logpath); os.IsNotExist(err) {
+		t.Errorf("%s LogDir %s not created by config", color.RedString("[!]"), err)
 	}
 
 	file, err := os.Open(path + "/htb.conf")
@@ -39,6 +45,32 @@ func Test_create_config(t *testing.T) {
 	if !reflect.DeepEqual(conf.OSCP_Machines, oscpmachines) {
 		t.Errorf("%s The wrong values where written to OSCP_Machines", color.RedString("[!]"))
 	}
+}
+
+func Test_set_logging_file(t *testing.T) {
+    file := "/var/log/htb/testing.log"
+
+    err := set_logging_file(file)
+	if err != nil {
+        t.Errorf("%s There was an error setting the log file: %s",color.RedString("[!]"),err)
+    }
+
+    hash := sha512.Sum512([]byte("Hello World"))
+	key := hex.EncodeToString(hash[:]) 
+    log.Printf("%s",key)
+    
+    f, err := os.Open(file)
+    if err != nil {
+        t.Errorf("%s Could not open file after logging.",color.RedString("[!]"))
+    }
+
+    data, err := ioutil.ReadAll(f)
+    if err != nil {
+        t.Errorf("%s Error reading file content after logging", color.RedString("[!]"))
+    } 
+    if !strings.Contains(string(data),key) {
+        t.Errorf("%s The logg data is different form the data logged",color.RedString("[!]"))
+    }
 }
 
 func Test_add_key(t *testing.T) {
