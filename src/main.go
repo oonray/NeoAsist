@@ -7,13 +7,7 @@ The config is found int /etc/HTB
 The config can be overrrided using a $(HOME)/.htbrc file
 */
 
-package HTBManager
-
-import (
-	"flag"
-	"fmt"
-	"github.com/fatih/color"
-)
+package main
 
 func main() {
 

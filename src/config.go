@@ -5,14 +5,13 @@
 
 */
 
-package HTBManager
+package main
 
 import (
-	"encodeing/json"
+	"fmt"
 	"github.com/fatih/color"
 	"log"
 	"os"
-	"path/filepath"
 )
 
 const (
@@ -34,10 +33,13 @@ func create_config() (Config, error) {
 
 	err := os.MkdirAll(path, os.ModeDir)
 	if err != nil {
-		log.Fatal("%s Error %s\n", color.RedString("[!]"), err)
+		log.Fatal(fmt.Sprintf("%s Error %s\n", color.RedString("[!]"), err))
+		return Config{}, err
 	}
+	conf := Config{}
+	conf.OSCP_Machines = oscpmachines
 
-	return Config{}, nil
+	return conf, nil
 }
 
 func write_config(conf Config) error {
@@ -49,5 +51,25 @@ func get_config() (Config, error) {
 }
 
 func add_key(key string, conf Config) error {
+	return nil
+}
+
+func add_machines_folder(key string, conf Config) error {
+	return nil
+}
+
+func add_install_folder(key string, conf Config) error {
+	return nil
+}
+
+func set_vpn_started(conf Config) error {
+	return nil
+}
+
+func set_vpn_stopped(conf Config) error {
+	return nil
+}
+
+func set_last_machine(id string, conf Config) error {
 	return nil
 }

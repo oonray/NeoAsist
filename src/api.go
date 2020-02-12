@@ -5,9 +5,4 @@
 
 */
 
-package HTBManager
-
-import (
-	"fmt"
-	"net/http"
-)
+package main

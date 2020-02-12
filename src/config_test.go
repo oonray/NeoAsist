@@ -1,4 +1,4 @@
-package HTBManager
+package main
 
 import (
 	"crypto/sha512"
@@ -54,6 +54,64 @@ func Test_add_key(t *testing.T) {
 	}
 }
 
+func Test_add_machines_folder(t *testing.T) {
+	hash := sha512.Sum512([]byte("/home/oonray/HTB"))
+	key := hex.EncodeToString(hash[:])
+
+	err := add_machines_folder(key, conf)
+	if err != nil {
+		t.Errorf("%s There was an error changing the machine folder %s", color.RedString("[!]"), err)
+	}
+	if conf.Machines != key {
+		t.Errorf("%s The value of the machine folder is wrong after change", color.RedString("[!]"))
+	}
+}
+
+func Test_add_install_folder(t *testing.T) {
+	hash := sha512.Sum512([]byte("/opt/HTBManager"))
+	key := hex.EncodeToString(hash[:])
+
+	err := add_install_folder(key, conf)
+	if err != nil {
+		t.Errorf("%s There was an error changing the install folder %s", color.RedString("[!]"), err)
+	}
+	if conf.Install != key {
+		t.Errorf("%s The value of the install folder is wrong after change", color.RedString("[!]"))
+	}
+
+}
+
+func Test_set_vpn_started(t *testing.T) {
+	err := set_vpn_started(conf)
+	if err != nil {
+		t.Errorf("%s There was an error setting VPN: %s", color.RedString("[!]"), err)
+	}
+	if conf.Vpnstarted != true {
+		t.Errorf("%s VPN no set to started", color.RedString("[!]"))
+	}
+}
+
+func Test_set_vpn_stopped(t *testing.T) {
+	err := set_vpn_stopped(conf)
+	if err != nil {
+		t.Errorf("%s There was an error setting VPN: %s", color.RedString("[!]"), err)
+	}
+	if conf.Vpnstarted != false {
+		t.Errorf("%s VPN no set to stopped", color.RedString("[!]"))
+	}
+
+}
+
+func Test_set_last_machine(t *testing.T) {
+	err := set_last_machine("Jerry", conf)
+	if err != nil {
+		t.Errorf("%s There was an error setting VPN: %s", color.RedString("[!]"), err)
+	}
+	if conf.LastMachine != "Jerry" {
+		t.Errorf("%s The value of Last machine was wrong after setting", color.RedString("[!]"))
+	}
+}
+
 func Test_write_config(t *testing.T) {
 	var check Config
 
@@ -83,6 +141,6 @@ func Test_get_config(t *testing.T) {
 		t.Errorf("%s Could not get config: %s", color.RedString("[!]"), err)
 	}
 	if !reflect.DeepEqual(check, conf) {
-		t.Errorf("%s Conf has wrong values when read")
+		t.Errorf("%s Conf has wrong values when read", color.RedString("[!]"))
 	}
 }
