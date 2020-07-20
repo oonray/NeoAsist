@@ -1,11 +1,11 @@
 /*
 
 @author oonray
-@brief functions for communicating with the api
+@brief functions (a *Api) (a *Api) for communicating with the api
 
 */
 
-package main
+package api
 
 import (
     "io/ioutil"
@@ -17,31 +17,6 @@ import (
 
 var    client   http.Client
 var    machines []Machine
-
-/*
-
-  {
-    "id": 262,
-    "name": "SneakyMailer",
-    "os": "Linux",
-    "ip": "10.10.10.197",
-    "avatar_thumb": "https://www.hackthebox.eu/storage/avatars/5f5ab2f3fb31673d80623bdd98b286c3_thumb.png",
-    "points": 30,
-    "release": "2020-07-11",
-    "retired_date": null,
-    "maker": {
-      "id": 106709,
-      "name": "sulcud"
-    },
-    "maker2": null,
-    "rating": "3.5",
-    "user_owns": 427,
-    "root_owns": 422,
-    "retired": false,
-    "free": true
-  }
-*/
-
 
 type Api struct {
     Url     string  `json:"url"`
@@ -64,14 +39,14 @@ func init(){
     client = http.Client{}
 }
 
-func make_url(path string) string{
+func (a *Api) make_url(path string) string{
     return fmt.Sprintf("%s/%s?api_token=%s",Config.API.Url,path,Config.API.Token)
 }
 
-func headders(){
+func (a *Api) headders(){
 }
 
-func make_request(path string,r_type string) *http.Request {
+func (a *Api) make_request(path string,r_type string) *http.Request {
     url := make_url(path)
     req, _ := http.NewRequest(r_type,url,nil)
     if r_type == "GET"{
@@ -80,7 +55,7 @@ func make_request(path string,r_type string) *http.Request {
     return req
 }
 
-func Get_all_machines(){
+func (a *Api) Get_all_machines(){
     defer dbg.Rec()
     resp, err := client.Do(make_request("machines/get/all","GET"))
     defer resp.Body.Close()

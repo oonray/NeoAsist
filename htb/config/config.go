@@ -5,7 +5,7 @@
 
 */
 
-package main
+package config
 
 import (
     "os"
@@ -23,11 +23,11 @@ const (
 
 var (
     home string
-    Config config
+    Configuration Config
     config_file string
 )
 
-type config struct {
+type Config struct {
     Machines          string       `json:"machines"`
     LastMachine       string       `json:"lastmachine"`
     OSCP_Machines     []string     `json:"oscpmachines"`
@@ -49,7 +49,7 @@ func init(){
     Write_config()
 }
 
-func check_files() error {
+func (c *Config) check_files() error {
     home = os.Getenv("HOME")
     _, err := os.Stat(fmt.Sprintf("%s/%s",home,file))
     if err != nil {
@@ -70,7 +70,7 @@ func check_files() error {
     return nil
 }
 
-func first_write() error {
+func (c *Config) first_write() error {
     defer dbg.Rec()
 
     dbg.Log_info("Writing First Config file to /etc/HTB/config!")
@@ -80,14 +80,14 @@ func first_write() error {
     return nil
 }
 
-func Load_config(){
+func (c *Config) Load_config(){
     data, err := ioutil.ReadFile(config_file)
     dbg.Check_error(err, "Could not Read the Config File.")
     err = json.Unmarshal(data,&Config)
     dbg.Check_error(err, "Could not Parse the Config File.")
 }
 
-func Write_json(file string,data ) error {
+func (c *Config) Write_json(file string,data ) error {
     data, err := json.Marshal(Config)
     dbg.Check_error(err,"Could not parse Json")
 
@@ -95,25 +95,20 @@ func Write_json(file string,data ) error {
     dbg.Check_error(err,"Could not write to file")
 }
 
-func Write_config() error {
+func (c *Config) Write_config() error {
     defer dbg.Rec()
     Write_json(confi_file)
     return nil
 }
 
-func Start_vpn() ([]byte,error) {
+func (c *Config) Start_vpn() ([]byte,error) {
     dbg.Log_info("Starting VPN")
     cmd := exec.Command("/bin/sh", "-c", "sudo systemctl start HTB")
     return cmd.Output()
 }
 
-func Stop_vpn() ([]byte,error) {
+func (c *Config) Stop_vpn() ([]byte,error) {
     dbg.Log_info("Stop VPN")
     cmd := exec.Command("/bin/sh", "-c", "sudo systemctl stop HTB")
     return cmd.Output()
-}
-
-func Write_Machines(){
-    defer dbg.Rec()
-    
 }
