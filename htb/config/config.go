@@ -8,12 +8,14 @@
 package config
 
 import (
-    "os"
-    "os/exec"
-    "fmt"
-    "encoding/json"
-    "io/ioutil"
-    dbg "github.com/oonray/godbg" // $GOPATH/src/github.com/oonray/godbg/dbg.go
+	"NeoAsist/htb/api"
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"os"
+	"os/exec"
+
+	dbg "github.com/oonray/godbg" // $GOPATH/src/github.com/oonray/godbg/dbg.go
 )
 
 const (
@@ -28,25 +30,27 @@ var (
 )
 
 type Config struct {
-    Machines          string       `json:"machines"`
-    LastMachine       string       `json:"lastmachine"`
-    OSCP_Machines     []string     `json:"oscpmachines"`
-    API               Api          `json:"api"`
+    Machines          string           `json:"machines"`
+    LastMachine       string           `json:"lastmachine"`
+    OSCP_Machines     []string         `json:"oscpmachines"`
+    API               api.Api          `json:"api"`
 }
 
 func init(){
-    Config.OSCP_Machines = []string{"Lame", "Branfuck", "Shocker", "Bashed", "Nibbles", "Beep", "Cronos", "Nineveh", "Sencse", "Solidstate", "Kotark", "Node", "Valentine", "Poison", "Sunday", "Tartarsause", "Legacy", "Blue", "Devel", "Optimum", "Bastard", "Granny", "Arctic", "Grandpa", "Silo", "Bounty", "Jerry"}
+    Configuration.OSCP_Machines = []string{"Lame", "Branfuck", "Shocker", "Bashed", "Nibbles", "Beep", "Cronos", "Nineveh", "Sencse", "Solidstate", "Kotark", "Node", "Valentine", "Poison", "Sunday", "Tartarsause", "Legacy", "Blue", "Devel", "Optimum", "Bastard", "Granny", "Arctic", "Grandpa", "Silo", "Bounty", "Jerry"}
 
-    Config.API.Url = "https://hackthebox.eu/api"
+    Configuration.API.Url = "https://hackthebox.eu/api"
 
-    err := check_files()
+    err := Configuration.check_files()
     if err != nil {
         dbg.Log_info("Writing initial config")
-        err = first_write()
+        err = Configuration.first_write()
         dbg.Check_error(err,"Could not Write to files!")
      }
-    Load_config()
-    Write_config()
+
+    Configuration.Load_config()
+    Configuration.API.Check_Update()
+    Configuration.Write_config()
 }
 
 func (c *Config) check_files() error {
@@ -76,28 +80,29 @@ func (c *Config) first_write() error {
     dbg.Log_info("Writing First Config file to /etc/HTB/config!")
     err := os.MkdirAll(config_path, os.ModePerm)
     if err != nil {return err}
-    Write_config()
+    c.Write_config()
     return nil
 }
 
 func (c *Config) Load_config(){
     data, err := ioutil.ReadFile(config_file)
     dbg.Check_error(err, "Could not Read the Config File.")
-    err = json.Unmarshal(data,&Config)
+    err = json.Unmarshal(data,c)
     dbg.Check_error(err, "Could not Parse the Config File.")
 }
 
-func (c *Config) Write_json(file string,data ) error {
-    data, err := json.Marshal(Config)
+func (c *Config) Write_json(file string) error {
+    data, err := json.Marshal(c)
     dbg.Check_error(err,"Could not parse Json")
 
     err = ioutil.WriteFile(file,data,0644)
     dbg.Check_error(err,"Could not write to file")
+    return nil
 }
 
 func (c *Config) Write_config() error {
     defer dbg.Rec()
-    Write_json(confi_file)
+    c.Write_json(config_file)
     return nil
 }
 

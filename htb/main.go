@@ -9,16 +9,13 @@ The config can be overrrided using a $(HOME)/.htbrc file
 package main
 
 import (
-    "fmt"
+	"NeoAsist/htb/config"
+	"fmt"
 )
-
-const (
-    logpath = "/var/log/htb/"
-    debug = false
-)
-
 
 func main() {
-    Get_all_machines()
-    fmt.Printf("%v\n",machines[0])
+    config.Configuration.API.Update_Machines()
+    config.Configuration.Write_config()
+    machine := config.Configuration.API.Get_Machine("Lame")
+    fmt.Printf("%v\n",machine)
 }
