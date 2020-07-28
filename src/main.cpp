@@ -1,7 +1,11 @@
 #include <iostream>
+#include "config/config.hpp"
+
+Config cfg;
 
 int main(void){
-    std::cout << "Hello World\n";
+    cfg = Config();
+    std::cout << "Hello World" << '\n';
     return 0;
 }
 
