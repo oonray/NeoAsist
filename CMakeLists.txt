@@ -9,8 +9,16 @@ set(CMAKE_SYSTEM_NAME "Linux")
 set(CMAKE_FIND_LIBRARY_PREFIXES "lib")
 set(CMAKE_FIND_LIBRARY_SUFFIXES ".so;.a")
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS on)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+
+
 include(build/conanbuildinfo.cmake)
 conan_basic_setup()
+
 
 project(NeoAsist
     LANGUAGES CXX
@@ -20,4 +28,8 @@ add_executable(NeoAsist
     src/main.cpp
     src/config/config.cpp)
 
+set(CMAKE_CXX_FLAGS "-std=c++2a ${CMAKE_CXX_FLAGS}")
+
 target_link_libraries(NeoAsist ${CONAN_LIBS})
+
+install(TARGETS NeoAsist DESTINATION bin)

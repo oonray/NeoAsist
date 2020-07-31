@@ -1,0 +1,5 @@
+[config]
+name="lol"
+
+[target]
+ip="192.168.0.1"

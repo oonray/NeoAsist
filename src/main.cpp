@@ -1,11 +1,16 @@
 #include <iostream>
 #include "config/config.hpp"
 
-Config cfg;
+ConfigFile *cfg;
 
 int main(void){
-    cfg = Config();
-    std::cout << "Hello World" << '\n';
+    std::string filename = "/opt/git/NeoAsist/tests/config.toml";
+
+    cfg = new ConfigFile();
+    if(cfg->Parse(filename) != 0)
+        return 1;
+
+    std::cout << "After Parse" << '\n';
     return 0;
 }
 

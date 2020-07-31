@@ -1,41 +1,35 @@
 #include "config.hpp"
 
-Config::Config(){
+ConfigFile::ConfigFile() {
+    std::cout << "[Config] init" << '\n';
 }
 
-Config::~Config(){
+ConfigFile::~ConfigFile(){
 }
 
-/**
- * @brief Gets the content of a file and makes it avaliable in Config.
- * @param std::string filename The filename of the file to parse
- */
-void Config::Parse(std::string filename){
-//    auto data = YAML::Load(filename);
-  //  if(data.Type() != YAML::NodeType::Undefined){
-     //   document = data;
-   // }
-    //else{
-   //     document = NULL;
-    //}
+void ConfigFile::prt_error(std::string M, std::string file, int line){
+    std::cout << "[-][Config] error " << file << ' ' << line << ' ' << M << '\n';
 }
 
-/**
- * @brief Retuns size of the document or 0
- * @returns size of documentt
- */
-int Config::Size(){
-    return document.size();
+int ConfigFile::Parse(std::string &filename){
+    content = toml::parse_file(filename);
+    if(!content.contains("target")){
+        prt_error("No target spesified. Please specify a target.",__FILE__,__LINE__);
+        return 1;
+    }
+    target = content["target"].as<toml::table>();
+    if(!target->contains("ip")){
+        prt_error("No target->ip spesified. Please specify a target->ip or target->ips.",__FILE__,__LINE__);
+        return 1;
+    }
+
+    if(!target->contains("attacks")){
+        prt_error("No Attack specified",__FILE__,__LINE__);
+        return 1;
+    }
+
+    attacks = content["attacks"].as<toml::table>();
+    return 0;
 }
-
-/**
- * @brief Returns document node type
- */
-YAML::NodeType::value Config::Type(){
-    return document.Type();
-}
-
-
-
 
 

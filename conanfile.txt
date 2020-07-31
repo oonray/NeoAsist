@@ -1,6 +1,6 @@
 [requires]
-yaml-cpp/0.6.3
-fmt/7.0.1
+docopt/0.6.2@conan/stable
+tomlplusplus/2.0.0
 
 [generators]
 cmake
