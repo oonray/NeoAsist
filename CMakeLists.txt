@@ -15,7 +15,6 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
-
 include(build/conanbuildinfo.cmake)
 conan_basic_setup()
 
@@ -26,7 +25,12 @@ project(NeoAsist
 
 add_executable(NeoAsist 
     src/main.cpp
-    src/config/config.cpp)
+    src/config/config.cpp
+    src/target/target.cpp
+    src/service/services.cpp
+    src/debug/dbug.cpp
+    )
+
 
 set(CMAKE_CXX_FLAGS "-std=c++2a ${CMAKE_CXX_FLAGS}")
 
