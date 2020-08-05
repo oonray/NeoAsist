@@ -5,10 +5,6 @@
 
 NeoA::ConfigFile *cfg;
 
-/*
- * TODO: Test
- */
-
 int main(void)
 {
     log_debug("Starting");
