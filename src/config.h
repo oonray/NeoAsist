@@ -1,25 +1,25 @@
-#include <iostream>
-#include <fstream>
 #include <toml++/toml.h>
-#include "../target/target.h"
-#include "../debug/dbug.h"
+#include <fstream>
+#include <iostream>
 #include <vector>
+#include "dbug.h"
+#include "target.h"
 
 namespace NeoA {
 
-class ConfigFile{
-    private:
-        std::string filename;
-        toml::table content;
-        std::vector<NeoA::Target_t> targets;
+class ConfigFile {
+private:
+    std::string filename;
+    toml::table content;
+    std::vector<NeoA::Target_t> targets;
 
-    public:
-        ConfigFile(std::string f_name);
-        ~ConfigFile();
-        int Parse();
+public:
+    ConfigFile(std::string f_name);
+    ~ConfigFile();
+    int Parse();
 };
 
-}
+}  // namespace NeoA
 
 /**
  * ----------------

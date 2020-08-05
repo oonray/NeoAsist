@@ -25,10 +25,10 @@ project(NeoAsist
 
 add_executable(NeoAsist 
     src/main.cpp
-    src/config/config.cpp
-    src/target/target.cpp
-    src/service/services.cpp
-    src/debug/dbug.cpp
+    src/config.cpp
+    src/target.cpp
+    src/services.cpp
+    src/dbug.cpp
     )
 
 
