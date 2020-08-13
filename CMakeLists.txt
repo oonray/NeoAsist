@@ -1,27 +1,25 @@
 cmake_minimum_required()
 cmake_minimum_required(VERSION 3.2)
 
-set(CMAKE_CXX_COMPILER_ID "GNU")
-set(CMAKE_CXX_COMPILER "g++")
-set(CMAKE_CXX_COMPILER_VERSION "8.3.0")
-set(CMAKE_SYSTEM_NAME "Linux")
-
-set(CMAKE_FIND_LIBRARY_PREFIXES "lib")
-set(CMAKE_FIND_LIBRARY_SUFFIXES ".so;.a")
-
 set(CMAKE_EXPORT_COMPILE_COMMANDS on)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release)
+endif()
 
-include(build/conanbuildinfo.cmake)
-conan_basic_setup()
-
+set(CMAKE_CXX_FLAGS "-Wall -Wextra")
+set(CMAKE_CXX_FLAGS_DEBUG "-g")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 project(NeoAsist
     LANGUAGES CXX
     VERSION 1)
+
+include(build/conanbuildinfo.cmake)
+conan_basic_setup()
 
 add_executable(NeoAsist 
     src/main.cpp
