@@ -15,7 +15,8 @@ hostname="name"
 [[target.attack]]
 name="nmap_tcp"
 type="nmap"
-run="once"
+proto="tcp"
+run=1
 #target="{{target.ip}}"
 
 #[attak.args]

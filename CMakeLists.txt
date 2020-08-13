@@ -29,6 +29,8 @@ add_executable(NeoAsist
     src/target.cpp
     src/services.cpp
     src/dbug.cpp
+    src/attacks.cpp
+    src/factories.cpp
     )
 
 

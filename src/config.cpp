@@ -1,10 +1,12 @@
 #include "config.h"
 
-NeoA::ConfigFile::ConfigFile(std::string f_name) { this->filename = f_name; }
+NeoA::Config_t::Config_t(std::string f_name) { this->filename = f_name; }
 
-NeoA::ConfigFile::~ConfigFile() {}
+NeoA::Config_t::~Config_t() {}
 
-int NeoA::ConfigFile::Parse()
+toml::table *NeoA::Config_t::Get_content() { return content.as_table(); }
+
+NeoA::Config_t *NeoA::Config_t::Parse()
 {
     try {
         content = toml::parse_file(filename);
@@ -14,20 +16,9 @@ int NeoA::ConfigFile::Parse()
     }
 
     check_error(content.contains("target"), "No Target");
-    // check_error(content.is_array_of_tables(),"Content does not contain
-    // propper targets.");
-    for (toml::node& data : *content["target"].as_array()) {
-        toml::table* tbl = data.as<toml::table>();
-        for (toml::node& attack : *tbl->get("attack")->as_array()) {
-            toml::table* tbl2 = attack.as<toml::table>();
-            std::cout << "Running attack: " << (*tbl2)["name"] << " on "
-                      << (*tbl)["ip"] << '\n';
-        }
-    }
-
-    log_debug("For Ending");
-    return 0;
-
+    check_error(!content.is_array_of_tables(),
+                "Content does not contain propper targets.");
+    return this;
 error:
-    return 1;
+    return NULL;
 }

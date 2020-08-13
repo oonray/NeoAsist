@@ -1,20 +1,25 @@
 
 #include <iostream>
-#include "config.h"
 #include "dbug.h"
+#include "factories.h"
 
-NeoA::ConfigFile *cfg;
+NeoA::Target_Factory_t *tf;
+NeoA::Config_t *cf;
+
+std::vector<NeoA::Target_t> targets;
 
 int main(void)
 {
     log_debug("Starting");
+    cf = new NeoA::Config_t("/opt/git/NeoAsist/tests/config.toml");
 
-    cfg = new NeoA::ConfigFile("/opt/git/NeoAsist/tests/config.toml");
+    tf = new NeoA::Target_Factory_t(cf);
 
-    log_debug("Parsing");
-    if (!cfg->Parse()) return 1;
+    tf->Create_all();
 
-    std::cout << "After Parse" << '\n';
+    targets = tf->Get_Result();
+
+    std::cout << targets.size() << " targes" << '\t';
     return 0;
 }
 
