@@ -23,12 +23,12 @@ conan_basic_setup()
 
 add_executable(NeoAsist 
     src/main.cpp
-    src/config.cpp
-    src/target.cpp
-    src/services.cpp
-    src/dbug.cpp
-    src/attacks.cpp
-    src/factories.cpp
+    src/cpp/config.cpp
+    src/cpp/target.cpp
+    src/cpp/services.cpp
+    src/cpp/dbug.cpp
+    src/cpp/attacks.cpp
+    src/cpp/factories.cpp
     )
 
 

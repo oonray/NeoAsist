@@ -1,4 +1,4 @@
-#include "target.h"
+#include "../target.h"
 
 NeoA::Target_t::Target_t(toml::table* t)
 {

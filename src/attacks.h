@@ -1,5 +1,6 @@
 #include <toml++/toml.h>
 #include <iostream>
+#include <sstream>
 #include <vector>
 
 #ifndef __attack_h
@@ -10,23 +11,24 @@ namespace NeoA {
 class Attack_t {
 private:
     std::string name;
-    std::string command;
     std::string binary;
+    std::string proto;
     std::vector<std::string> args;
     int run;
 
 public:
     Attack_t();
     Attack_t(toml::table* n);
-    int Run();
-};
+    Attack_t(std::string name, std::string binary, std::string proto,
+             std::vector<std::string> args);
 
-class Nmap_t : public Attack_t {
-private:
-public:
-    Nmap_t();
-    Nmap_t(toml::node* n);
-    Nmap_t(Attack_t* a);
+    std::string get_binary() const;
+    std::string get_proto() const;
+    std::string get_name() const;
+    std::vector<std::string> get_args() const;
+
+    int Run();
+    std::string command();
 };
 
 }  // namespace NeoA

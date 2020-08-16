@@ -1,4 +1,4 @@
-#include "config.h"
+#include "../config.h"
 
 NeoA::Config_t::Config_t(std::string f_name) { this->filename = f_name; }
 
@@ -6,7 +6,7 @@ NeoA::Config_t::~Config_t() {}
 
 toml::table *NeoA::Config_t::Get_content() { return content.as_table(); }
 
-NeoA::Config_t *NeoA::Config_t::Parse()
+int NeoA::Config_t::Parse()
 {
     try {
         content = toml::parse_file(filename);
@@ -18,7 +18,8 @@ NeoA::Config_t *NeoA::Config_t::Parse()
     check_error(content.contains("target"), "No Target");
     check_error(!content.is_array_of_tables(),
                 "Content does not contain propper targets.");
-    return this;
+    return 1;
 error:
-    return NULL;
+    return 0;
 }
+

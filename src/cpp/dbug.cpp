@@ -1,4 +1,4 @@
-#include "dbug.h"
+#include "../dbug.h"
 
 std::string colors::red(std::string M)
 {

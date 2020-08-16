@@ -1,8 +1,8 @@
-#include "factories.h"
+#include "../factories.h"
 //
 // TARGET FACTORY
 //
-NeoA::Target_Factory_t::Target_Factory_t(Config_t* c) { config = c->Parse(); }
+NeoA::Target_Factory_t::Target_Factory_t(Config_t* c) { config = c; }
 
 int NeoA::Target_Factory_t::Create_all()
 {
