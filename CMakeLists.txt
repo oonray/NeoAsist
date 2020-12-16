@@ -1,7 +1,4 @@
-cmake_minimum_required()
-cmake_minimum_required(VERSION 3.2)
-
-set(CMAKE_EXPORT_COMPILE_COMMANDS on)
+cmake_minimum_required(VERSION 3.9)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -18,22 +15,21 @@ project(NeoAsist
     LANGUAGES CXX
     VERSION 1)
 
-include(build/conanbuildinfo.cmake)
-conan_basic_setup()
+if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
+  message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
+  file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/master/conan.cmake"
+          "${CMAKE_BINARY_DIR}/conan.cmake")
+endif()
 
-add_executable(NeoAsist 
-    src/main.cpp
-    src/cpp/config.cpp
-    src/cpp/target.cpp
-    src/cpp/services.cpp
-    src/cpp/dbug.cpp
-    src/cpp/attacks.cpp
-    src/cpp/factories.cpp
-    )
+include(${CMAKE_BINARY_DIR}/conan.cmake)
 
+conan_cmake_run(REQUIRES boost/1.74.0                 BASIC_SETUP)
+conan_cmake_run(REQUIRES Catch2/2.6.0@catchorg/stable BASIC_SETUP)
+conan_cmake_run(REQUIRES spdlog/1.8.2                 BASIC_SETUP)
+conan_cmake_run(REQUIRES crow/1.0                     BASIC_SETUP)
+conan_cmake_run(REQUIRES libpq/13.1                   BASIC_SETUP)
 
-set(CMAKE_CXX_FLAGS "-std=c++2a ${CMAKE_CXX_FLAGS}")
+add_executable(NeoAsist
+    src/main.cpp)
 
 target_link_libraries(NeoAsist ${CONAN_LIBS})
-
-install(TARGETS NeoAsist DESTINATION bin)
